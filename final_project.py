@@ -46,7 +46,7 @@ def ordering(order):
 # print(order_list[0])
 
 def day_result(demand=demand_list,stock_order=stock_order_list,stock=stock_list):
-    # 當天最終存貨計算
+    # 當天最終結果綜合計算
     sold_list = []
     unmeet_list = []
     percent_list = []
