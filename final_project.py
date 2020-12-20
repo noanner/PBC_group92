@@ -96,13 +96,30 @@ def stock_cost(stock=stock_list, stock_cost=stock_cost):
         stock_total_cost += stock[i] * stock_cost
     return stock_total_cost
 
+
+import matplotlib.pyplot as plt
+day = ["Day1","Day2","Day3","Day4","Day5","Day6","Day7"]
+def plot_result(stock,profit):
+    # 折線圖函式
+    plt.figure(figsize=(10,5),dpi=100,linewidth = 2)
+    plt.plot(day,profit,'s-',color = 'r', label="Accumulated Profit")
+    plt.plot(day,stock,'o-',color = 'g', label="Stock Cost")
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
+    plt.xlabel("Day", fontsize=20, labelpad = 10)
+    plt.ylabel("$", fontsize=20, labelpad = 10)
+    plt.legend(loc = "best", fontsize=10)
+    plt.show()
+
 # print(stock_list)
 # print(sold_list)
 # print(unmeet_list)
 # print(stock_cost())
 
+stock_cost_list = []
+accumulated_profit_list = []
 accumulated_profit = 0
-for i in range(7):
+for i in range(7):  # print 出的方式可以再改
     if i == 0:  # 初始頁面
         print("Day "+str(i+1))
         print(menu_list)
@@ -131,8 +148,10 @@ for i in range(7):
         print("Day "+str(i+1))
         print(menu_list)
     stock_total_cost = stock_cost(stock_list)
-    profit = revenue - material_cost - stock_total_cost-fixed_cost
+    stock_cost_list.append(stock_total_cost)
+    profit = revenue - material_cost - stock_total_cost - fixed_cost
     accumulated_profit += profit
+    accumulated_profit_list.append(accumulated_profit)
     print("這是你今天營運結果")
     print("需求量",end=": ")
     print(demand_pattern[i])
@@ -159,6 +178,10 @@ for i in range(7):
     print(accumulated_profit)
 
 print("最終結果: " + str(accumulated_profit))
+# print(accumulated_profit_list)
+# print(stock_cost_list)
+plot_result(stock_cost_list,accumulated_profit_list)
+
 if accumulated_profit >= 3000:
     print("恭喜您的餐廳榮獲",end="")
     if accumulated_profit > 10000:
