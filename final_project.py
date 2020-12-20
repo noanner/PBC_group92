@@ -172,11 +172,12 @@ if accumulated_profit >= 3000:
 elif accumulated_profit < 3000 and accumulated_profit >=0:
     print("「今晚我想來點 " + name +" 的漢堡全餐」",end="；")
     print("「客人請您明天再來喔」")
+    print("因為沒控制好存貨，",end="")
     if accumulated_profit > 2000:
-        print("因為沒控制好存貨，漢堡稍微會缺貨")
+        print("漢堡稍微會缺貨")
     elif accumulated_profit <= 2000 and accumulated_profit > 500:
-        print("因為沒控制好存貨，漢堡偶爾缺貨")
+        print("漢堡偶爾缺貨")
     else:
-        print("因為沒控制好存貨，客人每次來都抓狂")
+        print("客人每次來都抓狂")
 else:
     print("加盟大老闆:「朽木不可雕也，你重練吧」")
