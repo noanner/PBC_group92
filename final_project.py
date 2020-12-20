@@ -79,13 +79,14 @@ def day_result(demand=demand_list,stock_order=stock_order_list,stock=stock_list)
 def order_cost(order=stock_order_list,price=material_price, fixed_cost=order_fixed_cost):
     # 計算訂貨成本
     material_cost = 0
-    if order != [0,0,0,0,0]:
-        for i in range(len(order)):
+    total_fixed_cost = 0
+    for i in range(len(order)):
+        if order[i] != 0:
             material_cost += order[i] * price[i]
-        fixed_cost = fixed_cost
-    else:
-        fixed_cost = 0
-    return material_cost, fixed_cost
+            total_fixed_cost += fixed_cost
+        else:
+            pass
+    return material_cost, total_fixed_cost
 
 # material_cost, fixed_cost = order_cost()  # 這個之後要設在迴圈內
 
@@ -99,11 +100,13 @@ def stock_cost(stock=stock_list, stock_cost=stock_cost):
 
 import matplotlib.pyplot as plt
 day = ["Day1","Day2","Day3","Day4","Day5","Day6","Day7"]
-def plot_result(stock,profit):
+def plot_result(stock,acc_profit,profit,order_cost):
     # 折線圖函式
     plt.figure(figsize=(10,5),dpi=100,linewidth = 2)
-    plt.plot(day,profit,'s-',color = 'r', label="Accumulated Profit")
+    plt.plot(day,acc_profit,'s-',color = 'r', label="Accumulated Profit")
     plt.plot(day,stock,'o-',color = 'g', label="Stock Cost")
+    plt.plot(day,profit,'s-',color = 'b', label="Day Profit")
+    plt.plot(day,order_cost,'s-',color = 'y', label="Day Order Cost")
     plt.xticks(fontsize=12)
     plt.yticks(fontsize=12)
     plt.xlabel("Day", fontsize=20, labelpad = 10)
@@ -118,20 +121,22 @@ def plot_result(stock,profit):
 
 stock_cost_list = []
 accumulated_profit_list = []
+profit_list = []
+order_cost_list = []
 accumulated_profit = 0
 for i in range(7):  # print 出的方式可以再改
     if i == 0:  # 初始頁面
         print("Day "+str(i+1))
         print(menu_list)
         stock_list, sold_list, unmeet_list, percent_list, revenue_list,revenue = day_result(demand_pattern[i],stock_order_list,stock_list)
-        material_cost, fixed_cost = 0, 0   
+        material_cost, total_fixed_cost = 0, 0   
     else:  # day 1 ~ day 6之後的頁面
         print("有要訂貨嗎?")
         print("庫存: "+str(stock_list))
         print("進貨成本: "+str(material_price))
-        a, order_a = ordering(input())
+        a, order_a = ordering(input("請輸入訂貨量: "))
         while a == "輸入錯誤":
-            a, order_a = ordering(input())
+            a, order_a = ordering(input("請輸入訂貨量: "))
         order_list = []
         for sub_order in order_a:
             order_list.append(int(sub_order))
@@ -142,16 +147,20 @@ for i in range(7):  # print 出的方式可以再改
         print("訂後庫存: ",end="")
         print(after_order)
         stock_list, sold_list, unmeet_list, percent_list, revenue_list,revenue = day_result(demand_pattern[i],order_list,stock_list)
-        material_cost, fixed_cost = order_cost(order_list)
+        material_cost, total_fixed_cost = order_cost(order_list)
+        print("訂貨固定費用: " + str(total_fixed_cost))
+        print("材料費用: " + str(material_cost))
         print("總價: ",end="")
-        print(material_cost+fixed_cost)
-        print("Day "+str(i+1))
+        print(material_cost + total_fixed_cost)
+        print("Day " + str(i+1))
         print(menu_list)
     stock_total_cost = stock_cost(stock_list)
     stock_cost_list.append(stock_total_cost)
-    profit = revenue - material_cost - stock_total_cost - fixed_cost
+    profit = revenue - material_cost - stock_total_cost - total_fixed_cost
     accumulated_profit += profit
     accumulated_profit_list.append(accumulated_profit)
+    profit_list.append(profit)
+    order_cost_list.append(material_cost+total_fixed_cost)
     print("這是你今天營運結果")
     print("需求量: " + str(demand_pattern[i]))
     print("庫存量: ",end="")
@@ -163,7 +172,7 @@ for i in range(7):  # print 出的方式可以再改
     print("營業額: " + str(revenue_list))
     print("營業佔比: " + str(percent_list))
     print("今日收益: " + str(revenue))
-    print("進貨成本: " + str(material_cost+fixed_cost))
+    print("進貨成本: " + str(material_cost + total_fixed_cost))
     print("存貨成本: " + str(stock_total_cost))
     print("本日利潤: " + str(profit))
     print("累積利潤: " + str(accumulated_profit))
@@ -171,7 +180,7 @@ for i in range(7):  # print 出的方式可以再改
 print("最終結果: " + str(accumulated_profit))
 # print(accumulated_profit_list)
 # print(stock_cost_list)
-plot_result(stock_cost_list,accumulated_profit_list)
+plot_result(stock_cost_list,accumulated_profit_list,profit_list,order_cost_list)
 
 if accumulated_profit >= 3000:
     print("恭喜您的餐廳榮獲",end="")
