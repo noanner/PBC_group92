@@ -27,7 +27,7 @@ def show_calender():
     """
     pass
 
-calender = tk.Button(text="Calender", width=20, height=5, bd=3)
+calender = tk.Button(text="Calender", width=18, height=4, bd=3)
 calender.config(background="skyblue")  # 第二種方式
 calender.config(command=show_calender)
 
