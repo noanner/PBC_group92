@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.font as tkFont
 from PIL import ImageTk
+from tkinter import ttk
 
 class Ordering(tk.Frame):
 
@@ -8,6 +9,7 @@ class Ordering(tk.Frame):
         tk.Frame.__init__(self) 
         self.grid()
         self.createWidgets()
+        self.createTreeview()
 
     def createWidgets(self):
         f1 = tkFont.Font(size = 30, family = "微軟正黑體")
@@ -15,11 +17,13 @@ class Ordering(tk.Frame):
         f3 = tkFont.Font(size = 12, family = "微軟正黑體")
         
         # row0 標題、敘述、行事曆按鈕
-        self.lbl_gridonly = tk.Label(self, text = " ", height = 2, width = 30, font = f1)
+        self.lbl_gridonly = tk.Label(self, text = " ", height = 200, width = 30, font = f1)
         self.lbl_topic = tk.Label(self, text = "Day1", height = 1, width = 5, font = f1)
         self.lbl_description = tk.Label(self, text = "以下是目前的剩餘庫存，請問今天要訂多少貨呢?", height = 2, width = 40, font = f3)
         self.btn_schedule = tk.Button(self, text = "行事曆", command = self.clickBtnSchedule, height = 2, width = 7, font = f2, bg = 'Lavender')
         
+        
+        '''
         # row1 訂購數量表格的標題欄
         self.lbl_r1c1 = tk.Label(self, text = "食材", height = 2, width = 8, font = f3, bg = 'LemonChiffon')
         self.lbl_r1c2 = tk.Label(self, text = "訂購單價", height = 2, width = 7, font = f3, bg = 'LemonChiffon')
@@ -55,6 +59,7 @@ class Ordering(tk.Frame):
         self.lbl_r6c2 = tk.Label(self, text = "$16", height = 2, width = 7, font = f3, bg = 'LightYellow')
         self.lbl_r6c3 = tk.Label(self, text = "5", height = 2, width = 7, font = f3, bg = 'LightYellow')
         self.lbl_r6c4 = tk.Label(self, text = "???", height = 2, width = 7, font = f3, bg = 'OldLace')
+        '''
         
         # row7 訂貨固定成本、目前訂購總價、訂購按鈕
         self.lbl_fixcost = tk.Label(self, text = " 訂貨固定成本:$50元 ", height = 2, width = 15, font = f3, bg = 'LemonChiffon')
@@ -71,7 +76,7 @@ class Ordering(tk.Frame):
         self.lbl_description.place(x = 200, y = 30)
         self.btn_schedule.place(x = 780, y = 10)
         
-        
+        '''
         # row1
         self.lbl_r1c1.grid(row = 1, column = 1, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
         self.lbl_r1c2.grid(row = 1, column = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
@@ -111,12 +116,45 @@ class Ordering(tk.Frame):
         self.lbl_r6c2.grid(row = 6, column = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
         self.lbl_r6c3.grid(row = 6, column = 3, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
         self.lbl_r6c4.grid(row = 6, column = 4, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        
+        '''
         # row7
         self.lbl_fixcost.grid(row = 7, column = 1, columnspan = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 15)
         self.lbl_cost.grid(row = 7, column = 4, columnspan = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 15)
         # self.btn_order.grid(row = 7, column = 6, padx = 1, pady = 15)
         self.btn_order.place(x = 780, y = 480)
+        
+        
+        
+    def createTreeview(self):    
+        # 品項表格
+        columns = ("牛肉漢堡","豬肉堡堡","雞肉漢堡","生菜堡","生酮堡堡")
+        self.tree_item = ttk.Treeview(self, column = columns)  #表格
+        
+        self.tree_item.column("#0", minwidth=0, width=110)
+        self.tree_item.column("牛肉漢堡",width=80, anchor="center")   #表示列,不顯示
+        self.tree_item.column("豬肉堡堡",width=80, anchor="center")
+        self.tree_item.column("雞肉漢堡",width=80, anchor="center")
+        self.tree_item.column("生菜堡",width=80, anchor="center")
+        self.tree_item.column("生酮堡堡",width=80, anchor="center")
+
+        self.tree_item.heading("#0", text="品項")
+        self.tree_item.heading("牛肉漢堡",text="牛肉漢堡")  #顯示錶頭
+        self.tree_item.heading("豬肉堡堡",text="豬肉堡堡")
+        self.tree_item.heading("雞肉漢堡",text="雞肉漢堡")
+        self.tree_item.heading("生菜堡",text="生菜堡")
+        self.tree_item.heading("生酮堡堡",text="生酮堡堡")
+
+        self.tree_item.insert("",0,text="期初庫存" ,values=("25","25","25","25","25")) #插入資料，
+        self.tree_item.insert("",1,text="需求量" ,values=("20","20","20","20","20"))
+        self.tree_item.insert("",2,text="賣出數量" ,values=("20","20","20","20","20"))
+        self.tree_item.insert("",3,text="營業額" ,values=("400","360","360","240","640"))
+        self.tree_item.insert("",4,text="營業額百分比" ,values=("20%","18%","18%","12%","32%"))
+
+        style = ttk.Style()
+        style.configure("Treeview", rowheight=50)
+        # style.configure("Treeview.Heading", font=(None, 12))
+
+        self.tree_item.place(x=60, y=140, height=300)
         
     
     def clickBtnSchedule(self):
