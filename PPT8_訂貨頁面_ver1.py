@@ -18,7 +18,7 @@ class Ordering(tk.Frame):
         f3 = tkFont.Font(size = 12, family = "微軟正黑體")
         
         # row0 標題、敘述、行事曆按鈕
-        self.lbl_gridonly = tk.Label(self, text = " ", height = 200, width = 30, font = f1)
+        self.lbl_gridonly = tk.Label(self, text = " ", height = 200, width = 30, font = f1) # 製造一個空的grid在底下
         self.lbl_topic = tk.Label(self, text = "Day1", height = 1, width = 5, font = f1)
         self.lbl_description = tk.Label(self, text = "以下是目前的剩餘庫存，請問今天要訂多少貨呢?", height = 2, width = 40, font = f3)
         self.btn_schedule = tk.Button(self, text = "行事曆", command = self.clickBtnSchedule, height = 2, width = 7, font = f2, bg = 'Lavender')
