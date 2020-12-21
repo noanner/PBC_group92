@@ -9,20 +9,43 @@ class WeelCal(tk.Frame):
         self.createWidgets()
 
     def createWidgets(self):
-        f1 = tkFont.Font(size = 20, family = "微軟正黑體")
+        f1 = tkFont.Font(size = 30, family = "微軟正黑體")
         f2 = tkFont.Font(size = 14, family = "微軟正黑體") 
         f3 = tkFont.Font(size = 12, family = "微軟正黑體") 
 
-        self.lbl_topic = tk.Label(self, text = "周結算", height = 2, width = 40, font = f1) 
-        self.lbl_descripition = tk.Label(self, text = "折線圖(損益情況、存貨總成本)", height = 1, width = 40, font = f2)
-        self.btn_chart = tk.Canvas(self, height = 400, width = 600, bg = 'LightYellow')
-        self.btn_next = tk.Button(self, text = "下一頁", command = self.clickBtnRank, height = 1, width = 6, font = f3, bg = 'Lavender')
+        # 空表格、標題、下一頁
+        self.lbl_gridonly = tk.Label(self, text = " ", height = 200, width = 300, font = f1) # 製造一個空的grid在底下
+        self.lbl_topic = tk.Label(self, text = "周結算", height = 1, width = 10, font = f1) 
+        self.btn_next = tk.Button(self, text = "下一頁", command = self.clickBtnRank, height = 2, width = 7, font = f2, bg = 'Lavender')
         
-        self.lbl_topic.grid(row = 0, column = 0, columnspan = 2)
-        self.lbl_descripition.grid(row = 1, column = 0, columnspan = 2)
-        self.btn_chart.grid(row = 2, column = 0, pady = 5)
-        self.btn_next.grid(row = 2, column = 1, padx = 10, pady = 10, sticky = tk.SE)
-    
+        # 左半邊 折線圖
+        self.lbl_descripition = tk.Label(self, text = "營業成果折線圖", height = 1, width = 15, font = f2)
+        self.btn_chart = tk.Canvas(self, height = 400, width = 600, bg = 'LightYellow')
+
+        # 右半邊 獲利、名次、殊榮
+        self.lbl_descripition1 = tk.Label(self, text = "獲利：$100000", height = 1, width = 15, font = f2, anchor = 'w')
+        self.lbl_descripition2 = tk.Label(self, text = "名次：3", height = 1, width = 15, font = f2, anchor = 'w')
+        self.lbl_descripition3 = tk.Label(self, text = "恭喜您的餐廳榮獲", height = 2, width = 15, font = f2, anchor = 'w', bg = 'OldLace')
+        self.lbl_descripition4 = tk.Label(self, text = "米其林三星殊榮", height = 2, width = 15, font = f2, anchor = 'w', bg = 'OldLace')
+        # self.lbl_descripition5 = tk.Label(self, text = "感謝遊玩!", height = 1, width = 10, font = f2, anchor = 'w')
+        
+        #-------------------------------------------------------------------------------------------
+        # 空表格、標題、下一頁
+        self.lbl_gridonly.grid(row = 0, column = 0, columnspan = 10, sticky = tk.NW)
+        self.lbl_topic.place(x=300, y=20)
+        self.btn_next.place(x=780, y=480)
+        
+        # 左半邊 折線圖
+        self.lbl_descripition.place(x=200, y=120)
+        self.btn_chart.place(x=15, y=160)
+        
+        # 右半邊 獲利、名次、殊榮
+        self.lbl_descripition1.place(x=640, y=170)
+        self.lbl_descripition2.place(x=640, y=220)
+        self.lbl_descripition3.place(x=640, y=270)
+        self.lbl_descripition4.place(x=640, y=320)
+        # self.lbl_descripition5.place(x=640, y=400)
+
     def clickBtnEnter(self):
         self.lblNum.configure(text = self.lblNum.cget("text") + "1")
     
