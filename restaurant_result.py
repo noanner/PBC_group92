@@ -94,7 +94,7 @@ next_page = tk.Button(text="下一頁", width=7, height=2, font=f2)
 next_page.config(background="Lavender")  # 第二種方式
 next_page.config(command=show_calender())
 
-next_page.pack(side=tk.BOTTOM, anchor=tk.SE)  # 下一頁按鈕封裝
+next_page.place(x=780, y=480)  # 下一頁按鈕封裝
 
 
 
