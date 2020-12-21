@@ -9,11 +9,11 @@ class Window(tk.Frame):
         self.createWidgets()
 
     def createWidgets(self):
-        f1 = tkFont.Font(size = 20, family = "微軟正黑體")
+        f1 = tkFont.Font(size = 30, family = "微軟正黑體")
         f2 = tkFont.Font(size = 14, family = "微軟正黑體") 
         f3 = tkFont.Font(size = 12, family = "微軟正黑體") 
 
-        self.lbl_topic = tk.Label(self, text = "高分秘訣", height = 2, width = 40, font = f1) 
+        self.lbl_topic = tk.Label(self, text = "高分秘訣", height = 2, width = 30, font = f1) 
 
         self.psystem = tk.Label(self,
         text = "P系統\n採定量訂購方式，又稱定量管制系統。存貨量時時審核、更新，一旦量降到最低水準(訂購點s)時，即開始訂購一固定數量Q，故又稱為(s,Q)制或定貨點制。此存貨控制系統的優點是：",
@@ -43,9 +43,9 @@ class Window(tk.Frame):
 
 # 名字要改一下
 first_page = Window()
-first_page.master.title("Restaurant Game")
-first_page.master.geometry('1000x600')
-first_page.master.configure(background = 'Lavender')
+first_page.master.title("餐廳經營小遊戲")
+first_page.master.geometry('900x600+200+30')
+# first_page.master.configure(background = 'Lavender')
 
 # 粉紫 LavenderBlush # 粉橘 OldLace # 薄荷奶油 MintCream # 淡鵝黃 LightYellow # 淡黃橘LemonChiffon
 # header_label = tk.Label(window, text = '餐廳經營管理遊戲')
