@@ -18,7 +18,6 @@ class Operating(tk.Frame):
 
 
         # 顯示Day 1 
-        f1 = tkFont.Font(size=30, family="微軟正黑體")
         header = tk.Label(text="Day 1", bg="#F3F3F3", fg="black", font=f1)
         header.place(x=26, y=20)
 
@@ -29,13 +28,13 @@ class Operating(tk.Frame):
             """
             pass
 
-        f2 = tkFont.Font(size=14, family="微軟正黑體")
         calender = tk.Button(command=show_calender(), text="行事曆", width=7, height=2, font=f2)
         calender.config(background="Lavender")  # 第二種方式
 
         calender.place(x=780, y=10)  # 行事曆封裝
 
         # 做漢堡的圖片
+        global cooking_img
         image = ImageTk.Image.open("C:\\Users\\formo\\Documents\\python files\\finalproject\\PBC_group92\\S__85836045.png")
         image = image.resize((600, 300), ImageTk.Image.ANTIALIAS)
         cooking_img = ImageTk.PhotoImage(image)
