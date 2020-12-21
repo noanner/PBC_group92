@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.font as tkFont
 
-class Window(tk.Frame):
+class WeelCal(tk.Frame):
 
     def __init__(self):
         tk.Frame.__init__(self) 
@@ -30,15 +30,11 @@ class Window(tk.Frame):
         self.lblNum.configure(text = self.lblNum.cget("text") + "1")
 
 
-first_page = Window()
-first_page.master.title("Restaurant Game")
-first_page.master.geometry('1000x600')
-first_page.master.configure(background = 'Lavender')
+week_cal_page = WeelCal()
+week_cal_page.master.title("餐廳經營小遊戲")
+week_cal_page.master.geometry("900x600+200+30")
+# week_cal_page.master.configure(background = 'Lavender')
  # 粉紫 LavenderBlush # 粉橘 OldLace # 薄荷奶油 MintCream # 淡鵝黃 LightYellow # 淡黃橘LemonChiffon
 
-# header_label = tk.Label(window, text = '餐廳經營管理遊戲')
-# header_label.pack()
 
-
-
-first_page.mainloop()
+week_cal_page.mainloop()
