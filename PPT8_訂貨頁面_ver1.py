@@ -10,6 +10,7 @@ class Ordering(tk.Frame):
         self.grid()
         self.createWidgets()
         self.createTreeview()
+        self.createText()
 
     def createWidgets(self):
         f1 = tkFont.Font(size = 30, family = "微軟正黑體")
@@ -23,47 +24,9 @@ class Ordering(tk.Frame):
         self.btn_schedule = tk.Button(self, text = "行事曆", command = self.clickBtnSchedule, height = 2, width = 7, font = f2, bg = 'Lavender')
         
         
-        '''
-        # row1 訂購數量表格的標題欄
-        self.lbl_r1c1 = tk.Label(self, text = "食材", height = 2, width = 8, font = f3, bg = 'LemonChiffon')
-        self.lbl_r1c2 = tk.Label(self, text = "訂購單價", height = 2, width = 7, font = f3, bg = 'LemonChiffon')
-        self.lbl_r1c3 = tk.Label(self, text = "剩於庫存", height = 2, width = 7, font = f3, bg = 'LemonChiffon')
-        self.lbl_r1c4 = tk.Label(self, text = "訂購數量", height = 2, width = 7, font = f3, bg = 'LemonChiffon')
-        
-        # row2 牛肉漢堡
-        self.lbl_r2c1 = tk.Label(self, text = "牛肉漢堡", height = 2, width = 8, font = f3, bg = 'LightYellow')
-        self.lbl_r2c2 = tk.Label(self, text = "$10", height = 2, width = 7, font = f3, bg = 'LightYellow')
-        self.lbl_r2c3 = tk.Label(self, text = "5", height = 2, width = 7, font = f3, bg = 'LightYellow')
-        self.lbl_r2c4 = tk.Label(self, text = "???", height = 2, width = 7, font = f3, bg = 'OldLace')
-        
-        # row3 豬肉漢堡
-        self.lbl_r3c1 = tk.Label(self, text = "豬肉漢堡", height = 2, width = 8, font = f3, bg = 'LightYellow')
-        self.lbl_r3c2 = tk.Label(self, text = "$9", height = 2, width = 7, font = f3, bg = 'LightYellow')
-        self.lbl_r3c3 = tk.Label(self, text = "5", height = 2, width = 7, font = f3, bg = 'LightYellow')
-        self.lbl_r3c4 = tk.Label(self, text = "???", height = 2, width = 7, font = f3, bg = 'OldLace')
-        
-        # row4 雞肉漢堡
-        self.lbl_r4c1 = tk.Label(self, text = "雞肉漢堡", height = 2, width = 8, font = f3, bg = 'LightYellow')
-        self.lbl_r4c2 = tk.Label(self, text = "$9", height = 2, width = 7, font = f3, bg = 'LightYellow')
-        self.lbl_r4c3 = tk.Label(self, text = "5", height = 2, width = 7, font = f3, bg = 'LightYellow')
-        self.lbl_r4c4 = tk.Label(self, text = "???", height = 2, width = 7, font = f3, bg = 'OldLace')
-        
-        # row5 生菜堡
-        self.lbl_r5c1 = tk.Label(self, text = "生菜堡", height = 2, width = 8, font = f3, bg = 'LightYellow')
-        self.lbl_r5c2 = tk.Label(self, text = "$6", height = 2, width = 7, font = f3, bg = 'LightYellow')
-        self.lbl_r5c3 = tk.Label(self, text = "5", height = 2, width = 7, font = f3, bg = 'LightYellow')
-        self.lbl_r5c4 = tk.Label(self, text = "???", height = 2, width = 7, font = f3, bg = 'OldLace')
-        
-        # row6 生酮堡
-        self.lbl_r6c1 = tk.Label(self, text = "生酮堡", height = 2, width = 8, font = f3, bg = 'LightYellow')
-        self.lbl_r6c2 = tk.Label(self, text = "$16", height = 2, width = 7, font = f3, bg = 'LightYellow')
-        self.lbl_r6c3 = tk.Label(self, text = "5", height = 2, width = 7, font = f3, bg = 'LightYellow')
-        self.lbl_r6c4 = tk.Label(self, text = "???", height = 2, width = 7, font = f3, bg = 'OldLace')
-        '''
-        
         # row7 訂貨固定成本、目前訂購總價、訂購按鈕
-        self.lbl_fixcost = tk.Label(self, text = " 訂貨固定成本:$50元 ", height = 2, width = 15, font = f3, bg = 'LemonChiffon')
-        self.lbl_cost = tk.Label(self, text = "總價:$$$$$", height = 2, width = 7, font = f3, bg = 'OldLace')
+        self.lbl_fixcost = tk.Label(self, text = " 訂貨固定成本:$50元 ", height = 2, width = 18, font = f3, bg = 'LemonChiffon')
+        self.lbl_cost = tk.Label(self, text = "總價:$$$$$", height = 2, width = 10, font = f3, bg = 'LemonChiffon')
         self.btn_order = tk.Button(self, text = "訂購!", command = self.clickBtnOrder, height = 2, width = 7, font = f2, bg = 'Lavender')
         
         #-----------------------------------------------------------------------------------------------
@@ -76,86 +39,63 @@ class Ordering(tk.Frame):
         self.lbl_description.place(x = 200, y = 30)
         self.btn_schedule.place(x = 780, y = 10)
         
-        '''
-        # row1
-        self.lbl_r1c1.grid(row = 1, column = 1, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r1c2.grid(row = 1, column = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r1c3.grid(row = 1, column = 3, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r1c4.grid(row = 1, column = 4, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        # self.lbl_r1c1.place(x = 80, y = 120)
-        # self.lbl_r1c2.place(x = 185, y = 120)
-        # self.lbl_r1c3.place(x = 290, y = 120)
-        # self.lbl_r1c4.place(x = 395, y = 120)
-                       
-        # row2
-        self.lbl_r2c1.grid(row = 2, column = 1, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r2c2.grid(row = 2, column = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r2c3.grid(row = 2, column = 3, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r2c4.grid(row = 2, column = 4, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
         
-        # row3
-        self.lbl_r3c1.grid(row = 3, column = 1, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r3c2.grid(row = 3, column = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r3c3.grid(row = 3, column = 3, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r3c4.grid(row = 3, column = 4, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        
-        # row4
-        self.lbl_r4c1.grid(row = 4, column = 1, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r4c2.grid(row = 4, column = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r4c3.grid(row = 4, column = 3, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r4c4.grid(row = 4, column = 4, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        
-        # row5
-        self.lbl_r5c1.grid(row = 5, column = 1, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r5c2.grid(row = 5, column = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r5c3.grid(row = 5, column = 3, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r5c4.grid(row = 5, column = 4, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        
-        # row6
-        self.lbl_r6c1.grid(row = 6, column = 1, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r6c2.grid(row = 6, column = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r6c3.grid(row = 6, column = 3, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        self.lbl_r6c4.grid(row = 6, column = 4, sticky = tk.NW + tk.SE, padx = 1, pady = 1)
-        '''
         # row7
         self.lbl_fixcost.grid(row = 7, column = 1, columnspan = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 15)
         self.lbl_cost.grid(row = 7, column = 4, columnspan = 2, sticky = tk.NW + tk.SE, padx = 1, pady = 15)
         # self.btn_order.grid(row = 7, column = 6, padx = 1, pady = 15)
+        self.lbl_fixcost.place(x = 150, y = 480)
+        self.lbl_cost.place(x = 511, y = 480)
         self.btn_order.place(x = 780, y = 480)
         
         
         
     def createTreeview(self):    
+        
         # 品項表格
-        columns = ("牛肉漢堡","豬肉堡堡","雞肉漢堡","生菜堡","生酮堡堡")
+        columns = ("訂購單價","剩餘庫存","訂購數量")
         self.tree_item = ttk.Treeview(self, column = columns)  #表格
         
-        self.tree_item.column("#0", minwidth=0, width=110)
-        self.tree_item.column("牛肉漢堡",width=80, anchor="center")   #表示列,不顯示
-        self.tree_item.column("豬肉堡堡",width=80, anchor="center")
-        self.tree_item.column("雞肉漢堡",width=80, anchor="center")
-        self.tree_item.column("生菜堡",width=80, anchor="center")
-        self.tree_item.column("生酮堡堡",width=80, anchor="center")
+        self.tree_item.column("#0", minwidth=0, width=120, anchor="center")
+        self.tree_item.column("訂購單價",width=120, anchor="center")
+        self.tree_item.column("剩餘庫存",width=120, anchor="center")
+        self.tree_item.column("訂購數量",width=123, anchor="center")
 
-        self.tree_item.heading("#0", text="品項")
-        self.tree_item.heading("牛肉漢堡",text="牛肉漢堡")  #顯示錶頭
-        self.tree_item.heading("豬肉堡堡",text="豬肉堡堡")
-        self.tree_item.heading("雞肉漢堡",text="雞肉漢堡")
-        self.tree_item.heading("生菜堡",text="生菜堡")
-        self.tree_item.heading("生酮堡堡",text="生酮堡堡")
 
-        self.tree_item.insert("",0,text="期初庫存" ,values=("25","25","25","25","25")) #插入資料，
-        self.tree_item.insert("",1,text="需求量" ,values=("20","20","20","20","20"))
-        self.tree_item.insert("",2,text="賣出數量" ,values=("20","20","20","20","20"))
-        self.tree_item.insert("",3,text="營業額" ,values=("400","360","360","240","640"))
-        self.tree_item.insert("",4,text="營業額百分比" ,values=("20%","18%","18%","12%","32%"))
+        self.tree_item.heading("#0", text="食材")
+        self.tree_item.heading("訂購單價",text="訂購單價")  #顯示錶頭
+        self.tree_item.heading("剩餘庫存",text="剩餘庫存")
+        self.tree_item.heading("訂購數量",text="訂購數量")
+
+
+        self.tree_item.insert("",0,text="牛肉漢堡" ,values=("10","剩餘庫存")) #插入資料，
+        self.tree_item.insert("",1,text="豬肉漢堡" ,values=("9","剩餘庫存"))
+        self.tree_item.insert("",2,text="雞肉漢堡" ,values=("9","剩餘庫存"))
+        self.tree_item.insert("",3,text="生菜堡" ,values=("6","剩餘庫存"))
+        self.tree_item.insert("",4,text="生酮堡" ,values=("16","剩餘庫存"))
 
         style = ttk.Style()
-        style.configure("Treeview", rowheight=50)
-        # style.configure("Treeview.Heading", font=(None, 12))
+        style.configure("Treeview.Heading", font=("微軟正黑體", 10))
+        style.configure("Treeview", rowheight=50, font=("微軟正黑體", 10))
 
-        self.tree_item.place(x=60, y=140, height=300)
+        self.tree_item.place(x=150, y=140, height=276)
         
+    def createText(self):
+        f3 = tkFont.Font(size = 10, family = "微軟正黑體")
+        # 輸入表格
+        self.txt_beef = tk.Text (self, height = 2, width = 12 , font = f3)
+        self.txt_pork = tk.Text (self, height = 2, width = 12 , font = f3)
+        self.txt_chick = tk.Text (self, height = 2, width = 12 , font = f3)
+        self.txt_vego = tk.Text (self, height = 2, width = 12 , font = f3)
+        self.txt_keto = tk.Text (self, height = 2, width = 12 , font = f3)
+    
+        # 輸入表格
+        self.txt_beef.place(x=511, y=165)
+        self.txt_pork.place(x=511, y=215)
+        self.txt_chick.place(x=511, y=265)
+        self.txt_vego.place(x=511, y=315)
+        self.txt_keto.place(x=511, y=365)
+    
     
     def clickBtnSchedule(self):
         self.lblNum.configure(text = self.lblNum.cget("text") + "1")
