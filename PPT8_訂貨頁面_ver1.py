@@ -3,7 +3,7 @@ import tkinter.font as tkFont
 from PIL import ImageTk
 from tkinter import ttk
 
-class Ordering(tk.Frame):
+class EverydayStockPage(tk.Frame):
 
     def __init__(self):
         tk.Frame.__init__(self) 
@@ -107,7 +107,7 @@ class Ordering(tk.Frame):
         self.lblNum.configure(text = self.lblNum.cget("text") + "1")
 
 
-ordering_page = Ordering()
+ordering_page = EverydayStockPage()
 ordering_page.master.title("餐廳經營小遊戲")
 ordering_page.master.geometry("900x600+200+30")
 # first_page.master.configure(background = 'Lavender')
