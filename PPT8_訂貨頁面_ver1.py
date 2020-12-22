@@ -25,8 +25,8 @@ class Ordering(tk.Frame):
         
         
         # row7 訂貨固定成本、目前訂購總價、訂購按鈕
-        self.lbl_fixcost = tk.Label(self, text = " 訂貨固定成本:$50元 ", height = 2, width = 18, font = f3, bg = 'LemonChiffon')
-        self.lbl_cost = tk.Label(self, text = "總價:$$$$$", height = 2, width = 10, font = f3, bg = 'LemonChiffon')
+        self.lbl_fixcost = tk.Label(self, text = " 訂貨固定成本:$50元 ", height = 2, width = 18, font = f2, bg = 'LemonChiffon')
+        self.lbl_cost = tk.Button(self, text = "總價試算", command = self.clickBtnCal, height = 2, width = 8, font = f2, bg = 'Lavender')
         self.btn_order = tk.Button(self, text = "訂購!", command = self.clickBtnOrder, height = 2, width = 7, font = f2, bg = 'Lavender')
         
         #-----------------------------------------------------------------------------------------------
@@ -103,6 +103,8 @@ class Ordering(tk.Frame):
     def clickBtnOrder(self):
         self.lblNum.configure(text = self.lblNum.cget("text") + "1")
 
+    def clickBtnCal(self):
+        self.lblNum.configure(text = self.lblNum.cget("text") + "1")
 
 
 ordering_page = Ordering()
