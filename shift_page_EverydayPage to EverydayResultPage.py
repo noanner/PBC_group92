@@ -256,7 +256,7 @@ class EverydayPage(object):  # 每日漢堡製作畫面
         self.page.lbl_gridonly.grid(row = 0, column = 0, columnspan = 10, sticky = tk.NW)
 
         # 顯示Day 1 
-        self.page.lbl_topic = tk.Label(self.page, text = "Day1", height = 1, width = 5, font = f1)
+        self.page.lbl_topic = tk.Label(self.page, text = ("Day " + str(counts+1)), height = 1, width = 5, font = f1)
         self.page.lbl_topic.place(x = 26, y = 20)
 
         # 行事曆按鈕
@@ -330,7 +330,7 @@ class EverydayResultPage(object):  # 每日結算畫面
         self.page.lbl_gridonly.grid(row = 0, column = 0, columnspan = 10, sticky = tk.NW)
 
         # 顯示 header
-        self.page.lbl_topic = tk.Label(self.page, text = "Day1", height = 1, width = 5, font = f1)
+        self.page.lbl_topic = tk.Label(self.page, text = ("Day " + str(counts+1)), height = 1, width = 5, font = f1)
         self.page.lbl_topic.place(x = 26, y = 20)
 
         self.page.lbl_description = tk.Label(self.page, text = "辛苦了~下面是你今天營業的成果~~", height = 2, width = 40, font = f3)
