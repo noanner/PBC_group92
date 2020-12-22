@@ -15,19 +15,21 @@ class StartPage(tk.Frame):
 
         self.lbl_gridonly = tk.Label(self, text = " ", height = 200, width = 300, font = f1) # 製造一個空的grid在底下
         self.lbl_topic = tk.Label(self, text = "餐廳經營管理遊戲", height = 2, width = 15, font = f1) 
-        self.btn_enter = tk.Button(self, text = "進入遊戲", command = self.clickBtnEnter, height = 2, width = 10, font = f2, bg = 'LightYellow')
-        self.btn_rank = tk.Button(self, text = "排行榜", command = self.clickBtnRank, height = 2, width = 10, font = f2, bg = 'Lavender')
+        self.btn_enter = tk.Button(self, text = "進入遊戲", command = self.gotoIntro, height = 2, width = 10, font = f2, bg = 'LightYellow')
+        self.btn_rank = tk.Button(self, text = "排行榜", command = self.gotoRanking1, height = 2, width = 10, font = f2, bg = 'Lavender')
         
         self.lbl_gridonly.grid(row = 0, column = 0, columnspan = 10, sticky = tk.NW)
         self.lbl_topic.place(x=220, y=100)
         self.btn_enter.place(x=250, y=350)
         self.btn_rank.place(x=500, y=350)
     
-    def clickBtnEnter(self):
-        self.lblNum.configure(text = self.lblNum.cget("text") + "1")
+    def gotoIntro(self):
+        self.page.destroy()
+        IntroPage(self.root)
     
-    def clickBtnRank(self):
-        self.lblNum.configure(text = self.lblNum.cget("text") + "1")
+    def gotoRanking1(self):
+        self.page.destroy()
+        RankingPage1(self.root)
 
 
 start_page = StartPage()
