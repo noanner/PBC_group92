@@ -27,7 +27,7 @@ class StartPage(object):  # 開始畫面
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
-        Label(self.page, text = '賬戶: ').grid(row=1, stick=W, pady=10)
+        Label(self.page, text = '開始頁面: ').grid(row=1, stick=W, pady=10)
         Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
         Label(self.page, text = '密碼: ').grid(row=2, stick=W, pady=10)
         Entry(self.page, textvariable=self.password, show='*').grid(row=2, column=1, stick=E)
@@ -55,7 +55,7 @@ class RankingPage1(object):  # 排行榜(前)
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
-        Label(self.page, text = '賬戶3: ').grid(row=1, stick=W, pady=10)
+        Label(self.page, text = '開始排行榜: ').grid(row=1, stick=W, pady=10)
         Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
         Label(self.page, text = '密碼3: ').grid(row=2, stick=W, pady=10)
         Entry(self.page, textvariable=self.password, show='*').grid(row=2, column=1, stick=E)
@@ -104,7 +104,7 @@ class RulePage(object):  #營業說明
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
-        Label(self.page, text = '賬戶: ').grid(row=1, stick=W, pady=10)
+        Label(self.page, text = '營業說明: ').grid(row=1, stick=W, pady=10)
         Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
         Label(self.page, text = '密碼: ').grid(row=2, stick=W, pady=10)
         Entry(self.page, textvariable=self.password, show='*').grid(row=2, column=1, stick=E)
@@ -127,7 +127,7 @@ class Day1Page1(object):  # Day 1 小知識的日子
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
-        Label(self.page, text = '賬戶: ').grid(row=1, stick=W, pady=10)
+        Label(self.page, text = 'day1小知識: ').grid(row=1, stick=W, pady=10)
         Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
         Label(self.page, text = '密碼: ').grid(row=2, stick=W, pady=10)
         Entry(self.page, textvariable=self.password, show='*').grid(row=2, column=1, stick=E)
@@ -159,7 +159,7 @@ class Day4Page1(object):  # Day 1 小知識的日子
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
-        Label(self.page, text = '賬戶: ').grid(row=1, stick=W, pady=10)
+        Label(self.page, text = 'day4小知識: ').grid(row=1, stick=W, pady=10)
         Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
         Label(self.page, text = '密碼: ').grid(row=2, stick=W, pady=10)
         Entry(self.page, textvariable=self.password, show='*').grid(row=2, column=1, stick=E)
@@ -243,7 +243,7 @@ class EverydayPage(object):  # 每日漢堡製作畫面
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
-        Label(self.page, text = '賬戶2: ').grid(row=1, stick=W, pady=10)
+        Label(self.page, text = ("Day " + str(counts+1) + "製作:")).grid(row=1, stick=W, pady=10)
         Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
         Label(self.page, text = '密碼2: ').grid(row=2, stick=W, pady=10)
         Entry(self.page, textvariable=self.password, show='*').grid(row=2, column=1, stick=E)
@@ -270,7 +270,7 @@ class EverydayResultPage(object):  # 每日結算畫面
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
-        Label(self.page, text = '賬戶2: ').grid(row=1, stick=W, pady=10)
+        Label(self.page, text = ("Day " + str(counts+1) + "結算:")).grid(row=1, stick=W, pady=10)
         Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
         Label(self.page, text = '密碼2: ').grid(row=2, stick=W, pady=10)
         Entry(self.page, textvariable=self.password, show='*').grid(row=2, column=1, stick=E)
@@ -307,6 +307,7 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
+        Label(self.page, text = ("Day " + str(counts+1) + "訂貨:")).grid(row=0, column=0, stick=W)
         Label(self.page, text = '牛肉: ').grid(row=1, stick=W, pady=10)
         Entry(self.page, textvariable=self.beef).grid(row=1, column=1, stick=E)
         Label(self.page, text = '豬肉: ').grid(row=2, stick=W, pady=10)
@@ -453,7 +454,7 @@ class FinalResultPage1(object):  # 總結算(折線圖)
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
-        Label(self.page, text = '賬戶3: ').grid(row=1, stick=W, pady=10)
+        Label(self.page, text = '結算1: ').grid(row=1, stick=W, pady=10)
         Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
         Label(self.page, text = '密碼3: ').grid(row=2, stick=W, pady=10)
         Entry(self.page, textvariable=self.password, show='*').grid(row=2, column=1, stick=E)
@@ -486,6 +487,7 @@ class FinalResultPage2(object):  # 總結算(總分、評價)、再玩一次、�
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
+        Label(self.page, text = '結算2: ').grid(row=1, stick=W, pady=10)
         Button(self.page, text='排行榜', command=self.gotoRanking2).grid(row=2, stick=W, pady=10)
         Button(self.page, text='高分秘訣', command=self.gotoHighscore).grid(row=3, stick=W, pady=10)
         Button(self.page, text='離開', command=self.page.quit).grid(row=3, column=1, stick=E)
@@ -510,7 +512,7 @@ class RankingPage2(object):  # 排行榜、可回總結算(2)、高分秘訣
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
-        Label(self.page, text = '賬戶3: ').grid(row=1, stick=W, pady=10)
+        Label(self.page, text = '排行榜2: ').grid(row=1, stick=W, pady=10)
         Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
         Label(self.page, text = '密碼3: ').grid(row=2, stick=W, pady=10)
         Entry(self.page, textvariable=self.password, show='*').grid(row=2, column=1, stick=E)
@@ -537,7 +539,7 @@ class HighscorePage(object):  # 高分秘訣、可回總結算(2)
         self.page = Frame(self.root) #建立Frame
         self.page.pack()
         Label(self.page).grid(row=0, stick=W)
-        Label(self.page, text = '賬戶3: ').grid(row=1, stick=W, pady=10)
+        Label(self.page, text = '高分秘訣: ').grid(row=1, stick=W, pady=10)
         Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
         Label(self.page, text = '密碼3: ').grid(row=2, stick=W, pady=10)
         Entry(self.page, textvariable=self.password, show='*').grid(row=2, column=1, stick=E)
