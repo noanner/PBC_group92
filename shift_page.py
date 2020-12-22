@@ -147,6 +147,7 @@ class Day1Page1(object):  # Day 1 小知識的日子
     def openCalendar(self):
         showinfo(title='行事曆', message='此處放行事曆')
 
+
 class Day4Page1(object):  # Day 1 小知識的日子
     def __init__(self, master=None):
         self.root = master #定義內部變數root
@@ -179,6 +180,7 @@ class Day4Page1(object):  # Day 1 小知識的日子
     def openCalendar(self):
         showinfo(title='行事曆', message='此處放行事曆')
 
+
 class CorrectPage(object):  # Day 1 答對頁面
     def __init__(self, master=None):
         self.root = master #定義內部變數root
@@ -204,6 +206,7 @@ class CorrectPage(object):  # Day 1 答對頁面
         
     def openCalendar(self):
         showinfo(title='行事曆', message='此處放行事曆')
+
 
 class WrongPage(object):  # Day 1 答錯頁面
     def __init__(self, master=None):
@@ -231,6 +234,7 @@ class WrongPage(object):  # Day 1 答錯頁面
     def openCalendar(self):
         showinfo(title='行事曆', message='此處放行事曆')
 
+
 class EverydayPage(object):  # 每日漢堡製作畫面
     def __init__(self, master=None):
         self.root = master #定義內部變數root
@@ -256,6 +260,7 @@ class EverydayPage(object):  # 每日漢堡製作畫面
 
     def openCalendar(self):
         showinfo(title='行事曆', message='此處放行事曆')
+
 
 class EverydayResultPage(object):  # 每日結算畫面
     def __init__(self, master=None):
@@ -290,6 +295,7 @@ class EverydayResultPage(object):  # 每日結算畫面
     def gotoResult(self):
         self.page.destroy()
         FinalResultPage1(root)
+
 
 class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算功能?)
     def __init__(self, master=None):
@@ -442,6 +448,7 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
     def openCalendar(self):
         showinfo(title='行事曆', message='此處放行事曆')
 
+
 class FinalResultPage1(object):  # 總結算(折線圖)
     def __init__(self, master=None):
         self.root = master #定義內部變數root
@@ -477,6 +484,7 @@ class FinalResultPage1(object):  # 總結算(折線圖)
         plt.legend(loc = "best", fontsize=10)
         plt.show()
 
+
 class FinalResultPage2(object):  # 總結算(總分、評價)、再玩一次、高分秘訣、離開
     def __init__(self, master=None):
         self.root = master #定義內部變數root
@@ -499,6 +507,7 @@ class FinalResultPage2(object):  # 總結算(總分、評價)、再玩一次、�
     def gotoHighscore(self):
         self.page.destroy()
         HighscorePage(root)
+
 
 class RankingPage2(object):  # 排行榜、可回總結算(2)、高分秘訣
     def __init__(self, master=None):
@@ -526,6 +535,7 @@ class RankingPage2(object):  # 排行榜、可回總結算(2)、高分秘訣
     def gotoHighscore(self):
         self.page.destroy()
         HighscorePage(root)
+
 
 class HighscorePage(object):  # 高分秘訣、可回總結算(2)
     def __init__(self, master=None):
@@ -587,6 +597,7 @@ class HighscorePage(object):  # 高分秘訣、可回總結算(2)
         self.countPage.pack_forget()
         self.aboutPage.pack()
 '''
+
 '''
 class InputFrame(Frame): # 繼承Frame類
     def __init__(self, master=None):
