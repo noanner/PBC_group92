@@ -23,7 +23,8 @@ class Day1_Operating(tk.Frame):
         self.lbl_topic.place(x = 26, y = 20)
 
         # 行事曆按鈕
-        self.calender = tk.Button(self, command=show_calender(), text="行事曆", width=7, height=2, font=f2, background="Lavender")
+        # self.calender = tk.Button(self, command=self.clickBtnEnter(), text="行事曆", width=7, height=2, font=f2, background="Lavender")
+        self.calender = tk.Button(self, command=self.clickBtnEnter(), text="行事曆", width=7, height=2, font=f2, background="Lavender")
         # self.calender.config(background="Lavender")  # 第二種方式
 
         self.calender.place(x=780, y=10)  # 行事曆封裝
