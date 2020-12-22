@@ -23,12 +23,6 @@ class Day1_Operating(tk.Frame):
         self.lbl_topic.place(x = 26, y = 20)
 
         # 行事曆按鈕
-        def show_calender():
-            """
-            show calender 等等再研究
-            """
-            pass
-
         self.calender = tk.Button(self, command=show_calender(), text="行事曆", width=7, height=2, font=f2, background="Lavender")
         # self.calender.config(background="Lavender")  # 第二種方式
 
@@ -59,6 +53,12 @@ class Day1_Operating(tk.Frame):
     
     def clickBtnRank(self):
         self.lblNum.configure(text = self.lblNum.cget("text") + "1")
+    
+    """
+    def gotoDay1_Result(self):
+        self.page.destroy()
+        Day1_Result(self.root)
+    """
 
 operating_page = Day1_Operating()
 operating_page.master.title("餐廳經營小遊戲")
