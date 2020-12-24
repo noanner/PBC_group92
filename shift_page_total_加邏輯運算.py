@@ -7,7 +7,8 @@ from tkinter.messagebox import *
 from PIL import ImageTk
 
 import random 
-scenario = random.randint(1,4)
+scenario = 0
+
 # print(scenario)
 
 
@@ -57,7 +58,7 @@ for i in range(4):
 
 
 demand_list1 = [[20,20,20,20,20],[3,5,52,62,2],[31,28,27,8,11],[30,25,28,5,15],[21,6,25,12,65], [25,3,30,28,18], [4,6,8,62,10]]
-demand_list2 = [[20,20,20,20,20],[18,19,43,15,12],[21,18,31,17,19],[23,25,28,19,12],[0,0,0,110,0],[28,26,27,8,13],[22,23,21,19,18]]
+demand_list2 = [[20,20,20,20,20],[18,43,19,15,12],[21,18,31,17,19],[23,25,28,19,12],[0,0,0,110,0],[28,26,27,8,13],[22,23,21,19,18]]
 demand_list3 = [[20,20,20,20,20],[16,16,17,15,15],[22,23,23,19,21],[26,28,27,23,24],[24,23,26,24,25], [15,14,16,13,16], [21,20,22,20,21]]
 demand_list4 = [[20,20,20,20,20], [81,21,20,19,18], [16,13,15,15,16], [31,28,29,27,29], [8,7,7,8,6], [22,23,21,21,22], [21,21,21,21,21]]
 
@@ -84,6 +85,7 @@ order_cost_list = [0]  # 畫圖
 profit_list = []  # 畫圖
 accumulated_profit = 0  # 總分
 accumulated_profit_list = []  # 畫圖
+ranking_list = [[5684,"就愛吃漢堡"],[4783,"今晚吃漢堡"],[3366,"My Way"],[6428,"賽百味"],[1056,"我不會玩"]]
 
 
 class StartPage(object):  # 開始畫面
@@ -91,11 +93,24 @@ class StartPage(object):  # 開始畫面
         # tk.Frame.__init__(self)
         # self.grid()
         # self.createWidgets()
-
+        global scenario
+        global counts
+        global stock_list
+        global order_list
+        global order_cost_list
+        global profit_list
+        global accumulated_profit
+        global accumulated_profit_list
+        scenario = random.randint(1,4)
+        counts = 0
+        stock_list = [25, 25, 25, 25, 25]  # 預設存貨
+        order_list = [0,0,0,0,0]
+        order_cost_list = [0]  # 畫圖
+        profit_list = []  # 畫圖
+        accumulated_profit = 0  # 總分
+        accumulated_profit_list = []  # 畫圖
         self.root = master  # 定義內部變數root
         self.root.geometry('900x600+200+30')  # 設定視窗大小
-        self.username = StringVar()
-        self.password = StringVar()
         self.createPage()
 
     def createPage(self):
@@ -141,8 +156,6 @@ class RankingPage1(object):  # 排行榜(前)
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
         self.root.geometry('900x600+200+30')  # 設定視窗大小
-        self.username = StringVar()
-        self.password = StringVar()
         self.createPage()
 
     def createPage(self):
@@ -159,6 +172,7 @@ class RankingPage1(object):  # 排行榜(前)
 
         # 背景圖
         global bg_img
+        global ranking_list
         image = ImageTk.Image.open("背景設計.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
@@ -167,14 +181,14 @@ class RankingPage1(object):  # 排行榜(前)
         # 內容
         self.page.lbl_topic = tk.Label(self.page, text = "排行榜", height = 2, width = 10, font = f1, bg = 'White',
                                        fg = '#666666')
-        self.page.psystem = tk.Label(self.page, text = "第一名：", height = 2, width = 10, font = f3, bg = 'LightYellow')
-        self.page.qsystem = tk.Label(self.page, text = "第二名：", height = 2, width = 10, font = f3, bg = 'OldLace')
+        for i in range(5):
+            self.page.rank = tk.Label(self.page, text = ("第" + str(i+1) + "名： " + ranking_list[i][1]+ "   " + str(ranking_list[i][0]) + "分"), 
+                                                         height = 2, width = 30, font = f3, bg = 'LightYellow')
+            self.page.rank.place(x = 300, y = 160+i*70)
         self.page.btn_main = tk.Button(self.page, text = "回主畫面", command = self.gotoStartPage, height = 2, width = 9,
                                        font = f2, bg = '#FFCC22', fg = 'White')
 
         self.page.lbl_topic.place(x = 300, y = 50)
-        self.page.psystem.place(x = 300, y = 160)
-        self.page.qsystem.place(x = 300, y = 230)
         self.page.btn_main.place(x = 730, y = 490)
 
     def gotoStartPage(self):
@@ -187,11 +201,11 @@ class IntroPage(object):  # 說明、輸入姓名
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
         self.root.geometry("900x600+200+30")  # 設定視窗大小
-        self.username = StringVar()
         self.createPage()
 
     def createPage(self):
         self.page = Frame(self.root)
+        self.username = StringVar()
         self.page.pack()
 
         f1 = tkFont.Font(size = 30, family = "華康娃娃體")
@@ -232,8 +246,7 @@ class IntroPage(object):  # 說明、輸入姓名
     def gotoRule(self):
         global user_name
         name = self.username.get()
-        print(name)
-        # user_name += name
+        user_name = name
         if name != '':
             self.page.destroy()
             RulePage(self.root)
@@ -276,7 +289,7 @@ class RulePage(object):  # 營業說明
                                    height = 5, width = 50, font = f3, bg = 'LemonChiffon', fg = '#666666')
         self.page.intro.place(relx = 0.5, rely = 0.26, anchor = 'n')
 
-        self.page.button = tk.Button(self.page, text = "開啟第一天吧！", font = f2, command = self.gotoDay1, height = 2, width = 10,
+        self.page.button = tk.Button(self.page, text = "開啟第一天吧！", font = f2, command = self.gotoEveryday, height = 2, width = 15,
                                      bg = '#FFCC22', fg = 'White')
         self.page.button.place(x = 720, y = 490)
 
@@ -317,23 +330,13 @@ class RulePage(object):  # 營業說明
                                                   self.unitPrice[i], self.inventory[i], self.orderingCost[i],
                                                   self.inventoryCost[i]))
 
-    def gotoDay1(self):
+    def gotoEveryday(self):
         self.page.destroy()
-        Day1Page1(self.root)
+        EverydayPage(self.root)
 
-    def gotoRule(self):
-        global user_name
-        name = self.username.get()
-        print(name)
-        # user_name += name
-        if name != '':
-            self.page.destroy()
-            RulePage(self.root)
-        else:
-            showinfo(title = '錯誤', message = '你的餐廳還沒命名喔！')
 
 know_content = "小知識1111111111111111111111111111111111111111111111111111111111111111111111111111"
-class Day1Page1(object):  # Day 1 小知識的日子
+class KnowledgePage(object):  # Day 1 小知識的日子
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
         self.root.geometry('900x600+200+30')  # 設定視窗大小
@@ -355,13 +358,14 @@ class Day1Page1(object):  # Day 1 小知識的日子
 
         # 背景圖
         global bg_img
+        global counts
         image = ImageTk.Image.open("背景設計.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 元件內容
-        lbl_day = tk.Label(self.page,text = "Day1小知識問答", height = 2, width = 15, font = f1, bg = 'White', fg = '#666666')
+        lbl_day = tk.Label(self.page,text = ("Day"+str(counts+1)+"小知識問答"), height = 2, width = 15, font = f1, bg = 'White', fg = '#666666')
         lbl_know = tk.Label(self.page,text = know_content, font = f2, borderwidth = 2, relief = "ridge", wraplength = 300,
                             justify = 'left', bg = 'LemonChiffon', fg = '#666666')
         btn_optA = tk.Button(self.page,text = "選項A", command = self.gotoCorrect, width = 7, height = 2, font = f2, bg = '#FFCC22',
@@ -505,11 +509,11 @@ class CorrectPage(object):  # Day 1 答對頁面
 
         # 下一頁按鈕
         Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
-               command = self.gotoDay1).place(x = 720, y = 490)
+               command = self.gotoStockorder).place(x = 720, y = 490)
 
-    def gotoDay1(self):
+    def gotoStockorder(self):
         self.page.destroy()
-        EverydayPage(self.root)
+        EverydayStockPage(self.root)
 
     def openCalendar(self):
         showinfo(title = '行事曆', message = '此處放行事曆')
@@ -568,11 +572,11 @@ class WrongPage(object):  # Day 1 答錯頁面
 
         # 下一頁按鈕
         Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
-               command = self.gotoDay1).place(x = 720, y = 490)
+               command = self.gotoStockorder).place(x = 720, y = 490)
 
-    def gotoDay1(self):
+    def gotoStockorder(self):
         self.page.destroy()
-        EverydayPage(self.root)
+        EverydayStockPage(self.root)
 
     def openCalendar(self):
         showinfo(title = '行事曆', message = '此處放行事曆')
@@ -674,19 +678,25 @@ class EverydayResultPage(object):  # 每日結算畫面
                                              bg = 'White')
         self.page.lbl_description.place(x = 200, y = 70)
 
-        if counts < 6:
+        if counts == 0 or counts == 3:
             # 下一頁按鈕
+            Button(self.page, text = '知識問答', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
+                   command = self.gotoKnowledge).place(x = 720, y = 490)
+
+            # 行事曆按鈕
+            Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
+                   command = self.openCalendar).place(x = 720, y = 70)
+        elif counts == 6:
+            # 下一頁按鈕
+            Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
+                   command = self.gotoResult).place(x = 720, y = 490)
+        else:
             Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
                    command = self.gotoStockorder).place(x = 720, y = 490)
 
             # 行事曆按鈕
             Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
                    command = self.openCalendar).place(x = 720, y = 70)
-
-        else:
-            # 下一頁按鈕
-            Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
-                   command = self.gotoResult).place(x = 720, y = 490)
         
         global stock_list
         global price_list
@@ -722,7 +732,10 @@ class EverydayResultPage(object):  # 每日結算畫面
             total_revenue += b
         pct = []
         for i in revenue:
-            c = i / total_revenue * 100
+            if total_revenue != 0:
+                c = i / total_revenue * 100
+            else:
+                c = 0
             pct.append("%.2f" % c + "%")
         self.page.tree_item.insert("", 0, text = "期初庫存", values = (stock[0], stock[1], stock[2], stock[3], stock[4]))  # 插入資料，
         self.page.tree_item.insert("", 1, text = "需求量", values = (demand[0],demand[1],demand[2],demand[3],demand[4]))
@@ -758,8 +771,8 @@ class EverydayResultPage(object):  # 每日結算畫面
         material_fixed_cost = 0
         stock_day_cost = 0
         for i in range(len(order_list)):
-            material_total_cost += order_list[i] * material_price[i]
-            if order_list[i] != 0:
+            material_total_cost += int(order_list[i]) * material_price[i]
+            if int(order_list[i]) != 0:
                 material_fixed_cost += order_fixed_cost
         for i in range(len(stock_list)):
             stock_day_cost += (stock_list[i] - sold[i]) * stock_cost
@@ -786,6 +799,10 @@ class EverydayResultPage(object):  # 每日結算畫面
     def gotoResult(self):
         self.page.destroy()
         FinalResultPage1(root)
+    
+    def gotoKnowledge(self):
+        self.page.destroy()
+        KnowledgePage(root)
 
 
 class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算功能?)
@@ -921,6 +938,8 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         for order in order_list:
             try:
                 order = int(order)
+                if order < 0:
+                    result = "failed"
             except ValueError:
                 result = "failed"
                 break
@@ -941,21 +960,23 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         global counts
         global order_list
         total_cost = 0
-        beefnum = int(self.page.txt_beef.get("1.0", END))
+        beefnum = self.page.txt_beef.get("1.0", END)
         order_list[0] = beefnum
-        porknum = int(self.page.txt_pork.get("1.0", END))
+        porknum = self.page.txt_pork.get("1.0", END)
         order_list[1] = porknum
-        chickennum = int(self.page.txt_chick.get("1.0", END))
+        chickennum = self.page.txt_chick.get("1.0", END)
         order_list[2] = chickennum
-        vegenum = int(self.page.txt_vege.get("1.0", END))
+        vegenum = self.page.txt_vege.get("1.0", END)
         order_list[3] = vegenum
-        ketonum = int(self.page.txt_keto.get("1.0", END))
+        ketonum = self.page.txt_keto.get("1.0", END)
         order_list[4] = ketonum
 
         result = "success"
         for order in order_list:
             try:
                 order = int(order)
+                if order < 0:
+                    result = "failed"
             except ValueError:
                 result = "failed"
                 break
@@ -980,21 +1001,23 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         global counts
         global order_list
         total_cost = 0
-        beefnum = int(self.page.txt_beef.get("1.0", END))
+        beefnum = self.page.txt_beef.get("1.0", END)
         order_list[0] = beefnum
-        porknum = int(self.page.txt_pork.get("1.0", END))
+        porknum = self.page.txt_pork.get("1.0", END)
         order_list[1] = porknum
-        chickennum = int(self.page.txt_chick.get("1.0", END))
+        chickennum = self.page.txt_chick.get("1.0", END)
         order_list[2] = chickennum
-        vegenum = int(self.page.txt_vege.get("1.0", END))
+        vegenum = self.page.txt_vege.get("1.0", END)
         order_list[3] = vegenum
-        ketonum = int(self.page.txt_keto.get("1.0", END))
+        ketonum = self.page.txt_keto.get("1.0", END)
         order_list[4] = ketonum
 
         result = "success"
         for order in order_list:
             try:
                 order = int(order)
+                if order < 0:
+                    result = "failed"
             except ValueError:
                 result = "failed"
                 break
@@ -1065,17 +1088,20 @@ class FinalResultPage1(object):
     def gotoResult(self):
         self.page.destroy()
         FinalResultPage2(self.root)
+        print(user_name)
+        print(order_cost_list)
+        print(profit_list)
+        print(accumulated_profit_list)
 
 
 class FinalResultPage2(object):
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
         self.root.geometry('900x600+200+30')  # 設定視窗大小
-        self.username = StringVar()
-        self.password = StringVar()
         self.createPage()
 
     def createPage(self):
+
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
@@ -1089,6 +1115,8 @@ class FinalResultPage2(object):
 
         # 背景圖
         global bg_img
+        global ranking_list
+        global user_name
         image = ImageTk.Image.open("背景設計.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
@@ -1101,19 +1129,45 @@ class FinalResultPage2(object):
                                                font = f2, anchor = 'w', bg = 'White', fg = '#666666')
         self.page.lbl_descripition2 = tk.Label(self.page, text = "名次：", height = 1, width = 15, font = f2, anchor = 'w',
                                                bg = 'White', fg = '#666666')
+        ranking_list.append([accumulated_profit,user_name])
 
         # 須依造分數給不一樣的敘述
-        self.page.lbl_descripition3 = tk.Label(self.page, text = " 恭喜您的餐廳榮獲:", height = 2, width = 20, font = f2,
-                                               anchor = 'w', bg = 'LemonChiffon')
-        self.page.lbl_descripition4 = tk.Label(self.page, text = "  米其林三星殊榮", height = 2, width = 20, font = f2,
-                                               anchor = 'w', bg = 'LemonChiffon')
-
+        if accumulated_profit >= 3000:
+            self.page.lbl_descripition3 = tk.Label(self.page, text = " 恭喜您的餐廳榮獲:  ", height = 2, width = 20, font = f2,
+                                                    anchor = 'w', bg = 'LemonChiffon')
+            if accumulated_profit > 10000:
+                self.page.lbl_descripition4 = tk.Label(self.page, text = "   米其林三星殊榮   ", height = 2, width = 20, font = f2,
+                                                        anchor = 'w', bg = 'LemonChiffon')
+            elif accumulated_profit <= 10000 and accumulated_profit > 7000:
+                self.page.lbl_descripition4 = tk.Label(self.page, text = " 必比登必吃百大美食 ", height = 2, width = 20, font = f2,
+                                                        anchor = 'w', bg = 'LemonChiffon')
+            elif accumulated_profit <= 7000 and accumulated_profit > 5000:
+                self.page.lbl_descripition4 = tk.Label(self.page, text = "  「我就讚」美食獎  ", height = 2, width = 20, font = f2,
+                                                        anchor = 'w', bg = 'LemonChiffon')
+            else:
+                self.page.lbl_descripition4 = tk.Label(self.page, text = "     街訪第一名     ", height = 2, width = 20, font = f2,
+                                                        anchor = 'w', bg = 'LemonChiffon')
+        elif accumulated_profit < 3000 and accumulated_profit >= 0:
+            self.page.lbl_descripition3 = tk.Label(self.page, text = ("「今晚我想來點 " + user_name +" 的漢堡全餐」"), height = 2, width = 35,
+                                                    font = f2, anchor = 'w', bg = 'LemonChiffon')
+            if accumulated_profit > 2000:
+                self.page.lbl_descripition4 = tk.Label(self.page, text ="「客人明天請早」\n 因為沒控制好存貨，漢堡偶爾會缺貨", 
+                                                        height = 4, width = 35, font = f2, anchor = 'w', bg = 'LemonChiffon')
+            elif accumulated_profit <= 2000 and accumulated_profit > 500:
+                self.page.lbl_descripition4 = tk.Label(self.page, text = "「客人明天請早」\n 因為沒控制好存貨，漢堡常常會缺貨", 
+                                                        height = 4, width = 35, font = f2, anchor = 'w', bg = 'LemonChiffon')
+            else:
+                self.page.lbl_descripition4 = tk.Label(self.page, text = "「客人明天請早」\n 因為沒控制好存貨，客人每次來都抓狂", 
+                                                        height = 4, width = 35, font = f2, anchor = 'w', bg = 'LemonChiffon')
+        else:
+            self.page.lbl_descripition3 = tk.Label(self.page, text = "加盟大老闆:「朽木不可雕也，你重練吧」", height = 2, 
+                                                    width = 35, font = f2, anchor = 'w', bg = 'LemonChiffon')
         # 按鈕
         self.page.btn_tips = tk.Button(self.page, text = "高分秘訣", command = self.gotoHighscore, height = 2, width = 7,
                                        font = f2, bg = '#FFCC22', fg = 'White')
         self.page.btn_ranking = tk.Button(self.page, text = "排行榜", command = self.gotoRanking2, height = 2, width = 7,
                                           font = f2, bg = '#FFCC22', fg = 'White')
-        self.page.btn_main = tk.Button(self.page, text = "回主畫面", command = self.page.quit, height = 2, width = 7,
+        self.page.btn_main = tk.Button(self.page, text = "再玩一次", command = self.againtoStart, height = 2, width = 7,
                                        font = f2, bg = '#FFCC22', fg = 'White')
 
         self.page.lbl_topic.place(x = 300, y = 50)
@@ -1132,14 +1186,16 @@ class FinalResultPage2(object):
     def gotoRanking2(self):
         self.page.destroy()
         RankingPage2(self.root)
+    
+    def againtoStart(self):
+        self.page.destroy()
+        StartPage(self.root)
 
 
 class RankingPage2(object):
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
         self.root.geometry('900x600+200+30')  # 設定視窗大小
-        self.username = StringVar()
-        self.password = StringVar()
         self.createPage()
 
     def createPage(self):
@@ -1156,22 +1212,26 @@ class RankingPage2(object):
 
         # 背景圖
         global bg_img
+        global ranking_list
         image = ImageTk.Image.open("背景設計.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 內容
+        ranking_list.sort()
+        ranking_list.reverse()
         self.page.lbl_topic = tk.Label(self.page, text = "排行榜", height = 2, width = 10, font = f1, bg = 'White',
                                        fg = '#666666')
-        self.page.psystem = tk.Label(self.page, text = "第一名：", height = 2, width = 10, font = f3, bg = 'LightYellow')
-        self.page.qsystem = tk.Label(self.page, text = "第二名：", height = 2, width = 10, font = f3, bg = 'OldLace')
+        for i in range(5):
+            self.page.rank = tk.Label(self.page, text = ("第" + str(i+1) + "名： " + ranking_list[i][1]+ "   " + str(ranking_list[i][0]) + "分"), 
+                                                         height = 2, width = 30, font = f3, bg = 'LightYellow')
+            self.page.rank.place(x = 300, y = 160+i*70)
         self.page.btn_main = tk.Button(self.page, text = "經營成就", command = self.gotoResult2, height = 2, width = 9,
                                        font = f2, bg = '#FFCC22', fg = 'White')
 
         self.page.lbl_topic.place(x = 300, y = 50)
-        self.page.psystem.place(x = 300, y = 160)
-        self.page.qsystem.place(x = 300, y = 230)
+        
         self.page.btn_main.place(x = 720, y = 490)
 
     def gotoResult2(self):
@@ -1183,8 +1243,6 @@ class HighscorePage(object):
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
         self.root.geometry('900x600+200+30')  # 設定視窗大小
-        self.username = StringVar()
-        self.password = StringVar()
         self.createPage()
 
     def createPage(self):
@@ -1241,3 +1299,7 @@ root.title('小程式')
 StartPage(root)
 root.mainloop()
 print(user_name)
+print(order_cost_list)
+print(profit_list)
+print(accumulated_profit_list)
+
