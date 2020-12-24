@@ -1562,8 +1562,9 @@ class FinalResultPage2(object):
                 self.page.lbl_descripition4 = tk.Label(self.page, text = "「客人明天請早」\n 因為沒控制好存貨，客人每次來都抓狂", 
                                                         height = 4, width = 35, font = f2, anchor = 'w', bg = 'LemonChiffon')
         else:
-            self.page.lbl_descripition4 = tk.Label(self.page, text = "加盟大老闆:「朽木不可雕也，你重練吧」", height = 2, 
+            self.page.lbl_descripition3 = tk.Label(self.page, text = "加盟大老闆:「朽木不可雕也，你重練吧」", height = 2, 
                                                     width = 35, font = f2, anchor = 'w', bg = 'LemonChiffon')
+            self.page.lbl_descripition4 = tk.Label(self.page)
         # 按鈕
         self.page.btn_tips = tk.Button(self.page, text = "高分秘訣", command = self.gotoHighscore, height = 2, width = 7,
                                        font = f2, bg = '#FFCC22', fg = 'White')
