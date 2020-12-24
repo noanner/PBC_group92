@@ -179,6 +179,8 @@ class RankingPage1(object):  # 排行榜(前)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 內容
+        ranking_list.sort()
+        ranking_list.reverse()
         self.page.lbl_topic = tk.Label(self.page, text = "排行榜", height = 2, width = 10, font = f1, bg = 'White',
                                        fg = '#666666')
         for i in range(5):
@@ -1633,4 +1635,3 @@ print(user_name)
 print(order_cost_list)
 print(profit_list)
 print(accumulated_profit_list)
-
