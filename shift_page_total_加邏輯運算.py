@@ -1419,8 +1419,10 @@ class FinalResultPage1(object):
         self.page.btn_chart.place(x = 200, y = 140)
 
     def gotoResult(self):
+        global ranking_list
         self.page.destroy()
         FinalResultPage2(self.root)
+        ranking_list.append([accumulated_profit,user_name])
         print(user_name)
         print(order_cost_list)
         print(profit_list)
@@ -1448,7 +1450,6 @@ class FinalResultPage2(object):
 
         # 背景圖
         global bg_img
-        global ranking_list
         global user_name
         image = ImageTk.Image.open("背景設計.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
@@ -1462,7 +1463,7 @@ class FinalResultPage2(object):
                                                font = f2, anchor = 'w', bg = 'White', fg = '#666666')
         self.page.lbl_descripition2 = tk.Label(self.page, text = "名次：", height = 1, width = 15, font = f2, anchor = 'w',
                                                bg = 'White', fg = '#666666')
-        ranking_list.append([accumulated_profit,user_name])
+        
 
         # 須依造分數給不一樣的敘述
         if accumulated_profit >= 3000:
