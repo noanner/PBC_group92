@@ -317,12 +317,13 @@ class RulePage(object):  # 營業說明
         self.treeview.heading("存貨成本", text = "存貨成本")
 
         # treeview.pack(side = LEFT, fill = BOTH)
+        global order_fixed_cost
         self.treeview.place(relx = 0.1, rely = 0.48, relwidth = 0.75, relheight = 0.27)
-
+        
         self.name = ['牛肉漢堡', '豬肉漢堡', '雞肉漢堡', '生菜堡', '生酮堡']
-        self.unitCost = ['10', '9', '9', '6', '16']
-        self.unitPrice = ['20', '18', '18', '12', '32']
-        self.inventory = ['25', '25', '25', '25', '25']
+        self.unitCost = material_price
+        self.unitPrice = price_list
+        self.inventory = stock_list
         self.orderingCost = ['$50元/次', '$50元/次', '$50元/次', '$50元/次', '$50元/次']
         self.inventoryCost = ['$2/單位', '$2/單位', '$2/單位', '$2/單位', '$2/單位']
         for i in range(len(self.name)):  # 寫入数据
@@ -383,19 +384,339 @@ class KnowledgePage(object):  # Day 1 小知識的日子
         btn_calendar.place(x = 720, y = 70)
 
     def gotoCorrect(self):
-        global scenario
         self.page.destroy()
         CorrectPage(self.root)
-        showinfo(title='小提示', message=hint_dict.get(scenario)[0])
 
     def gotoWrong(self):
         self.page.destroy()
         WrongPage(self.root)
 
     def openCalendar(self):
-        showinfo(title = '行事曆', message = '此處放行事曆')
+        self.page.destroy()
+        Calendar1(self.root)
 
 
+class Calendar1(object): # 行事曆(小知識頁面)
+    def __init__(self, master=None):
+        self.root = master #定義內部變數root
+        self.root.geometry('900x600+200+30') #設定視窗大小
+        self.username = StringVar()
+        self.password = StringVar()
+        self.createPage()
+
+    def createPage(self):
+        self.page = Frame(self.root) #建立Frame # 新增
+        self.page.pack() # 新增
+        
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        
+        # 底下的grid
+        self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
+        self.page.lbl_gridonly.grid(row = 3, column = 0, sticky = tk.S)
+        
+        # 背景圖
+        global bg_img
+        image = ImageTk.Image.open("背景設計.jpg")
+        image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
+        bg_img = ImageTk.PhotoImage(image)
+        Label(self.page, image = bg_img).place(x=0, y=0)
+        
+        # 內容
+        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = 'White', fg = '#666666') 
+        self.page.btn_main = tk.Button(self.page, text = "返回遊戲", command = self.backtopage, height = 2, width = 9, font = f2, bg = '#FFCC22', fg = 'White')
+        
+        self.page.lbl_topic.place(x=300, y=50)
+        self.page.btn_main.place(x = 730, y = 490)
+        
+        # 左半邊 經營背景
+        self.page.lbl_bg = tk.Label(self.page, text = scen_dict[scenario], font = f2, borderwidth = 20, wraplength = 200, justify = 'left', bg = 'LemonChiffon', fg = '#666666')
+        self.page.lbl_bg.place(x = 140, y = 220)
+        
+        # 右半邊 行事曆表格
+        tree_item=ttk.Treeview(root, selectmode="extended", columns=("天數", "活動"))#表格
+        tree_item["columns"]=("活動")
+        tree_item.column("#0",minwidth=0,width=100, anchor='center')
+        tree_item.column("活動",minwidth=0,width=200, anchor='center')   #表示列,不顯示
+
+        tree_item.heading("#0",text="天數")
+        tree_item.heading("活動",text="活動")  #顯示表頭
+
+        tree_item.insert("",1,text="Day1", values=cal_dict[scenario][0])#插入資料
+        tree_item.insert("",2,text="Day2", values=cal_dict[scenario][1])
+        tree_item.insert("",3,text="Day3", values=cal_dict[scenario][2])
+        tree_item.insert("",4,text="Day4", values=cal_dict[scenario][3])
+        tree_item.insert("",5,text="Day5", values=cal_dict[scenario][4])
+        tree_item.insert("",6,text="Day6", values=cal_dict[scenario][5])
+        tree_item.insert("",7,text="Day7", values=cal_dict[scenario][6])
+        
+        style = ttk.Style()
+        style.configure("Treeview.Heading", font=("華康娃娃體", 10))
+        style.configure("Treeview", rowheight=38, font=("華康娃娃體", 10))
+        tree_item.place(x=410, y=160, height=300)
+    
+    def backtopage(self):
+        self.page.destroy()
+        KnowledgePage(root)
+
+class Calendar2(object): # 行事曆(每天結果頁面)
+    def __init__(self, master=None):
+        self.root = master #定義內部變數root
+        self.root.geometry('900x600+200+30') #設定視窗大小
+        self.username = StringVar()
+        self.password = StringVar()
+        self.createPage()
+
+    def createPage(self):
+        self.page = Frame(self.root) #建立Frame # 新增
+        self.page.pack() # 新增
+        
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        
+        # 底下的grid
+        self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
+        self.page.lbl_gridonly.grid(row = 3, column = 0, sticky = tk.S)
+        
+        # 背景圖
+        global bg_img
+        image = ImageTk.Image.open("背景設計.jpg")
+        image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
+        bg_img = ImageTk.PhotoImage(image)
+        Label(self.page, image = bg_img).place(x=0, y=0)
+        
+        # 內容
+        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = 'White', fg = '#666666') 
+        self.page.btn_main = tk.Button(self.page, text = "返回遊戲", command = self.backtopage, height = 2, width = 9, font = f2, bg = '#FFCC22', fg = 'White')
+        
+        self.page.lbl_topic.place(x=300, y=50)
+        self.page.btn_main.place(x = 730, y = 490)
+        
+        # 左半邊 經營背景
+        self.page.lbl_bg = tk.Label(self.page, text = scen_dict[scenario], font = f2, borderwidth = 20, wraplength = 200, justify = 'left', bg = 'LemonChiffon', fg = '#666666')
+        self.page.lbl_bg.place(x = 140, y = 220)
+        
+        # 右半邊 行事曆表格
+        tree_item=ttk.Treeview(root, selectmode="extended", columns=("天數", "活動"))#表格
+        tree_item["columns"]=("活動")
+        tree_item.column("#0",minwidth=0,width=100, anchor='center')
+        tree_item.column("活動",minwidth=0,width=200, anchor='center')   #表示列,不顯示
+
+        tree_item.heading("#0",text="天數")
+        tree_item.heading("活動",text="活動")  #顯示表頭
+
+        tree_item.insert("",1,text="Day1", values=cal_dict[scenario][0])#插入資料
+        tree_item.insert("",2,text="Day2", values=cal_dict[scenario][1])
+        tree_item.insert("",3,text="Day3", values=cal_dict[scenario][2])
+        tree_item.insert("",4,text="Day4", values=cal_dict[scenario][3])
+        tree_item.insert("",5,text="Day5", values=cal_dict[scenario][4])
+        tree_item.insert("",6,text="Day6", values=cal_dict[scenario][5])
+        tree_item.insert("",7,text="Day7", values=cal_dict[scenario][6])
+        
+        style = ttk.Style()
+        style.configure("Treeview.Heading", font=("華康娃娃體", 10))
+        style.configure("Treeview", rowheight=38, font=("華康娃娃體", 10))
+        tree_item.place(x=410, y=160, height=300)
+    
+    def backtopage(self):
+        self.page.destroy()
+        EverydayResultPage(root)
+
+class Calendar3(object): # 行事曆(答對頁面)
+    def __init__(self, master=None):
+        self.root = master #定義內部變數root
+        self.root.geometry('900x600+200+30') #設定視窗大小
+        self.username = StringVar()
+        self.password = StringVar()
+        self.createPage()
+
+    def createPage(self):
+        self.page = Frame(self.root) #建立Frame # 新增
+        self.page.pack() # 新增
+        
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        
+        # 底下的grid
+        self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
+        self.page.lbl_gridonly.grid(row = 3, column = 0, sticky = tk.S)
+        
+        # 背景圖
+        global bg_img
+        image = ImageTk.Image.open("背景設計.jpg")
+        image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
+        bg_img = ImageTk.PhotoImage(image)
+        Label(self.page, image = bg_img).place(x=0, y=0)
+        
+        # 內容
+        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = 'White', fg = '#666666') 
+        self.page.btn_main = tk.Button(self.page, text = "返回遊戲", command = self.backtopage, height = 2, width = 9, font = f2, bg = '#FFCC22', fg = 'White')
+        
+        self.page.lbl_topic.place(x=300, y=50)
+        self.page.btn_main.place(x = 730, y = 490)
+        
+        # 左半邊 經營背景
+        self.page.lbl_bg = tk.Label(self.page, text = scen_dict[scenario], font = f2, borderwidth = 20, wraplength = 200, justify = 'left', bg = 'LemonChiffon', fg = '#666666')
+        self.page.lbl_bg.place(x = 140, y = 220)
+        
+        # 右半邊 行事曆表格
+        tree_item=ttk.Treeview(root, selectmode="extended", columns=("天數", "活動"))#表格
+        tree_item["columns"]=("活動")
+        tree_item.column("#0",minwidth=0,width=100, anchor='center')
+        tree_item.column("活動",minwidth=0,width=200, anchor='center')   #表示列,不顯示
+
+        tree_item.heading("#0",text="天數")
+        tree_item.heading("活動",text="活動")  #顯示表頭
+
+        tree_item.insert("",1,text="Day1", values=cal_dict[scenario][0])#插入資料
+        tree_item.insert("",2,text="Day2", values=cal_dict[scenario][1])
+        tree_item.insert("",3,text="Day3", values=cal_dict[scenario][2])
+        tree_item.insert("",4,text="Day4", values=cal_dict[scenario][3])
+        tree_item.insert("",5,text="Day5", values=cal_dict[scenario][4])
+        tree_item.insert("",6,text="Day6", values=cal_dict[scenario][5])
+        tree_item.insert("",7,text="Day7", values=cal_dict[scenario][6])
+        
+        style = ttk.Style()
+        style.configure("Treeview.Heading", font=("華康娃娃體", 10))
+        style.configure("Treeview", rowheight=38, font=("華康娃娃體", 10))
+        tree_item.place(x=410, y=160, height=300)
+    
+    def backtopage(self):
+        self.page.destroy()
+        CorrectPage(root)
+        
+class Calendar4(object): # 行事曆(答錯頁面)
+    def __init__(self, master=None):
+        self.root = master #定義內部變數root
+        self.root.geometry('900x600+200+30') #設定視窗大小
+        self.username = StringVar()
+        self.password = StringVar()
+        self.createPage()
+
+    def createPage(self):
+        self.page = Frame(self.root) #建立Frame # 新增
+        self.page.pack() # 新增
+        
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        
+        # 底下的grid
+        self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
+        self.page.lbl_gridonly.grid(row = 3, column = 0, sticky = tk.S)
+        
+        # 背景圖
+        global bg_img
+        image = ImageTk.Image.open("背景設計.jpg")
+        image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
+        bg_img = ImageTk.PhotoImage(image)
+        Label(self.page, image = bg_img).place(x=0, y=0)
+        
+        # 內容
+        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = 'White', fg = '#666666') 
+        self.page.btn_main = tk.Button(self.page, text = "返回遊戲", command = self.backtopage, height = 2, width = 9, font = f2, bg = '#FFCC22', fg = 'White')
+        
+        self.page.lbl_topic.place(x=300, y=50)
+        self.page.btn_main.place(x = 730, y = 490)
+        
+        # 左半邊 經營背景
+        self.page.lbl_bg = tk.Label(self.page, text = scen_dict[scenario], font = f2, borderwidth = 20, wraplength = 200, justify = 'left', bg = 'LemonChiffon', fg = '#666666')
+        self.page.lbl_bg.place(x = 140, y = 220)
+        
+        # 右半邊 行事曆表格
+        tree_item=ttk.Treeview(root, selectmode="extended", columns=("天數", "活動"))#表格
+        tree_item["columns"]=("活動")
+        tree_item.column("#0",minwidth=0,width=100, anchor='center')
+        tree_item.column("活動",minwidth=0,width=200, anchor='center')   #表示列,不顯示
+
+        tree_item.heading("#0",text="天數")
+        tree_item.heading("活動",text="活動")  #顯示表頭
+
+        tree_item.insert("",1,text="Day1", values=cal_dict[scenario][0])#插入資料
+        tree_item.insert("",2,text="Day2", values=cal_dict[scenario][1])
+        tree_item.insert("",3,text="Day3", values=cal_dict[scenario][2])
+        tree_item.insert("",4,text="Day4", values=cal_dict[scenario][3])
+        tree_item.insert("",5,text="Day5", values=cal_dict[scenario][4])
+        tree_item.insert("",6,text="Day6", values=cal_dict[scenario][5])
+        tree_item.insert("",7,text="Day7", values=cal_dict[scenario][6])
+        
+        style = ttk.Style()
+        style.configure("Treeview.Heading", font=("華康娃娃體", 10))
+        style.configure("Treeview", rowheight=38, font=("華康娃娃體", 10))
+        tree_item.place(x=410, y=160, height=300)
+    
+    def backtopage(self):
+        self.page.destroy()
+        WrongPage(root)
+
+class Calendar5(object): # 行事曆(訂貨頁面)
+    def __init__(self, master=None):
+        self.root = master #定義內部變數root
+        self.root.geometry('900x600+200+30') #設定視窗大小
+        self.username = StringVar()
+        self.password = StringVar()
+        self.createPage()
+
+    def createPage(self):
+        self.page = Frame(self.root) #建立Frame # 新增
+        self.page.pack() # 新增
+        
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        
+        # 底下的grid
+        self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
+        self.page.lbl_gridonly.grid(row = 3, column = 0, sticky = tk.S)
+        
+        # 背景圖
+        global bg_img
+        image = ImageTk.Image.open("背景設計.jpg")
+        image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
+        bg_img = ImageTk.PhotoImage(image)
+        Label(self.page, image = bg_img).place(x=0, y=0)
+        
+        # 內容
+        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = 'White', fg = '#666666') 
+        self.page.btn_main = tk.Button(self.page, text = "返回遊戲", command = self.backtopage, height = 2, width = 9, font = f2, bg = '#FFCC22', fg = 'White')
+        
+        self.page.lbl_topic.place(x=300, y=50)
+        self.page.btn_main.place(x = 730, y = 490)
+        
+        # 左半邊 經營背景
+        self.page.lbl_bg = tk.Label(self.page, text = scen_dict[scenario], font = f2, borderwidth = 20, wraplength = 200, justify = 'left', bg = 'LemonChiffon', fg = '#666666')
+        self.page.lbl_bg.place(x = 140, y = 220)
+        
+        # 右半邊 行事曆表格
+        tree_item=ttk.Treeview(root, selectmode="extended", columns=("天數", "活動"))#表格
+        tree_item["columns"]=("活動")
+        tree_item.column("#0",minwidth=0,width=100, anchor='center')
+        tree_item.column("活動",minwidth=0,width=200, anchor='center')   #表示列,不顯示
+
+        tree_item.heading("#0",text="天數")
+        tree_item.heading("活動",text="活動")  #顯示表頭
+
+        tree_item.insert("",1,text="Day1", values=cal_dict[scenario][0])#插入資料
+        tree_item.insert("",2,text="Day2", values=cal_dict[scenario][1])
+        tree_item.insert("",3,text="Day3", values=cal_dict[scenario][2])
+        tree_item.insert("",4,text="Day4", values=cal_dict[scenario][3])
+        tree_item.insert("",5,text="Day5", values=cal_dict[scenario][4])
+        tree_item.insert("",6,text="Day6", values=cal_dict[scenario][5])
+        tree_item.insert("",7,text="Day7", values=cal_dict[scenario][6])
+        
+        style = ttk.Style()
+        style.configure("Treeview.Heading", font=("華康娃娃體", 10))
+        style.configure("Treeview", rowheight=38, font=("華康娃娃體", 10))
+        tree_item.place(x=410, y=160, height=300)
+    
+    def backtopage(self):
+        self.page.destroy()
+        EverydayStockPage(root)
+
+'''
 know_content = "小知識1111111111111111111111111111111111111111111111111111111111111111111111111111"
 class Day4Page1(object):  # Day 4 小知識的日子
     def __init__(self, master = None):
@@ -454,7 +775,7 @@ class Day4Page1(object):  # Day 4 小知識的日子
 
     def openCalendar(self):
         showinfo(title = '行事曆', message = '此處放行事曆')
-
+'''
 
 hint = '為了獎勵你答對，\n告訴你一個小提示吧:\n !!!!!!!!!!!!!'
 
@@ -497,15 +818,22 @@ class CorrectPage(object):  # Day 1 答對頁面
 
         # 答對的圖片
         global cooking_img
+        global scenario
         image = ImageTk.Image.open("Bingo.jpg")
         image = image.resize((300, 300), ImageTk.Image.ANTIALIAS)
         cooking_img = ImageTk.PhotoImage(image)
-        Label(self.page, image = cooking_img).place(x = 150, y = 150)
+        Label(self.page, image = cooking_img).place(x = 120, y = 150)
 
         # 答對的小提示
-        self.page.lbl_hint = tk.Label(self.page, text = hint, font = f2, borderwidth = 2, wraplength = 300,
-                                      justify = 'left', bg = 'LemonChiffon', fg = '#666666')
-        self.page.lbl_hint.place(x = 500, y = 200)
+        self.page.lbl_descripition = tk.Label(self.page, text = ("為了獎勵你答對，告訴你 Day" + str(counts+1) + "需求的小提示吧!"), font = f2, borderwidth = 2, wraplength = 300, justify = 'left', bg = 'White', fg = '#666666')
+        self.page.lbl_descripition.place(x = 480, y = 220)
+        
+        if counts == 0:
+            hint = hint_dict[scenario][0]
+        else:
+            hint = hint_dict[scenario][1]
+        self.page.lbl_hint = tk.Label(self.page, text = hint, font = f2, borderwidth = 15, wraplength = 320, justify = 'left', bg = 'LemonChiffon', fg = '#666666')
+        self.page.lbl_hint.place(x = 460, y = 280)
 
         # 下一頁按鈕
         Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
@@ -516,8 +844,8 @@ class CorrectPage(object):  # Day 1 答對頁面
         EverydayStockPage(self.root)
 
     def openCalendar(self):
-        showinfo(title = '行事曆', message = '此處放行事曆')
-
+        self.page.destroy()
+        Calendar3(self.root)
 
 class WrongPage(object):  # Day 1 答錯頁面
     def __init__(self, master = None):
@@ -579,7 +907,8 @@ class WrongPage(object):  # Day 1 答錯頁面
         EverydayStockPage(self.root)
 
     def openCalendar(self):
-        showinfo(title = '行事曆', message = '此處放行事曆')
+        self.page.destroy()
+        Calendar4(self.root)
 
 
 class EverydayPage(object):  # 每日漢堡製作畫面
@@ -615,8 +944,8 @@ class EverydayPage(object):  # 每日漢堡製作畫面
         self.page.lbl_topic.place(x = 50, y = 40)
 
         # 行事曆按鈕
-        Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
-               command = self.openCalendar).place(x = 720, y = 70)
+        # Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
+               # command = self.openCalendar).place(x = 720, y = 70)
 
         # 做漢堡的圖片
         global cooking_img
@@ -639,8 +968,8 @@ class EverydayPage(object):  # 每日漢堡製作畫面
         self.page.destroy()
         EverydayResultPage(root)
 
-    def openCalendar(self):
-        showinfo(title = '行事曆', message = '此處放行事曆')
+    # def openCalendar(self):
+        # showinfo(title = '行事曆', message = '此處放行事曆')
 
 
 class EverydayResultPage(object):  # 每日結算畫面
@@ -684,8 +1013,8 @@ class EverydayResultPage(object):  # 每日結算畫面
                    command = self.gotoKnowledge).place(x = 720, y = 490)
 
             # 行事曆按鈕
-            Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
-                   command = self.openCalendar).place(x = 720, y = 70)
+            # Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
+                   # command = self.openCalendar).place(x = 720, y = 70)
         elif counts == 6:
             # 下一頁按鈕
             Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
@@ -695,8 +1024,8 @@ class EverydayResultPage(object):  # 每日結算畫面
                    command = self.gotoStockorder).place(x = 720, y = 490)
 
             # 行事曆按鈕
-            Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
-                   command = self.openCalendar).place(x = 720, y = 70)
+            # Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
+                   # command = self.openCalendar).place(x = 720, y = 70)
         
         global stock_list
         global price_list
@@ -793,8 +1122,9 @@ class EverydayResultPage(object):  # 每日結算畫面
         self.page.destroy()
         EverydayStockPage(root)
 
-    def openCalendar(self):
-        showinfo(title = '行事曆', message = '此處放行事曆')
+    # def openCalendar(self):
+        # self.page.destroy()
+        # Calendar2(root)
 
     def gotoResult(self):
         self.page.destroy()
@@ -864,7 +1194,7 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         elif counts == 2:
             # 訂購按鈕
             Button(self.page, text = '訂購!', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
-                   command = self.orderFinishedgoto4).place(x = 720, y = 490)
+                   command = self.orderFinished).place(x = 720, y = 490)
 
         # row0 排版位置
         self.page.lbl_topic.place(x = 50, y = 40)
@@ -994,7 +1324,7 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
             EverydayPage(root)
         else:
             showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
-
+    '''
     def orderFinishedgoto4(self):
         global stock_list
         global order_cost_list
@@ -1035,9 +1365,10 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
             Day4Page1(root)
         else:
             showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
-
+    '''
     def openCalendar(self):
-        showinfo(title = '行事曆', message = '此處放行事曆')
+        self.page.destroy()
+        Calendar5(root)
 
 
 class FinalResultPage1(object):
@@ -1160,7 +1491,7 @@ class FinalResultPage2(object):
                 self.page.lbl_descripition4 = tk.Label(self.page, text = "「客人明天請早」\n 因為沒控制好存貨，客人每次來都抓狂", 
                                                         height = 4, width = 35, font = f2, anchor = 'w', bg = 'LemonChiffon')
         else:
-            self.page.lbl_descripition3 = tk.Label(self.page, text = "加盟大老闆:「朽木不可雕也，你重練吧」", height = 2, 
+            self.page.lbl_descripition4 = tk.Label(self.page, text = "加盟大老闆:「朽木不可雕也，你重練吧」", height = 2, 
                                                     width = 35, font = f2, anchor = 'w', bg = 'LemonChiffon')
         # 按鈕
         self.page.btn_tips = tk.Button(self.page, text = "高分秘訣", command = self.gotoHighscore, height = 2, width = 7,
