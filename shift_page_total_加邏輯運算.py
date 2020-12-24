@@ -87,6 +87,42 @@ accumulated_profit = 0  # 總分
 accumulated_profit_list = []  # 畫圖
 ranking_list = [[5684,"就愛吃漢堡"],[4783,"今晚吃漢堡"],[3366,"My Way"],[6428,"賽百味"],[1056,"我不會玩"]]
 
+ques_list1 = [[2,"First in, First out (FIFO)的方式是指先進的貨先出貨，Last in, First out (LIFO)是讓後進的貨品先出貨。如果你的公司賣的是市場價格呈上升趨勢的商品如貴金屬，或是沒有特定保存期限的商品如煉油業，適合使用哪種存貨\管理方法?",
+                "FIFO","LIFO"],
+              [3,"安全庫存(Safety Stock)：安全庫存又稱保險庫存、緩衝庫存，是指為了防止不確定性因素而預計的保險庫存量。小明開了一間漢堡店，店內的廚房平常總是備100個漢堡的庫存跟日常販售所需，另外在漢堡店的地下室裡另外放了25個漢堡的庫存以備不時之需。請問小明經營的漢堡店安全庫存數量為？",
+               "100","25"],
+              [3,"訂購週期(Reorder Cycle)：訂購週期為連續訂購之間的時間間隔。小明開了一間漢堡店，漢堡需要用到的食材有麵包、生菜及肉排。麵包每3天需要訂貨一次，生菜與肉排則是每2天訂貨一次。請問生菜的訂購週期為？",
+               "3天","2天"],
+              [3,"訂購點(Order Point)：當商品庫存低至特定水位時，再次訂購商品的時間點。小明開了一間漢堡店，漢堡需要用到的食材有麵包、生菜及肉排。麵包的消耗比較快，每天開店前小明都會準備300個麵包，只要麵包庫存少於50個，小明就會擔心缺貨。請問麵包的訂購點為？",
+               "300個","50個"],
+              [2,"最大存貨量(Maximum Inventory)：所能存放的最大物品數量。小明開了一間漢堡店，漢堡店的食物儲藏室最多可以裝500個漢堡的材料，但是小明希望留一條走道方便拿東西，所以規定員工最多只能在儲藏室裡放450份漢堡食材。請問漢堡食材的最大庫\存量為？",
+               "450個","500個"],
+              [2,"最小訂購量(Minimum Order Quantity)：每筆訂單的最低起訂量。小明開了一間漢堡店，漢堡店每天開店時會準備5公斤的生菜，但當天大概只會消耗4公斤。賣生菜的老闆說每次只送5公斤連付油錢都不夠，要買8公斤以上才送貨。請問生菜的最小訂購量為？",
+               "4公斤","8公斤"],
+              [2,"訂貨成本：又稱為進貨費用，是指從發出訂單到收到存貨整個過程中付出的成本。如訂單處理成本、運輸費、保險費及裝卸費等。小明開了一間漢堡店，每一次訂貨小明的員工要花2小時確認訂購量、下訂單、收貨、點貨、卸貨。已知員工時薪為$200元。請問一次訂貨成本為？",
+               "400元","600元"]]
+
+ques_dict1 = dict()
+for i in range(len(ques_list1)):
+    ques_dict1[i+1] = ques_list1[i]
+
+ques_list2 = [[3,"期末庫存：期末庫存=期初庫存+期間進貨-期間需求。小明開了一間漢堡店，今天營業前小明盤點倉庫裡有12公斤麵包、10公斤生菜、8公斤肉排。今天總共進貨6公斤麵包、7公斤生菜、4公斤肉排，消耗4公斤麵包、6公斤生菜、5公斤肉排。請問今天結束營業後肉排的期末庫存為？",
+               "5公斤","7公斤"],
+              [2,"訂單達成率(Order Fill Rate)：給定時間內實際完成訂單的百分比。小明開了一間漢堡店，今天午餐時段總共售出100個漢堡、晚餐時段售出200個漢堡，消夜時段售出100個漢堡，但實際上因為缺貨還有100個訂單沒有被滿足。請問漢堡店今天的訂單達成率為？",
+               "80%","90%"],
+              [3,"前置時間(Lead Time)：指從買方開始下單訂購到賣方交貨所間隔的時間。小明開了一間漢堡店，顧客下單後需要經過以下程序：服務生與廚房確認訂單(10秒)→廚房製作漢堡(320秒)→服務生出餐(30秒)。請問顧客訂購一個漢堡的前置時間為？",
+               "3分鐘","6分鐘"],
+              [2,"毛利率(Gross Margin)：毛利率計算的是產品的成本以及收入的關係，毛利率計算公式＝(銷售收入－銷售成本) / 銷售收入 x 100%。小明開了一間漢堡店，一個漢堡售價60元，已知漢堡由麵包、生菜、肉排3種配料組成，成本分別是10元、15元、20元。請問一個漢堡的毛利率為？",
+               "75%","85%"],
+              [3,"營收(Revenue)：又稱為營業額，是指企業在某段時間內，經由商業行為取得的收入。小明開了一間漢堡店，總共販售三種品項包括雞塊、沙拉與漢堡，售價分別為40元、30元、60元。已知今日雞塊、沙拉與漢堡分別售出100份、200份、150份。請問漢堡店今天的營收為？",
+               "15,000元","19,000元"],
+              [2,"固定成本(Fixed Cost)：不會隨著營業收入變動而變動的成本，包括店面租金、機械設備租金、人事費等等。小明開了一間漢堡店，店裡聘僱了一位正職員工月薪20,000元，機器租金每年120,000元、店面租金每月50,000元。請問漢堡店每個月的固定成本為？",
+               "80,000元","190,000元"],
+              [2,"下列哪個可以算是商家的存貨?","農牧業者收成後的農場品，例如蘋果樹上摘的蘋果","企業不具有控制權的實體商品"]]
+ques_dict2 = dict()
+for i in range(len(ques_list1)):
+    ques_dict2[i+1] = ques_list1[i]
+
 
 class StartPage(object):  # 開始畫面
     def __init__(self, master = None):
@@ -338,7 +374,7 @@ class RulePage(object):  # 營業說明
         EverydayPage(self.root)
 
 
-know_content = "小知識1111111111111111111111111111111111111111111111111111111111111111111111111111"
+
 class KnowledgePage(object):  # Day 1 小知識的日子
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
@@ -368,13 +404,25 @@ class KnowledgePage(object):  # Day 1 小知識的日子
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 元件內容
+        global know_num
+        know_num = random.randint(1,7)
+        if counts == 0:
+            know_content = (ques_dict1.get(know_num))[1]
+        else:
+            know_content = (ques_dict2.get(know_num))[1]
         lbl_day = tk.Label(self.page,text = ("Day"+str(counts+1)+"小知識問答"), height = 2, width = 15, font = f1, bg = 'White', fg = '#666666')
         lbl_know = tk.Label(self.page,text = know_content, font = f2, borderwidth = 2, relief = "ridge", wraplength = 300,
                             justify = 'left', bg = 'LemonChiffon', fg = '#666666')
-        btn_optA = tk.Button(self.page,text = "選項A", command = self.gotoCorrect, width = 7, height = 2, font = f2, bg = '#FFCC22',
-                             fg = 'White')
-        btn_optB = tk.Button(self.page,text = "選項B", command = self.gotoWrong, width = 7, height = 2, font = f2, bg = '#FFCC22',
-                             fg = 'White')
+        if counts == 0:
+            btn_optA = tk.Button(self.page,text = (ques_dict1.get(know_num))[2], command = self.gotoVerify1, width = 7, height = 2, font = f2, bg = '#FFCC22',
+                                fg = 'White')
+            btn_optB = tk.Button(self.page,text = (ques_dict1.get(know_num))[3], command = self.gotoVerify2, width = 7, height = 2, font = f2, bg = '#FFCC22',
+                                fg = 'White')
+        else:
+            btn_optA = tk.Button(self.page,text = (ques_dict2.get(know_num))[2], command = self.gotoVerify1, width = 7, height = 2, font = f2, bg = '#FFCC22',
+                                fg = 'White')
+            btn_optB = tk.Button(self.page,text = (ques_dict2.get(know_num))[3], command = self.gotoVerify2, width = 7, height = 2, font = f2, bg = '#FFCC22',
+                                fg = 'White')
         btn_calendar = tk.Button(self.page,text = "行事曆", command = self.openCalendar, width = 7, height = 2, font = f2,
                                  bg = '#666666', fg = 'White')
 
@@ -385,13 +433,33 @@ class KnowledgePage(object):  # Day 1 小知識的日子
         btn_optB.place(relx = 0.6, rely = 0.75)
         btn_calendar.place(x = 720, y = 70)
 
-    def gotoCorrect(self):
+    def gotoVerify1(self):
         self.page.destroy()
-        CorrectPage(self.root)
+        choose = 2
+        if counts == 0:
+            if (ques_dict1.get(know_num))[0] == choose:
+                CorrectPage(self.root)
+            else:
+                WrongPage(self.root)
+        else:
+            if (ques_dict2.get(know_num))[0] == choose:
+                CorrectPage(self.root)
+            else:
+                WrongPage(self.root)
 
-    def gotoWrong(self):
+    def gotoVerify2(self):
         self.page.destroy()
-        WrongPage(self.root)
+        choose = 3
+        if counts == 0:
+            if (ques_dict1.get(know_num))[0] == choose:
+                CorrectPage(self.root)
+            else:
+                WrongPage(self.root)
+        else:
+            if (ques_dict2.get(know_num))[0] == choose:
+                CorrectPage(self.root)
+            else:
+                WrongPage(self.root)
 
     def openCalendar(self):
         self.page.destroy()
