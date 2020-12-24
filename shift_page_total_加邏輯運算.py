@@ -121,7 +121,7 @@ ques_list2 = [[3,"期末庫存：期末庫存=期初庫存+期間進貨-期間�
               [2,"下列哪個可以算是商家的存貨?","農牧業者收成後的農場品，例如蘋果樹上摘的蘋果","企業不具有控制權的實體商品"]]
 ques_dict2 = dict()
 for i in range(len(ques_list1)):
-    ques_dict2[i+1] = ques_list1[i]
+    ques_dict2[i+1] = ques_list2[i]
 
 
 class StartPage(object):  # 開始畫面
@@ -411,7 +411,7 @@ class KnowledgePage(object):  # Day 1 小知識的日子
         else:
             know_content = (ques_dict2.get(know_num))[1]
         lbl_day = tk.Label(self.page,text = ("Day"+str(counts+1)+"小知識問答"), height = 2, width = 15, font = f1, bg = 'White', fg = '#666666')
-        lbl_know = tk.Label(self.page,text = know_content, font = f2, borderwidth = 2, relief = "ridge", wraplength = 300,
+        lbl_know = tk.Label(self.page,text = know_content, font = f3, borderwidth = 2, relief = "ridge", wraplength = 300,
                             justify = 'left', bg = 'LemonChiffon', fg = '#666666')
         if counts == 0:
             btn_optA = tk.Button(self.page,text = (ques_dict1.get(know_num))[2], command = self.gotoVerify1, width = 7, height = 2, font = f2, bg = '#FFCC22',
