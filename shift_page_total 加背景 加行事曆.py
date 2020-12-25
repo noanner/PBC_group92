@@ -173,19 +173,10 @@ class IntroPage(object):  # 說明、輸入姓名
         image = ImageTk.Image.open("背景設計.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
-        Label(self.page, image = bg_img).place(x=0, y=0)
-        
-        # 內容
-        # self.page.lbl_topic = tk.Label(self.page, text = "餐廳經營管理遊戲", height = 2, width = 18, font = f1, bg = 'White', fg = '#666666')
-
-        
-        # 背景圖片填滿畫布
-        # self.background_image = ImageTk.PhotoImage(file = 'restaurant.jpg')
-        # self.background_label = tk.Label(self.root, image = self.background_image)
-        # self.background_label.place(relwidth = 1, relheight = 1)
+        Label(self.page, image = bg_img).place(x = 0, y = 0)
         
         self.button1 = tk.Label(root, text = "遊戲說明", font = f1, height = 2, width = 18, bg = 'White', fg = '#666666')
-        self.button1.place(x=220, y=50)
+        self.button1.place(x = 220, y = 50)
         
         self.intro = tk.Label(root, text = "有沒有想過經營一間漢堡餐廳？\n\n在這個遊戲裡，你要發揮需求預測能力，進行訂貨及存貨管理。\n"
                                            "這個遊戲中，你將會面對每天不同的銷售情境，\n根據不同的情境，你必須預測菜單的需求變動狀況，"
