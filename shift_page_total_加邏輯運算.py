@@ -179,7 +179,7 @@ class StartPage(object):  # 開始畫面
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 內容
-        self.page.lbl_topic = tk.Label(self.page, text = "商管讓你睡不堡  餐廳遊戲", height = 2, width = 23, font = f1, bg = 'black',
+        self.page.lbl_topic = tk.Label(self.page, text = "PBC讓你睡不堡  餐廳遊戲", height = 2, width = 23, font = f1, bg = 'black',
                                        fg = 'white')
         self.page.btn_enter = tk.Button(self.page, text = "進入遊戲", command = self.gotoIntro, height = 2, width = 10,
                                         font = f2, bg = '#FFCC22', fg = 'black')
@@ -1123,7 +1123,7 @@ class EverydayResultPage(object):  # 每日結算畫面
 
         global user_name
 
-        self.page.lbl_description = tk.Label(self.page, text = ("辛苦了~" + user_name + "下面是你今天營業的成果~~"), height = 2, width = 48, font = f3,
+        self.page.lbl_description = tk.Label(self.page, text = ("辛苦了~" + user_name + "   下面是你今天營業的成果~~"), height = 2, width = 48, font = f3,
                                              bg = '#f9f7f1')
         self.page.lbl_description.place(x = 200, y = 70)
 
@@ -1186,16 +1186,9 @@ class EverydayResultPage(object):  # 每日結算畫面
             else:
                 c = 0
             pct.append("%.2f" % c + "%")
-# <<<<<<< HEAD
-        self.page.tree_item.insert("", 0, text = "期初庫存", values = (stock[0], stock[1], stock[2], stock[3], stock[4]))
-        self.page.tree_item.insert("", 1, text = "需求量", values = (demand[0],demand[1],demand[2],demand[3],demand[4]))
-        self.page.tree_item.insert("", 2, text = "賣出數量", values = (sold[0],sold[1],sold[2],sold[3],sold[4]))
-        self.page.tree_item.insert("", 3, text = "營業額", values = (revenue[0],revenue[1],revenue[2],revenue[3],revenue[4]))
-        self.page.tree_item.insert("", 4, text = "營業額百分比", values = (pct[0],pct[1],pct[2],pct[3],pct[4]))
-# =======
 
         pct = []
-        for i in range(sold):
+        for i in range(len(sold)):
             if demand[i] >= sold[i] and stock[i] == demand[i]:
                 pct.append("缺貨")
             else:
@@ -1210,7 +1203,6 @@ class EverydayResultPage(object):  # 每日結算畫面
                                    values = (revenue[0], revenue[1], revenue[2], revenue[3], revenue[4]))
         
         self.page.tree_item.insert("", 4, text = "缺貨提醒", values = (pct[0], pct[1], pct[2], pct[3], pct[4]))
-# >>>>>>> df7985f4d14488aad06be08e8d549345756ae932
 
         style = ttk.Style()
         style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
@@ -1323,6 +1315,8 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         # row7 訂貨固定成本、目前訂購總價、訂購按鈕
         self.page.lbl_fixcost = tk.Label(self.page, text = " 各品項固定成本:$50元 ", height = 1, width = 22, font = f3,
                                          bg = 'LemonChiffon')
+        self.page.lbl_stockcost = tk.Label(self.page, text = " 每單位存貨成本:$2元 ", height = 1, width = 22, font = f3,
+                                         bg = 'LemonChiffon')
         self.page.lbl_note = tk.Label(self.page, text = " 沒有要訂購也要輸入0唷! ", height = 1, width = 22, font = f3,
                                       bg = 'LemonChiffon')
         self.page.lbl_cost = tk.Button(self.page, text = "總價試算", command = self.costCalculation, height = 2, width = 10,
@@ -1342,36 +1336,40 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
 
         # row7 排版位置
         self.page.lbl_fixcost.place(x = 220, y = 480)
+        self.page.lbl_stockcost.place(x = 220, y = 500)
         self.page.lbl_note.place(x = 220, y = 520)
         self.page.lbl_cost.place(x = 511, y = 490)
         # -----------------------------------------------------------------------------------------------------------
 
         # 品項表格
-        columns = ("訂購單價", "剩餘庫存", "訂購數量")
+        columns = ("訂購單價", "售價", "剩餘庫存", "訂購數量")
         self.page.tree_item = ttk.Treeview(self.page, column = columns)  # 表格
 
-        self.page.tree_item.column("#0", minwidth = 0, width = 120, anchor = "center")
-        self.page.tree_item.column("訂購單價", width = 120, anchor = "center")
-        self.page.tree_item.column("剩餘庫存", width = 120, anchor = "center")
-        self.page.tree_item.column("訂購數量", width = 123, anchor = "center")
+        self.page.tree_item.column("#0", minwidth = 0, width = 95, anchor = "center")
+        self.page.tree_item.column("訂購單價", width = 95, anchor = "center")
+        self.page.tree_item.column("售價", width = 95, anchor = "center")
+        self.page.tree_item.column("剩餘庫存", width = 95, anchor = "center")
+        self.page.tree_item.column("訂購數量", width = 110, anchor = "center")
 
         self.page.tree_item.heading("#0", text = "食材")
-        self.page.tree_item.heading("訂購單價", text = "訂購單價")  # 顯示錶頭
+        self.page.tree_item.heading("訂購單價", text = "訂購單價")  # 顯示表頭
+        self.page.tree_item.heading("售價", text = "售價")
         self.page.tree_item.heading("剩餘庫存", text = "剩餘庫存")
         self.page.tree_item.heading("訂購數量", text = "訂購數量")
 
         global stock_list
+        global price_list
         global material_price
-        self.page.tree_item.insert("", 0, text = "牛肉漢堡", values = (material_price[0], stock_list[0]))  # 插入資料，
-        self.page.tree_item.insert("", 1, text = "豬肉漢堡", values = (material_price[1], stock_list[1]))
-        self.page.tree_item.insert("", 2, text = "雞肉漢堡", values = (material_price[2], stock_list[2]))
-        self.page.tree_item.insert("", 3, text = "生菜堡", values = (material_price[3], stock_list[3]))
-        self.page.tree_item.insert("", 4, text = "生酮堡", values = (material_price[4], stock_list[4]))
+        self.page.tree_item.insert("", 0, text = "牛肉漢堡", values = (material_price[0], price_list[0], stock_list[0]))  # 插入資料
+        self.page.tree_item.insert("", 1, text = "豬肉漢堡", values = (material_price[1], price_list[1], stock_list[1]))
+        self.page.tree_item.insert("", 2, text = "雞肉漢堡", values = (material_price[2], price_list[2], stock_list[2]))
+        self.page.tree_item.insert("", 3, text = "生菜堡", values = (material_price[3], price_list[3], stock_list[3]))
+        self.page.tree_item.insert("", 4, text = "生酮堡", values = (material_price[4], price_list[4], stock_list[4]))
 
         style = ttk.Style()
         style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
         style.configure("Treeview", rowheight = 50, font = ("華康娃娃體", 10))
-        self.page.tree_item.place(x = 120, y = 150, height = 276)
+        self.page.tree_item.place(x = 100, y = 150, height = 276)
         # -----------------------------------------------------------------------------------------------------------
 
         # 讓玩家輸入的表格
@@ -1382,11 +1380,11 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         self.page.txt_keto = tk.Text(self.page, height = 2, width = 12, font = f4)
 
         # 輸入的表格 排版位置
-        self.page.txt_beef.place(x = 481, y = 175)
-        self.page.txt_pork.place(x = 481, y = 225)
-        self.page.txt_chick.place(x = 481, y = 275)
-        self.page.txt_vege.place(x = 481, y = 325)
-        self.page.txt_keto.place(x = 481, y = 375)
+        self.page.txt_beef.place(x = 498, y = 182)
+        self.page.txt_pork.place(x = 498, y = 232)
+        self.page.txt_chick.place(x = 498, y = 282)
+        self.page.txt_vege.place(x = 498, y = 332)
+        self.page.txt_keto.place(x = 498, y = 382)
         # -----------------------------------------------------------------------------------------------------------
         
         # 右半邊 行事曆表格
@@ -1618,18 +1616,13 @@ class FinalResultPage2(object):
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
+
         # 要接最後的獲利，還有抓歷史還行榜，要排名次
         self.page.lbl_topic = tk.Label(self.page, text = "經營成就", height = 2, width = 10, font = f1, bg = '#f9f7f1',
                                        fg = '#666666')
-# <<<<<<< HEAD
-        self.page.lbl_descripition1 = tk.Label(self.page, text = ("獲利：" + str(accumulated_profit)), height = 1, width = 15,
-                                               font = f2, anchor = 'w', bg = 'White', fg = '#666666')
-        
-# =======
         self.page.lbl_descripition1 = tk.Label(self.page, text = ("獲利：" + str(accumulated_profit)), height = 1,
                                                width = 15,
                                                font = f2, anchor = 'w', bg = '#f9f7f1', fg = '#666666')
-# >>>>>>> df7985f4d14488aad06be08e8d549345756ae932
         self.page.lbl_descripition2 = tk.Label(self.page, text = "名次：", height = 1, width = 15, font = f2, anchor = 'w',
                                                bg = '#f9f7f1', fg = '#666666')
 
