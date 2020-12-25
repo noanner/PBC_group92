@@ -3,27 +3,23 @@ import tkinter.font as tkFont
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import *
-
 from PIL import ImageTk
-
 import random 
 scenario = 0
-
 # print(scenario)
 
-
-# 經營背景
+'''
+#########需求背景資訊#############
+'''
+# 經營背景-------------------------------------------------------------------
 scen_list = ["您的餐廳開在著名的觀光景點附近，每天會有不同的大型旅行團造訪!",
     "您的餐廳舉辦了為期一周的活動，希望可以推廣並且慶祝各式各樣的節日!",
     "這一周的天氣變化很大，好在你可以先看天氣預報，再決定要備多少料!",
     "這是禍不單行，但也好事成雙的一周，您的餐廳遇到很多突發狀況，您要如何解決呢？"]
-
 scen_dict = dict()
 for i in range(4):
     scen_dict[i+1] = scen_list[i]
-
 # print(scen_dict.get(scenario))
-
 
 # 行事曆---------------------------------------------------------------------
 # [第0天, 第1天, 第2天, 第3天, 第4天, 第5天, 第6天]
@@ -31,17 +27,13 @@ cal_list = [["固定需求", "印度教", "高中畢旅", "美國人", "健身�
             ["固定需求", "33五花肉日", "感恩節", "中秋節", "全球素食日", "兒童節", "情人節"],
             ["固定需求", "下豪大雨", "出炎熱的大太陽", "風和日麗", "寒流來襲", "颱風天", "無風無雨"],
             ["固定需求", "大樂透開獎", "店門口道路施工", "對面漢堡王休息一天", "新聞不實報導", "拿到安全衛生許可", "平凡的一天"]]
-
 cal_dict = dict()
 for i in range(4):
     cal_dict[i+1] = cal_list[i]
-
 # print(cal_dict.get(scenario))
-
 
 # 小提示----------------------------------------------------------------------
 # [第1天的提示, 第4天的提示]
-# 情境1
 hint_list = [["印度教徒不吃牛肉豬肉，特愛雞肉，如果沒有咖哩的話，他們寧願少吃點", 
               "健身的巨巨們喜歡選用蛋白質較高的牛肉雞肉，若是有生酮這樣碳水低的選擇，他們再愛也不過了，通常可以吃上兩份"],
              ["韓國人熱愛豬五花肉，甚至將3月3日正式訂為「五花肉日」", "全球素食日是一個完全不能吃肉的節日，連製作的食材都不會有任何的肉"],
@@ -49,14 +41,12 @@ hint_list = [["印度教徒不吃牛肉豬肉，特愛雞肉，如果沒有咖�
               "寒流來襲，大口大口咬下漢堡，身體有熱量去禦寒，大家喜歡到漢堡店坐在店裡享用，全品項銷售量約增加25%"],
              ["今日為大樂透開獎，得主就住在餐廳樓上，平常他最愛吃的就是牛肉漢堡，今天他決定拿獎金買下60個請台北車站的流浪漢吃", 
               "新聞報導指控您的餐廳餐點不衛生，漢堡都是用組合肉，生菜也不新鮮，麵包更是都發霉了，讓業績只剩4成"]]
-
 hint_dict = dict()
 for i in range(4):
     hint_dict[i+1] = hint_list[i]
-
 # print(hint_dict.get(scenario))
 
-
+# 每日需求量----------------------------------------------------------------------
 demand_list1 = [[20,20,20,20,20],[3,5,52,62,2],[31,28,27,8,11],[30,25,28,5,15],[21,6,25,12,65], [25,3,30,28,18], [4,6,8,62,10]]
 demand_list2 = [[20,20,20,20,20],[18,43,19,15,12],[21,18,31,17,19],[23,25,28,19,12],[0,0,0,110,0],[28,26,27,8,13],[22,23,21,19,18]]
 demand_list3 = [[20,20,20,20,20],[16,16,17,15,15],[22,23,23,19,21],[26,28,27,23,24],[24,23,26,24,25], [15,14,16,13,16], [21,20,22,20,21]]
@@ -67,11 +57,12 @@ demand_dict[1] = demand_list1
 demand_dict[2] = demand_list2
 demand_dict[3] = demand_list3
 demand_dict[4] = demand_list4
-
 # print(demand_dict.get(scenario))
 
+# 不知道哪裡有用到?----------------------------------------------------------------
 day = ["Day1", "Day2", "Day3", "Day4", "Day5", "Day6", "Day7"]
 
+# 預設資訊-------------------------------------------------------------------------
 counts = 0
 count_list = []
 user_name = ""
@@ -87,6 +78,7 @@ accumulated_profit = 0  # 總分
 accumulated_profit_list = []  # 畫圖
 ranking_list = [[5684,"就愛吃漢堡"],[4783,"今晚吃漢堡"],[3366,"My Way"],[6428,"賽百味"],[1056,"我不會玩"]]
 
+# 小知識題庫1-------------------------------------------------------------------------
 ques_list1 = [[2,"First in, First out (FIFO)的方式是指先進的貨先出貨，Last in, First out (LIFO)是讓後進的貨品先出貨。如果你的公司賣的是市場價格呈上升趨勢的商品如貴金屬，或是沒有特定保存期限的商品如煉油業，適合使用哪種存貨\管理方法?",
                 "FIFO","LIFO"],
               [3,"安全庫存(Safety Stock)：安全庫存又稱保險庫存、緩衝庫存，是指為了防止不確定性因素而預計的保險庫存量。小明開了一間漢堡店，店內的廚房平常總是備100個漢堡的庫存跟日常販售所需，另外在漢堡店的地下室裡另外放了25個漢堡的庫存以備不時之需。請問小明經營的漢堡店安全庫存數量為？",
@@ -101,11 +93,11 @@ ques_list1 = [[2,"First in, First out (FIFO)的方式是指先進的貨先出貨
                "4公斤","8公斤"],
               [2,"訂貨成本：又稱為進貨費用，是指從發出訂單到收到存貨整個過程中付出的成本。如訂單處理成本、運輸費、保險費及裝卸費等。小明開了一間漢堡店，每一次訂貨小明的員工要花2小時確認訂購量、下訂單、收貨、點貨、卸貨。已知員工時薪為$200元。請問一次訂貨成本為？",
                "400元","600元"]]
-
 ques_dict1 = dict()
 for i in range(len(ques_list1)):
     ques_dict1[i+1] = ques_list1[i]
 
+# 小知識題庫2-------------------------------------------------------------------------
 ques_list2 = [[3,"期末庫存：期末庫存=期初庫存+期間進貨-期間需求。小明開了一間漢堡店，今天營業前小明盤點倉庫裡有12公斤麵包、10公斤生菜、8公斤肉排。今天總共進貨6公斤麵包、7公斤生菜、4公斤肉排，消耗4公斤麵包、6公斤生菜、5公斤肉排。請問今天結束營業後肉排的期末庫存為？",
                "5公斤","7公斤"],
               [2,"訂單達成率(Order Fill Rate)：給定時間內實際完成訂單的百分比。小明開了一間漢堡店，今天午餐時段總共售出100個漢堡、晚餐時段售出200個漢堡，消夜時段售出100個漢堡，但實際上因為缺貨還有100個訂單沒有被滿足。請問漢堡店今天的訂單達成率為？",
@@ -123,6 +115,9 @@ ques_dict2 = dict()
 for i in range(len(ques_list1)):
     ques_dict2[i+1] = ques_list2[i]
 
+'''
+#########每個頁面Class#############
+'''
 
 class StartPage(object):  # 開始畫面
     def __init__(self, master = None):
@@ -217,7 +212,7 @@ class RankingPage1(object):  # 排行榜(前)
         # 內容
         ranking_list.sort()
         ranking_list.reverse()
-        self.page.lbl_topic = tk.Label(self.page, text = "排行榜", height = 2, width = 10, font = f1, bg = 'White',
+        self.page.lbl_topic = tk.Label(self.page, text = "排行榜", height = 2, width = 10, font = f1, bg = '#f9f7f1',
                                        fg = '#666666')
         for i in range(5):
             self.page.rank = tk.Label(self.page, text = ("第" + str(i+1) + "名： " + ranking_list[i][1]+ "   " + str(ranking_list[i][0]) + "分"), 
@@ -274,12 +269,12 @@ class IntroPage(object):  # 說明、輸入姓名
         self.button2 = tk.Button(self.page, text = "開始遊戲", font = f2, command = self.gotoRule, height = 2, width = 10,
                                  bg = '#FFCC22', fg = 'White')
         self.button2.place(x = 720, y = 490)
-
+        
         # 輸入框
         self.button1 = tk.Label(self.page, text = "替你的餐廳取個會賺大錢的名字：", font = f3, bg = '#FFCC22', fg = 'White')
-        self.button1.place(relx = 0.2,rely = 0.2, relheight = 0.05, relwidth = 0.4, anchor = 'nw')
+        self.button1.place(relx = 0.2, rely = 0.7, relheight = 0.05, relwidth = 0.4, anchor = 'nw')
         self.entry = tk.Entry(self.page, textvariable = self.username, font = f3)
-        self.entry.place(relx = 0.6,rely = 0.2,relwidth = 0.2, relheight = 0.05)
+        self.entry.place(relx = 0.6, rely = 0.7, relwidth = 0.2,  relheight = 0.05)
 
     def gotoRule(self):
         global user_name
@@ -327,7 +322,7 @@ class RulePage(object):  # 營業說明
                                    height = 5, width = 50, font = f3, bg = 'LemonChiffon', fg = '#666666')
         self.page.intro.place(relx = 0.5, rely = 0.26, anchor = 'n')
 
-        self.page.button = tk.Button(self.page, text = "開啟第一天吧！", font = f2, command = self.gotoEveryday, height = 2, width = 15,
+        self.page.button = tk.Button(self.page, text = "開始遊戲", font = f2, command = self.gotoEveryday, height = 2, width = 10,
                                      bg = '#FFCC22', fg = 'White')
         self.page.button.place(x = 720, y = 490)
 
@@ -411,7 +406,7 @@ class KnowledgePage(object):  # Day 1 小知識的日子
         else:
             know_content = (ques_dict2.get(know_num))[1]
         lbl_day = tk.Label(self.page,text = ("Day"+str(counts+1)+"小知識問答"), height = 2, width = 15, font = f1, bg = '#f9f7f1', fg = '#666666')
-        lbl_know = tk.Label(self.page,text = know_content, font = f3, borderwidth = 2, relief = "ridge", wraplength = 300,
+        lbl_know = tk.Label(self.page,text = know_content, font = f3, borderwidth = 2, relief = "ridge", wraplength = 350,
                             justify = 'left', bg = 'LemonChiffon', fg = '#666666')
         if counts == 0:
             btn_optA = tk.Button(self.page,text = (ques_dict1.get(know_num))[2], command = self.gotoVerify1, width = 7, height = 2, font = f2, bg = '#FFCC22',
@@ -494,7 +489,7 @@ class Calendar1(object): # 行事曆(小知識頁面)
         Label(self.page, image = bg_img).place(x=0, y=0)
         
         # 內容
-        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = 'White', fg = '#666666') 
+        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = '#f9f7f1', fg = '#666666') 
         self.page.btn_main = tk.Button(self.page, text = "返回遊戲", command = self.backtopage, height = 2, width = 9, font = f2, bg = '#FFCC22', fg = 'White')
         
         self.page.lbl_topic.place(x=300, y=50)
@@ -558,7 +553,7 @@ class Calendar2(object): # 行事曆(每天結果頁面)
         Label(self.page, image = bg_img).place(x=0, y=0)
         
         # 內容
-        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = 'White', fg = '#666666') 
+        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = '#f9f7f1', fg = '#666666') 
         self.page.btn_main = tk.Button(self.page, text = "返回遊戲", command = self.backtopage, height = 2, width = 9, font = f2, bg = '#FFCC22', fg = 'White')
         
         self.page.lbl_topic.place(x=300, y=50)
@@ -622,7 +617,7 @@ class Calendar3(object): # 行事曆(答對頁面)
         Label(self.page, image = bg_img).place(x=0, y=0)
         
         # 內容
-        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = 'White', fg = '#666666') 
+        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = '#f9f7f1', fg = '#666666') 
         self.page.btn_main = tk.Button(self.page, text = "返回遊戲", command = self.backtopage, height = 2, width = 9, font = f2, bg = '#FFCC22', fg = 'White')
         
         self.page.lbl_topic.place(x=300, y=50)
@@ -686,7 +681,7 @@ class Calendar4(object): # 行事曆(答錯頁面)
         Label(self.page, image = bg_img).place(x=0, y=0)
         
         # 內容
-        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = 'White', fg = '#666666') 
+        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = '#f9f7f1', fg = '#666666') 
         self.page.btn_main = tk.Button(self.page, text = "返回遊戲", command = self.backtopage, height = 2, width = 9, font = f2, bg = '#FFCC22', fg = 'White')
         
         self.page.lbl_topic.place(x=300, y=50)
@@ -750,7 +745,7 @@ class Calendar5(object): # 行事曆(訂貨頁面)
         Label(self.page, image = bg_img).place(x=0, y=0)
         
         # 內容
-        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = 'White', fg = '#666666') 
+        self.page.lbl_topic = tk.Label(self.page, text = "行事曆", height = 2, width = 10, font = f1, bg = '#f9f7f1', fg = '#666666') 
         self.page.btn_main = tk.Button(self.page, text = "返回遊戲", command = self.backtopage, height = 2, width = 9, font = f2, bg = '#FFCC22', fg = 'White')
         
         self.page.lbl_topic.place(x=300, y=50)
