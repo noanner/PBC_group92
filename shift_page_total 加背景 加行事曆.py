@@ -8,7 +8,7 @@ from PIL import ImageTk
 
 ##### 需求背景 #####
 # 跑Random決定這次遊戲玩哪個情境
-Scen = 'Scen1'
+Scen = 'Scen4'
 
 # 經營背景 (行事曆) 【已加】
 Scen_dict = {'Scen1' : "您的餐廳開在著名的觀光景點附近，每天會有不同的大型旅行團造訪!",
@@ -173,19 +173,10 @@ class IntroPage(object):  # 說明、輸入姓名
         image = ImageTk.Image.open("背景設計.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
-        Label(self.page, image = bg_img).place(x=0, y=0)
-        
-        # 內容
-        # self.page.lbl_topic = tk.Label(self.page, text = "餐廳經營管理遊戲", height = 2, width = 18, font = f1, bg = 'White', fg = '#666666')
-
-        
-        # 背景圖片填滿畫布
-        # self.background_image = ImageTk.PhotoImage(file = 'restaurant.jpg')
-        # self.background_label = tk.Label(self.root, image = self.background_image)
-        # self.background_label.place(relwidth = 1, relheight = 1)
+        Label(self.page, image = bg_img).place(x = 0, y = 0)
         
         self.button1 = tk.Label(root, text = "遊戲說明", font = f1, height = 2, width = 18, bg = 'White', fg = '#666666')
-        self.button1.place(x=220, y=50)
+        self.button1.place(x = 220, y = 50)
         
         self.intro = tk.Label(root, text = "有沒有想過經營一間漢堡餐廳？\n\n在這個遊戲裡，你要發揮需求預測能力，進行訂貨及存貨管理。\n"
                                            "這個遊戲中，你將會面對每天不同的銷售情境，\n根據不同的情境，你必須預測菜單的需求變動狀況，"
@@ -592,8 +583,8 @@ class Calendar(object): # 行事曆(Day1Page1)
         # 右半邊 行事曆表格
         tree_item=ttk.Treeview(root, selectmode="extended", columns=("天數", "活動"))#表格
         tree_item["columns"]=("活動")
-        tree_item.column("#0",minwidth=0,width=100, anchor='center')
-        tree_item.column("活動",minwidth=0,width=200, anchor='center')   #表示列,不顯示
+        tree_item.column("#0",minwidth=0,width=60, anchor='center')
+        tree_item.column("活動",minwidth=0,width=130, anchor='center')   #表示列,不顯示
 
         tree_item.heading("#0",text="天數")
         tree_item.heading("活動",text="活動")  #顯示表頭
@@ -607,9 +598,9 @@ class Calendar(object): # 行事曆(Day1Page1)
         tree_item.insert("",7,text="Day7", values=Events_dict[Scen][6])
         
         style = ttk.Style()
-        style.configure("Treeview.Heading", font=("華康娃娃體", 10))
-        style.configure("Treeview", rowheight=38, font=("華康娃娃體", 10))
-        tree_item.place(x=410, y=160, height=300)
+        style.configure("Treeview.Heading", font=("微軟正黑體", 8))
+        style.configure("Treeview", rowheight=35, font=("微軟正黑體", 8))
+        tree_item.place(x=410, y=160, height=280)
     
     def backtopage(self):
         self.page.destroy()
