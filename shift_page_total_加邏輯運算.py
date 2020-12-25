@@ -1123,7 +1123,7 @@ class EverydayResultPage(object):  # 每日結算畫面
 
         global user_name
 
-        self.page.lbl_description = tk.Label(self.page, text = ("辛苦了~" + user_name + "下面是你今天營業的成果~~"), height = 2, width = 48, font = f3,
+        self.page.lbl_description = tk.Label(self.page, text = ("辛苦了~" + user_name + "   下面是你今天營業的成果~~"), height = 2, width = 48, font = f3,
                                              bg = '#f9f7f1')
         self.page.lbl_description.place(x = 200, y = 70)
 
@@ -1188,7 +1188,7 @@ class EverydayResultPage(object):  # 每日結算畫面
             pct.append("%.2f" % c + "%")
 
         pct = []
-        for i in range(sold):
+        for i in range(len(sold)):
             if demand[i] >= sold[i] and stock[i] == demand[i]:
                 pct.append("缺貨")
             else:
