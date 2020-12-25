@@ -36,12 +36,12 @@ for i in range(4):
 
 # 小提示----------------------------------------------------------------------
 # [第1天的提示, 第4天的提示]
-hint_list = [["印度教徒不吃牛肉豬肉，特愛雞肉，如果沒有咖哩的話，他們寧願少吃點",
-              "健身的巨巨們喜歡選用蛋白質較高的牛肉雞肉，若是有生酮這樣碳水低的選擇，他們再愛也不過了，通常可以吃上兩份"],
+hint_list = [["印度教徒不吃牛肉、豬肉，特愛雞肉，如果沒有咖哩的話，他們寧願少吃點有肉的漢堡",
+              "健身的巨巨們喜歡選用蛋白質較高的牛肉、雞肉，若是有生酮這樣碳水低的選擇，他們再愛也不過了，通常可以吃兩份以上"],
              ["韓國人熱愛豬五花肉，甚至將3月3日正式訂為「五花肉日」", "全球素食日是一個完全不能吃肉的節日，連製作的食材都不會有任何的肉"],
              ["因為午後的豪大雨，導致顧客出門意願降低，只想待在家叫Foodpanda或Ubereats，全品項銷量約減少25%",
               "寒流來襲，大口大口咬下漢堡，身體有熱量去禦寒，大家喜歡到漢堡店坐在店裡享用，全品項銷售量約增加25%"],
-             ["今日為大樂透開獎，得主就住在餐廳樓上，平常他最愛吃的就是牛肉漢堡，今天他決定拿獎金買下60個請台北車站的流浪漢吃",
+             ["今日為大樂透開獎，得主就住在餐廳樓上，平常他最愛吃的就是漢堡，今天他決定拿獎金買下60個牛肉漢堡請台北車站的流浪漢吃",
               "新聞報導指控您的餐廳餐點不衛生，漢堡都是用組合肉，生菜也不新鮮，麵包更是都發霉了，讓業績只剩4成"]]
 hint_dict = dict()
 for i in range(4):
@@ -49,7 +49,7 @@ for i in range(4):
 # print(hint_dict.get(scenario))
 
 # 每日需求量----------------------------------------------------------------------
-demand_list1 = [[20, 20, 20, 20, 20], [3, 5, 52, 62, 2], [31, 28, 27, 8, 11], [30, 25, 28, 5, 15], [21, 6, 25, 12, 65],
+demand_list1 = [[20, 20, 20, 20, 20], [3, 5, 52, 26, 2], [31, 28, 27, 8, 11], [30, 25, 28, 5, 15], [21, 6, 25, 12, 65],
                 [25, 3, 30, 28, 18], [4, 6, 8, 62, 10]]
 demand_list2 = [[20, 20, 20, 20, 20], [18, 43, 19, 15, 12], [21, 18, 31, 17, 19], [23, 25, 28, 19, 12],
                 [0, 0, 0, 110, 0], [28, 26, 27, 8, 13], [22, 23, 21, 19, 18]]
@@ -183,14 +183,14 @@ class StartPage(object):  # 開始畫面
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 內容
-        self.page.lbl_topic = tk.Label(self.page, text = "今晚，我想來點__堡", height = 2, width = 18, font = f1, bg = 'black',
+        self.page.lbl_topic = tk.Label(self.page, text = "商管讓你睡不堡  餐廳遊戲", height = 2, width = 23, font = f1, bg = 'black',
                                        fg = 'white')
         self.page.btn_enter = tk.Button(self.page, text = "進入遊戲", command = self.gotoIntro, height = 2, width = 10,
                                         font = f2, bg = '#FFCC22', fg = 'black')
         self.page.btn_rank = tk.Button(self.page, text = "排行榜", command = self.gotoRanking1, height = 2, width = 10,
                                        font = f2, bg = '#666666', fg = 'black')
 
-        self.page.lbl_topic.place(x = 220, y = 150)
+        self.page.lbl_topic.place(x = 150, y = 150)
         self.page.btn_enter.place(x = 260, y = 350)
         self.page.btn_rank.place(x = 495, y = 350)
 
@@ -281,11 +281,11 @@ class IntroPage(object):  # 說明、輸入姓名
                                 fg = '#666666')
         self.button1.place(x = 220, y = 50)
 
-        self.intro = tk.Label(self.page, text = "有沒有想過經營一間漢堡餐廳？\n\n在這個遊戲裡，你要發揮需求預測能力，進行訂貨及存貨管理。\n"
-                                                "這個遊戲中，你將會面對每天不同的銷售情境，\n根據不同的情境，你必須預測菜單的需求變動狀況，"
-                                                "進而去決定如何訂購產品原料。\n" "遊戲中，最重要的三個元素就是需求量、訂購的固定成本以及材料成本。\n"
+        self.intro = tk.Label(self.page, text = "你知道經營一間餐廳到底有多難嗎？\n\n在這個遊戲裡，你每天會遇到不同的情境和特殊狀況。\n"
+                                                "根據不同的情境，你要發揮預測能力，進行訂貨及存貨管理，"
+                                                "\n遊戲中，最重要的就是決定明天到底要買多少原料！！。\n"
                                                 "遊戲將根據你的獲利情況計算分數，最後進行評價。",
-                              font = f3, bg = 'LemonChiffon', fg = '#666666')
+                              font = f3, bg = 'LemonChiffon', fg = '#666666', justify = 'left')
         self.intro.place(relx = 0.5, rely = 0.28, relwidth = 0.85, relheight = 0.35, anchor = 'n')
 
         self.button2 = tk.Button(self.page, text = "開始遊戲", font = f2, command = self.gotoRule, height = 2, width = 10,
@@ -340,9 +340,9 @@ class RulePage(object):  # 營業說明
         self.topic.place(x = 220, y = 50)
 
         # 輸入介紹
-        self.page.intro = tk.Label(self.page, text = "有一位經驗老道的前輩傳授了他的經營祕訣，\n保證你開店第一天就有好成績，"
-                                                     "\n要仔細記得存貨與需求量的資訊，\n之後進行食材訂購才會順利喔~",
-                                   height = 5, width = 50, font = f3, bg = 'LemonChiffon', fg = '#666666')
+        self.page.intro = tk.Label(self.page, text = "5種漢堡中，每天各會賣出20個左右\n記得打開行事曆看看今天遇到什麼狀況~"
+                                                     "\n另外Day1和Day4會有小知識問答，\n答對會給你提示，祝你開店順利！!",
+                                   height = 5, width = 50, font = f3, bg = 'LemonChiffon', fg = '#666666', justify = 'left')
         self.page.intro.place(relx = 0.5, rely = 0.26, anchor = 'n')
 
         self.page.button = tk.Button(self.page, text = "開始遊戲", font = f2, command = self.gotoEveryday, height = 2,
@@ -1787,7 +1787,7 @@ class HighscorePage(object):
 
 
 root = Tk()
-root.title('小程式')
+root.title('餐廳經營管理遊戲')
 StartPage(root)
 root.mainloop()
 print(user_name)
