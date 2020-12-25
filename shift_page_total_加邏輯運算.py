@@ -1121,7 +1121,9 @@ class EverydayResultPage(object):  # 每日結算畫面
                                        bg = '#f9f7f1', fg = '#666666')
         self.page.lbl_topic.place(x = 50, y = 40)
 
-        self.page.lbl_description = tk.Label(self.page, text = "辛苦了~下面是你今天營業的成果~~", height = 2, width = 40, font = f3,
+        global user_name
+
+        self.page.lbl_description = tk.Label(self.page, text = ("辛苦了~" + user_name + "下面是你今天營業的成果~~"), height = 2, width = 48, font = f3,
                                              bg = '#f9f7f1')
         self.page.lbl_description.place(x = 200, y = 70)
 
@@ -1184,6 +1186,14 @@ class EverydayResultPage(object):  # 每日結算畫面
             else:
                 c = 0
             pct.append("%.2f" % c + "%")
+
+        pct = []
+        for i in range(sold):
+            if demand[i] >= sold[i] and stock[i] == demand[i]:
+                pct.append("缺貨")
+            else:
+                pct.append(" ")
+        
         self.page.tree_item.insert("", 0, text = "期初庫存",
                                    values = (stock[0], stock[1], stock[2], stock[3], stock[4]))  # 插入資料，
         self.page.tree_item.insert("", 1, text = "需求量",
@@ -1191,7 +1201,8 @@ class EverydayResultPage(object):  # 每日結算畫面
         self.page.tree_item.insert("", 2, text = "賣出數量", values = (sold[0], sold[1], sold[2], sold[3], sold[4]))
         self.page.tree_item.insert("", 3, text = "營業額",
                                    values = (revenue[0], revenue[1], revenue[2], revenue[3], revenue[4]))
-        self.page.tree_item.insert("", 4, text = "營業額百分比", values = (pct[0], pct[1], pct[2], pct[3], pct[4]))
+        
+        self.page.tree_item.insert("", 4, text = "缺貨提醒", values = (pct[0], pct[1], pct[2], pct[3], pct[4]))
 
         style = ttk.Style()
         style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
