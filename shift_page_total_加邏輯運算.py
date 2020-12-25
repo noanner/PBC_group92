@@ -319,6 +319,7 @@ class RulePage(object):  # 營業說明
         f1 = tkFont.Font(size = 30, family = "華康娃娃體")
         f2 = tkFont.Font(size = 14, family = "華康娃娃體")
         f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        f4 = tkFont.Font(size = 10, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -326,63 +327,57 @@ class RulePage(object):  # 營業說明
 
         # 背景圖
         global bg_img
+        global user_name
         image = ImageTk.Image.open("背景設計.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
-        self.topic = tk.Label(self.page, text = "貼心小提醒", font = f1, height = 2, width = 18, bg = '#f9f7f1',
-                              fg = '#666666')
-        self.topic.place(x = 220, y = 50)
+        self.topic = tk.Label(self.page, text = ("Hello, " + user_name), font = f1, bg = '#f9f7f1',
+                              fg = '#666666', height = 2, width = 30)
+        self.topic.place(x = 50, y = 40)
 
-        # 輸入介紹
-        self.page.intro = tk.Label(self.page, text = "5種漢堡中，每天各會賣出20個左右\n記得打開行事曆看看今天遇到什麼狀況~"
-                                                     "\n另外Day1和Day4會有小知識問答，\n答對會給你提示，祝你開店順利！!",
-                                   height = 5, width = 50, font = f3, bg = 'LemonChiffon', fg = '#666666', justify = 'left')
-        self.page.intro.place(relx = 0.5, rely = 0.26, anchor = 'n')
+        # 左半邊 經營背景   
+        self.page.intro_topic = tk.Label(self.page, text = "遊戲說明", height = 2, width = 8, font = f3, bg = '#f9f7f1', fg = '#666666')
+        self.page.intro_topic.place(x = 120 , y = 150) 
+        self.page.intro = tk.Label(self.page, text = "5種漢堡中，每天各會賣出20個左右，記得打開行事曆看看今天遇到什麼狀況~"
+                                                     "\n另外Day1和Day4會有小知識問答，答對會給你提示，祝你開店順利！!",
+                                   font = f4, borderwidth = 20, wraplength = 280, justify = 'left', bg = 'LemonChiffon', fg = '#666666')
+        self.page.intro.place(x = 120, y = 190)
+        
+        self.page.bg_topic = tk.Label(self.page, text = "經營背景", height = 2, width = 8, font = f3, bg = '#f9f7f1', fg = '#666666')
+        self.page.bg_topic.place(x = 120 , y = 320)
+        self.page.lbl_bg = tk.Label(self.page, text = scen_dict[scenario], font = f4, borderwidth = 20,
+                                    wraplength = 280, justify = 'left', bg = 'LemonChiffon', fg = '#666666')
+        self.page.lbl_bg.place(x = 120, y = 360)
 
-        self.page.button = tk.Button(self.page, text = "開始遊戲", font = f2, command = self.gotoEveryday, height = 2,
-                                     width = 10,
-                                     bg = '#FFCC22', fg = 'White')
-        self.page.button.place(x = 720, y = 490)
 
-        # 建立成本表格
-        self.columns = ("品項", "成本", "售價", "期初存貨", "進貨成本", "存貨成本")
-        self.treeview = ttk.Treeview(self.page, height = 7, show = "headings", columns = self.columns)  # 表格
-        # 表格UI
+        # 右半邊 行事曆表格
+        tree_item = ttk.Treeview(root, selectmode = "extended", columns = ("天數", "活動"))  # 表格
+        tree_item["columns"] = ("活動")
+        tree_item.column("#0", minwidth = 0, width = 100, anchor = 'center')
+        tree_item.column("活動", minwidth = 0, width = 200, anchor = 'center')  # 表示列,不顯示
+
+        tree_item.heading("#0", text = "天數")
+        tree_item.heading("活動", text = "活動")  # 顯示表頭
+
+        tree_item.insert("", 1, text = "Day1", values = cal_dict[scenario][0])  # 插入資料
+        tree_item.insert("", 2, text = "Day2", values = cal_dict[scenario][1])
+        tree_item.insert("", 3, text = "Day3", values = cal_dict[scenario][2])
+        tree_item.insert("", 4, text = "Day4", values = cal_dict[scenario][3])
+        tree_item.insert("", 5, text = "Day5", values = cal_dict[scenario][4])
+        tree_item.insert("", 6, text = "Day6", values = cal_dict[scenario][5])
+        tree_item.insert("", 7, text = "Day7", values = cal_dict[scenario][6])
+
         style = ttk.Style()
-        style.configure("Treeview.Heading", font = ("華康娃娃體", 12))
-        style.configure("Treeview", rowheight = 25, font = ("華康娃娃體", 10))
-
-        # 表格格式
-        self.treeview.column("品項", width = 30, anchor = 'center')
-        self.treeview.column("成本", width = 30, anchor = 'center')
-        self.treeview.column("售價", width = 30, anchor = 'center')
-        self.treeview.column("期初存貨", width = 40, anchor = 'center')
-        self.treeview.column("進貨成本", width = 40, anchor = 'center')
-        self.treeview.column("存貨成本", width = 40, anchor = 'center')
-        # 显示表头
-        self.treeview.heading("品項", text = "品項")
-        self.treeview.heading("成本", text = "成本")
-        self.treeview.heading("售價", text = "售價")
-        self.treeview.heading("期初存貨", text = "期初存貨")
-        self.treeview.heading("進貨成本", text = "進貨成本")
-        self.treeview.heading("存貨成本", text = "存貨成本")
-
-        # treeview.pack(side = LEFT, fill = BOTH)
-        global order_fixed_cost
-        self.treeview.place(relx = 0.1, rely = 0.48, relwidth = 0.75, relheight = 0.27)
-
-        self.name = ['牛肉漢堡', '豬肉漢堡', '雞肉漢堡', '生菜堡', '生酮堡']
-        self.unitCost = material_price
-        self.unitPrice = price_list
-        self.inventory = stock_list
-        self.orderingCost = ['$50元/次', '$50元/次', '$50元/次', '$50元/次', '$50元/次']
-        self.inventoryCost = ['$2/單位', '$2/單位', '$2/單位', '$2/單位', '$2/單位']
-        for i in range(len(self.name)):  # 寫入数据
-            self.treeview.insert('', i, values = (self.name[i], self.unitCost[i],
-                                                  self.unitPrice[i], self.inventory[i], self.orderingCost[i],
-                                                  self.inventoryCost[i]))
+        style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
+        style.configure("Treeview", rowheight = 38, font = ("華康娃娃體", 10))
+        tree_item.place(x = 480, y = 160, height = 300)
+        
+        # 開始遊戲
+        self.page.button = tk.Button(self.page, text = "開始遊戲", font = f2, command = self.gotoEveryday, height = 2,
+                                     width = 10, bg = '#FFCC22', fg = 'White')
+        self.page.button.place(x = 720, y = 490)
 
     def gotoEveryday(self):
         self.page.destroy()
