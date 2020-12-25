@@ -8,7 +8,7 @@ from PIL import ImageTk
 
 ##### 需求背景 #####
 # 跑Random決定這次遊戲玩哪個情境
-Scen = 'Scen1'
+Scen = 'Scen4'
 
 # 經營背景 (行事曆) 【已加】
 Scen_dict = {'Scen1' : "您的餐廳開在著名的觀光景點附近，每天會有不同的大型旅行團造訪!",
@@ -583,8 +583,8 @@ class Calendar(object): # 行事曆(Day1Page1)
         # 右半邊 行事曆表格
         tree_item=ttk.Treeview(root, selectmode="extended", columns=("天數", "活動"))#表格
         tree_item["columns"]=("活動")
-        tree_item.column("#0",minwidth=0,width=100, anchor='center')
-        tree_item.column("活動",minwidth=0,width=200, anchor='center')   #表示列,不顯示
+        tree_item.column("#0",minwidth=0,width=60, anchor='center')
+        tree_item.column("活動",minwidth=0,width=130, anchor='center')   #表示列,不顯示
 
         tree_item.heading("#0",text="天數")
         tree_item.heading("活動",text="活動")  #顯示表頭
@@ -598,9 +598,9 @@ class Calendar(object): # 行事曆(Day1Page1)
         tree_item.insert("",7,text="Day7", values=Events_dict[Scen][6])
         
         style = ttk.Style()
-        style.configure("Treeview.Heading", font=("華康娃娃體", 10))
-        style.configure("Treeview", rowheight=38, font=("華康娃娃體", 10))
-        tree_item.place(x=410, y=160, height=300)
+        style.configure("Treeview.Heading", font=("微軟正黑體", 8))
+        style.configure("Treeview", rowheight=35, font=("微軟正黑體", 8))
+        tree_item.place(x=410, y=160, height=280)
     
     def backtopage(self):
         self.page.destroy()

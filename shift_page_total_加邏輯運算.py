@@ -168,9 +168,9 @@ class StartPage(object):  # 開始畫面
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)  # 製造一個空的grid在底下
         self.page.lbl_gridonly.grid(row = 0, column = 0, columnspan = 10, sticky = tk.NW)
@@ -213,9 +213,9 @@ class RankingPage1(object):  # 排行榜(前)
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -262,9 +262,9 @@ class IntroPage(object):  # 說明、輸入姓名
         self.username = StringVar()
         self.page.pack()
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -320,9 +320,9 @@ class RulePage(object):  # 營業說明
         self.page = Frame(self.root)
         self.page.pack()
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -355,8 +355,8 @@ class RulePage(object):  # 營業說明
         self.treeview = ttk.Treeview(self.page, height = 7, show = "headings", columns = self.columns)  # 表格
         # 表格UI
         style = ttk.Style()
-        style.configure("Treeview.Heading", font = ("微軟正黑", 12))
-        style.configure("Treeview", rowheight = 25, font = ("微軟正黑", 10))
+        style.configure("Treeview.Heading", font = ("華康娃娃體", 12))
+        style.configure("Treeview", rowheight = 25, font = ("華康娃娃體", 10))
 
         # 表格格式
         self.treeview.column("品項", width = 30, anchor = 'center')
@@ -405,9 +405,9 @@ class KnowledgePage(object):  # Day 1 小知識的日子
         self.page = Frame(self.root)  # 建立Frame
         self.page.pack()
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -506,9 +506,9 @@ class Calendar1(object):  # 行事曆(小知識頁面)
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -553,8 +553,8 @@ class Calendar1(object):  # 行事曆(小知識頁面)
         tree_item.insert("", 7, text = "Day7", values = cal_dict[scenario][6])
 
         style = ttk.Style()
-        style.configure("Treeview.Heading", font = ("微軟正黑", 10))
-        style.configure("Treeview", rowheight = 38, font = ("微軟正黑", 10))
+        style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
+        style.configure("Treeview", rowheight = 38, font = ("華康娃娃體", 10))
         tree_item.place(x = 410, y = 160, height = 300)
 
     def backtopage(self):
@@ -574,9 +574,9 @@ class Calendar2(object):  # 行事曆(每天結果頁面)
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -621,8 +621,8 @@ class Calendar2(object):  # 行事曆(每天結果頁面)
         tree_item.insert("", 7, text = "Day7", values = cal_dict[scenario][6])
 
         style = ttk.Style()
-        style.configure("Treeview.Heading", font = ("微軟正黑", 10))
-        style.configure("Treeview", rowheight = 38, font = ("微軟正黑", 10))
+        style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
+        style.configure("Treeview", rowheight = 38, font = ("華康娃娃體", 10))
         tree_item.place(x = 410, y = 160, height = 300)
 
     def backtopage(self):
@@ -642,9 +642,9 @@ class Calendar3(object):  # 行事曆(答對頁面)
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -689,8 +689,8 @@ class Calendar3(object):  # 行事曆(答對頁面)
         tree_item.insert("", 7, text = "Day7", values = cal_dict[scenario][6])
 
         style = ttk.Style()
-        style.configure("Treeview.Heading", font = ("微軟正黑", 10))
-        style.configure("Treeview", rowheight = 38, font = ("微軟正黑", 10))
+        style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
+        style.configure("Treeview", rowheight = 38, font = ("華康娃娃體", 10))
         tree_item.place(x = 410, y = 160, height = 300)
 
     def backtopage(self):
@@ -710,9 +710,9 @@ class Calendar4(object):  # 行事曆(答錯頁面)
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -757,8 +757,8 @@ class Calendar4(object):  # 行事曆(答錯頁面)
         tree_item.insert("", 7, text = "Day7", values = cal_dict[scenario][6])
 
         style = ttk.Style()
-        style.configure("Treeview.Heading", font = ("微軟正黑", 10))
-        style.configure("Treeview", rowheight = 38, font = ("微軟正黑", 10))
+        style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
+        style.configure("Treeview", rowheight = 38, font = ("華康娃娃體", 10))
         tree_item.place(x = 410, y = 160, height = 300)
 
     def backtopage(self):
@@ -778,9 +778,9 @@ class Calendar5(object):  # 行事曆(訂貨頁面)
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -825,8 +825,8 @@ class Calendar5(object):  # 行事曆(訂貨頁面)
         tree_item.insert("", 7, text = "Day7", values = cal_dict[scenario][6])
 
         style = ttk.Style()
-        style.configure("Treeview.Heading", font = ("微軟正黑", 10))
-        style.configure("Treeview", rowheight = 38, font = ("微軟正黑", 10))
+        style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
+        style.configure("Treeview", rowheight = 38, font = ("華康娃娃體", 10))
         tree_item.place(x = 410, y = 160, height = 300)
 
     def backtopage(self):
@@ -848,9 +848,9 @@ class Day4Page1(object):  # Day 4 小知識的日子
         self.page = Frame(self.root)  # 建立Frame
         self.page.pack()
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -910,9 +910,9 @@ class CorrectPage(object):  # Day 1 答對頁面
         self.page = Frame(self.root)  # 建立Frame
         self.page.pack()
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -981,9 +981,9 @@ class WrongPage(object):  # Day 1 答錯頁面
         self.page = Frame(self.root)  # 建立Frame
         self.page.pack()
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -1045,9 +1045,9 @@ class EverydayPage(object):  # 每日漢堡製作畫面
     def createPage(self):
         self.page = Frame(self.root)  # 建立Frame
         self.page.pack()
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -1105,9 +1105,9 @@ class EverydayResultPage(object):  # 每日結算畫面
     def createPage(self):
         self.page = Frame(self.root)  # 建立Frame
         self.page.pack()
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -1198,8 +1198,8 @@ class EverydayResultPage(object):  # 每日結算畫面
         self.page.tree_item.insert("", 4, text = "營業額百分比", values = (pct[0], pct[1], pct[2], pct[3], pct[4]))
 
         style = ttk.Style()
-        style.configure("Treeview.Heading", font = ("微軟正黑", 10))
-        style.configure("Treeview", rowheight = 50, font = ("微軟正黑", 10))
+        style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
+        style.configure("Treeview", rowheight = 50, font = ("華康娃娃體", 10))
 
         self.page.tree_item.place(x = 80, y = 160, height = 280)
 
@@ -1279,10 +1279,10 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         self.page = Frame(self.root)  # 建立Frame
         self.page.pack()
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
-        f4 = tkFont.Font(size = 10, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        f4 = tkFont.Font(size = 10, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -1354,9 +1354,9 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         self.page.tree_item.insert("", 4, text = "生酮堡", values = (material_price[4], stock_list[4]))
 
         style = ttk.Style()
-        style.configure("Treeview.Heading", font = ("微軟正黑", 10))
-        style.configure("Treeview", rowheight = 50, font = ("微軟正黑", 10))
-        self.page.tree_item.place(x = 150, y = 150, height = 276)
+        style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
+        style.configure("Treeview", rowheight = 50, font = ("華康娃娃體", 10))
+        self.page.tree_item.place(x = 120, y = 150, height = 276)
         # -----------------------------------------------------------------------------------------------------------
 
         # 讓玩家輸入的表格
@@ -1367,11 +1367,34 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         self.page.txt_keto = tk.Text(self.page, height = 2, width = 12, font = f4)
 
         # 輸入的表格 排版位置
-        self.page.txt_beef.place(x = 511, y = 175)
-        self.page.txt_pork.place(x = 511, y = 225)
-        self.page.txt_chick.place(x = 511, y = 275)
-        self.page.txt_vege.place(x = 511, y = 325)
-        self.page.txt_keto.place(x = 511, y = 375)
+        self.page.txt_beef.place(x = 481, y = 175)
+        self.page.txt_pork.place(x = 481, y = 225)
+        self.page.txt_chick.place(x = 481, y = 275)
+        self.page.txt_vege.place(x = 481, y = 325)
+        self.page.txt_keto.place(x = 481, y = 375)
+        # -----------------------------------------------------------------------------------------------------------
+        
+        # 右半邊 行事曆表格
+        tree_item1=ttk.Treeview(root, selectmode="extended", columns=("天數", "活動"))#表格
+        tree_item1["columns"]=("活動")
+        tree_item1.column("#0",minwidth=0,width=60, anchor='center')
+        tree_item1.column("活動",minwidth=0,width=130, anchor='center')   #表示列,不顯示
+
+        tree_item1.heading("#0",text="天數")
+        tree_item1.heading("活動",text="活動")  #顯示表頭
+
+        tree_item1.insert("",1,text="Day1", values=cal_dict[scenario][0])#插入資料
+        tree_item1.insert("",2,text="Day2", values=cal_dict[scenario][1])
+        tree_item1.insert("",3,text="Day3", values=cal_dict[scenario][2])
+        tree_item1.insert("",4,text="Day4", values=cal_dict[scenario][3])
+        tree_item1.insert("",5,text="Day5", values=cal_dict[scenario][4])
+        tree_item1.insert("",6,text="Day6", values=cal_dict[scenario][5])
+        tree_item1.insert("",7,text="Day7", values=cal_dict[scenario][6])
+        
+        # style1 = ttk.Style()
+        # style1.configure("Treeview.Heading", font=("華康娃娃體", 8))
+        # style1.configure("Treeview", rowheight=35, font=("華康娃娃體", 8))
+        tree_item1.place(x=630, y=150, height=276)
 
     def costCalculation(self):
         global material_price
@@ -1510,9 +1533,9 @@ class FinalResultPage1(object):
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -1565,9 +1588,9 @@ class FinalResultPage2(object):
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -1670,9 +1693,9 @@ class RankingPage2(object):
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -1718,9 +1741,9 @@ class HighscorePage(object):
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "微軟正黑")
-        f2 = tkFont.Font(size = 14, family = "微軟正黑")
-        f3 = tkFont.Font(size = 12, family = "微軟正黑")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
