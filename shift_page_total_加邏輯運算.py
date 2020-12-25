@@ -1189,12 +1189,12 @@ class EverydayResultPage(object):  # 每日結算畫面
 
         pct = []
         for i in range(len(sold)):
-            if demand[i] >= sold[i] and stock[i] == demand[i]:
+            if stock[i] <= demand[i]:
                 pct.append("缺貨")
             else:
                 pct.append(" ")
         
-        self.page.tree_item.insert("", 0, text = "期初庫存",
+        self.page.tree_item.insert("", 0, text = "庫存",
                                    values = (stock[0], stock[1], stock[2], stock[3], stock[4]))  # 插入資料，
         self.page.tree_item.insert("", 1, text = "需求量",
                                    values = (demand[0], demand[1], demand[2], demand[3], demand[4]))
