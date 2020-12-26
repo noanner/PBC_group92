@@ -437,8 +437,8 @@ class KnowledgePage(object):  # Day 1 小知識的日子
             btn_optB = tk.Button(self.page, text = (ques_dict2.get(know_num))[3], command = self.gotoVerify2, width = 7,
                                  height = 2, font = f2, bg = '#FFCC22',
                                  fg = 'White')
-        btn_calendar = tk.Button(self.page, text = "行事曆", command = self.openCalendar, width = 7, height = 2, font = f2,
-                                 bg = '#666666', fg = 'White')
+        # btn_calendar = tk.Button(self.page, text = "行事曆", command = self.openCalendar, width = 7, height = 2, font = f2,
+                                 # bg = '#666666', fg = 'White')
 
         # 元件位置
         lbl_day.place(x = 50, y = 40)
@@ -446,7 +446,7 @@ class KnowledgePage(object):  # Day 1 小知識的日子
         lbl_know.place(relx = 0.28, rely = 0.3, width = 400, height = 200)
         btn_optA.place(relx = 0.3, rely = 0.75)
         btn_optB.place(relx = 0.6, rely = 0.75)
-        btn_calendar.place(x = 720, y = 70)
+        # btn_calendar.place(x = 720, y = 70)
 
     def gotoVerify1(self):
         self.page.destroy()
@@ -476,11 +476,11 @@ class KnowledgePage(object):  # Day 1 小知識的日子
             else:
                 WrongPage(self.root)
 
-    def openCalendar(self):
-        self.page.destroy()
-        Calendar1(self.root)
+    # def openCalendar(self):
+        # self.page.destroy()
+        # Calendar1(self.root)
 
-
+'''
 class Calendar1(object):  # 行事曆(小知識頁面)
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
@@ -819,7 +819,7 @@ class Calendar5(object):  # 行事曆(訂貨頁面)
     def backtopage(self):
         self.page.destroy()
         EverydayStockPage(root)
-
+'''
 
 class CorrectPage(object):  # Day 1 答對頁面
     def __init__(self, master = None):
@@ -854,8 +854,8 @@ class CorrectPage(object):  # Day 1 答對頁面
         self.page.lbl_topic.place(x = 50, y = 40)
 
         # 行事曆按鈕
-        Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
-               command = self.openCalendar).place(x = 720, y = 70)
+        # Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
+               # command = self.openCalendar).place(x = 720, y = 70)
 
         # 答對的圖片
         global cooking_img
@@ -887,9 +887,9 @@ class CorrectPage(object):  # Day 1 答對頁面
         self.page.destroy()
         EverydayStockPage(self.root)
 
-    def openCalendar(self):
-        self.page.destroy()
-        Calendar3(self.root)
+    # def openCalendar(self):
+        # self.page.destroy()
+        # Calendar3(self.root)
 
 
 class WrongPage(object):  # Day 1 答錯頁面
@@ -925,8 +925,8 @@ class WrongPage(object):  # Day 1 答錯頁面
         self.page.lbl_topic.place(x = 50, y = 40)
 
         # 行事曆按鈕
-        Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
-               command = self.openCalendar).place(x = 720, y = 70)
+        # Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
+               # command = self.openCalendar).place(x = 720, y = 70)
 
         # 答錯的圖片
         global cooking_img
@@ -951,9 +951,9 @@ class WrongPage(object):  # Day 1 答錯頁面
         self.page.destroy()
         EverydayStockPage(self.root)
 
-    def openCalendar(self):
-        self.page.destroy()
-        Calendar4(self.root)
+    # def openCalendar(self):
+        # self.page.destroy()
+        # Calendar4(self.root)
 
 
 class EverydayPage(object):  # 每日漢堡製作畫面
@@ -1014,9 +1014,6 @@ class EverydayPage(object):  # 每日漢堡製作畫面
     def gotoDayResult(self):
         self.page.destroy()
         EverydayResultPage(root)
-
-    # def openCalendar(self):
-    # showinfo(title = '行事曆', message = '此處放行事曆')
 
 
 class EverydayResultPage(object):  # 每日結算畫面
@@ -1233,8 +1230,8 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 行事曆按鈕
-        Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
-               command = self.openCalendar).place(x = 720, y = 70)
+        # Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
+               # command = self.openCalendar).place(x = 720, y = 70)
 
         # row0 標題、敘述、行事曆按鈕
         self.page.lbl_topic = tk.Label(self.page, text = ("Day" + str(counts + 1)), height = 2, width = 7, font = f1,
@@ -1421,9 +1418,9 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         else:
             showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
 
-    def openCalendar(self):
-        self.page.destroy()
-        Calendar5(root)
+    # def openCalendar(self):
+        # self.page.destroy()
+        # Calendar5(root)
 
 
 class FinalResultPage1(object):
@@ -1497,7 +1494,7 @@ class FinalResultPage1(object):
         global ranking_list
         self.page.destroy()
         FinalResultPage2(self.root)
-        ranking_list.append([accumulated_profit, user_name])
+        # ranking_list.append([accumulated_profit, user_name])
         print(user_name)
         print(order_cost_list)
         print(profit_list)
