@@ -421,7 +421,7 @@ class KnowledgePage(object):  # Day 1 小知識的日子
         # 背景圖
         global bg_img
         global counts
-        image = ImageTk.Image.open("knowledge_bg.png")
+        image = ImageTk.Image.open("小知識_bg.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
@@ -433,7 +433,7 @@ class KnowledgePage(object):  # Day 1 小知識的日子
             know_content = (ques_dict1.get(know_num))[1]
         else:
             know_content = (ques_dict2.get(know_num))[1]
-        lbl_day = tk.Label(self.page, text = ("Day" + str(counts + 2) + "需求提示"), height = 2, width = 15, font = f1,
+        lbl_day = tk.Label(self.page, text = ("Day" + str(counts + 2) + "需求提示"), height = 1, width = 12, font = f1,
                            bg = 'black', fg = 'white')
         lbl_hint = tk.Label(self.page, text = ("這裡有一道小知識問答，\n答對了就能獲得明天的需求提示噢！"), height = 2, width = 15,
                             font = f2,
@@ -459,10 +459,10 @@ class KnowledgePage(object):  # Day 1 小知識的日子
 
         # 元件位置
         lbl_day.place(x = 50, y = 40)
-        lbl_hint.place(width = 400, height = 80, x = 100, y = 140)
-        lbl_know.place(relx = 0.1, rely = 0.4, width = 400, height = 200)
-        btn_optA.place(relx = 0.15, rely = 0.8)
-        btn_optB.place(relx = 0.4, rely = 0.8)
+        lbl_hint.place(width = 400, height = 80, x = 60, y = 130)
+        lbl_know.place(relx = 0.05, rely = 0.38, width = 400, height = 200)
+        btn_optA.place(relx = 0.12, rely = 0.8)
+        btn_optB.place(relx = 0.30, rely = 0.8)
         # btn_calendar.place(x = 720, y = 70)
 
     def gotoVerify1(self):
@@ -852,9 +852,9 @@ class CorrectPage(object):  # Day 1 答對頁面
         self.page = Frame(self.root)  # 建立Frame
         self.page.pack()
 
-        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
-        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
-        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        f1 = tkFont.Font(size = 30, family = "微軟正黑體")
+        f2 = tkFont.Font(size = 14, family = "微軟正黑體")
+        f3 = tkFont.Font(size = 12, family = "微軟正黑體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -864,45 +864,46 @@ class CorrectPage(object):  # Day 1 答對頁面
         global bg_img
         global correct
         correct = 1
-        image = ImageTk.Image.open("小知識_bg.jpg")
+        image_name = "答對_Day" + str(counts + 2) + "_bg.jpg"
+        image = ImageTk.Image.open(image_name)
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 顯示恭喜答對
-        self.page.lbl_topic = tk.Label(self.page, text = 'Bingo!', height = 2, width = 8, font = f1, bg = '#f9f7f1',
-                                       fg = '#666666')
-        self.page.lbl_topic.place(x = 50, y = 40)
+        # self.page.lbl_topic = tk.Label(self.page, text = 'Bingo!', height = 2, width = 8, font = f1, bg = '#f9f7f1',
+                                       # fg = '#666666')
+        # self.page.lbl_topic.place(x = 50, y = 40)
 
         # 行事曆按鈕
         # Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
         # command = self.openCalendar).place(x = 720, y = 70)
 
         # 答對的圖片
-        global cooking_img
-        global scenario
-        image = ImageTk.Image.open("Bingo.jpg")
-        image = image.resize((300, 300), ImageTk.Image.ANTIALIAS)
-        cooking_img = ImageTk.PhotoImage(image)
-        Label(self.page, image = cooking_img).place(x = 120, y = 150)
+        # global cooking_img
+        # global scenario
+        # image = ImageTk.Image.open("Bingo.jpg")
+        # image = image.resize((300, 300), ImageTk.Image.ANTIALIAS)
+        # cooking_img = ImageTk.PhotoImage(image)
+        # Label(self.page, image = cooking_img).place(x = 120, y = 150)
 
         # 答對的小提示
-        self.page.lbl_descripition = tk.Label(self.page, text = ("為了獎勵你答對，告訴你 Day" + str(counts + 2) + "需求的小提示吧!"),
-                                              font = f2, borderwidth = 2, wraplength = 300, justify = 'left',
-                                              bg = '#f9f7f1', fg = '#666666')
-        self.page.lbl_descripition.place(x = 480, y = 220)
+        # self.page.lbl_descripition = tk.Label(self.page, text = ("為了獎勵你答對，告訴你 Day" + str(counts + 2) + "需求的小提示吧!"),
+                                              # font = f2, borderwidth = 2, wraplength = 300, justify = 'left',
+                                              # bg = '#f9f7f1', fg = '#666666')
+        # self.page.lbl_descripition.place(x = 480, y = 220)
 
         if counts == 0:
             hint = hint_dict[scenario][0]
         else:
             hint = hint_dict[scenario][1]
-        self.page.lbl_hint = tk.Label(self.page, text = hint, font = f2, borderwidth = 15, wraplength = 320,
+        self.page.lbl_hint = tk.Label(self.page, text = hint, font = f3, borderwidth = 15, wraplength = 320,
                                       justify = 'left', bg = 'LemonChiffon', fg = '#666666')
-        self.page.lbl_hint.place(x = 460, y = 280)
+        self.page.lbl_hint.place(x = 460, y = 300)
 
         # 下一頁按鈕
-        Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
-               command = self.gotoStockorder).place(x = 720, y = 490)
+        Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f3, bg = 'black', fg = 'White',
+               command = self.gotoStockorder).place(x = 650, y = 460)
 
     def gotoStockorder(self):
         self.page.destroy()
@@ -937,38 +938,38 @@ class WrongPage(object):  # Day 1 答錯頁面
         global bg_img
         global correct
         correct = 0
-        image = ImageTk.Image.open("背景設計.jpg")
+        image = ImageTk.Image.open("答錯_bg.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 顯示可惜答錯
-        self.page.lbl_topic = tk.Label(self.page, text = 'Oops!', height = 2, width = 7, font = f1, bg = '#f9f7f1',
-                                       fg = '#666666')
-        self.page.lbl_topic.place(x = 50, y = 40)
+        # self.page.lbl_topic = tk.Label(self.page, text = 'Oops!', height = 2, width = 7, font = f1, bg = '#f9f7f1',
+                                       # fg = '#666666')
+        # self.page.lbl_topic.place(x = 50, y = 40)
 
         # 行事曆按鈕
         # Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
         # command = self.openCalendar).place(x = 720, y = 70)
 
         # 答錯的圖片
-        global cooking_img
-        image = ImageTk.Image.open("wrong.png")
-        # image = ImageTk.Image.open("C:\\Users\\formo\\Documents\\python files\\finalproject\\mytest\\S__85836045.png")
-        image = image.resize((300, 300), ImageTk.Image.ANTIALIAS)
-        cooking_img = ImageTk.PhotoImage(image)
-        Label(self.page, image = cooking_img).place(x = 150, y = 150)
+        # global cooking_img
+        # image = ImageTk.Image.open("wrong.png")
+        # # image = ImageTk.Image.open("C:\\Users\\formo\\Documents\\python files\\finalproject\\mytest\\S__85836045.png")
+        # image = image.resize((300, 300), ImageTk.Image.ANTIALIAS)
+        # cooking_img = ImageTk.PhotoImage(image)
+        # Label(self.page, image = cooking_img).place(x = 150, y = 150)
 
         # 答錯的訊息
-        self.page.lbl_hint = tk.Label(self.page, text = "答錯了 好可惜呀... 不要氣餒，繼續玩遊戲吧!", font = f2, borderwidth = 2,
-                                      wraplength = 300, justify = 'left', bg = '#f9f7f1', fg = '#666666')
-        self.page.lbl_hint.place(x = 500, y = 200)
+        # self.page.lbl_hint = tk.Label(self.page, text = "答錯了 好可惜呀... 不要氣餒，繼續玩遊戲吧!", font = f2, borderwidth = 2,
+                                      # wraplength = 300, justify = 'left', bg = '#f9f7f1', fg = '#666666')
+        # self.page.lbl_hint.place(x = 500, y = 200)
         # self.page.lbl_description = tk.Label(self.page, text="為了獎勵你答對，告訴你一個小提示吧~", height = 2, width = 40, bg="#F3F3F3", fg="black", font=f3)
         # self.page.lbl_description.place(x = 400, y = 300)
 
         # 下一頁按鈕
-        Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
-               command = self.gotoStockorder).place(x = 720, y = 490)
+        Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f3, bg = 'black', fg = 'White',
+               command = self.gotoStockorder).place(x = 180, y = 460)
 
     def gotoStockorder(self):
         self.page.destroy()
