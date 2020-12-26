@@ -81,7 +81,7 @@ order_fixed_cost = 50
 stock_cost = 2
 stock_list = [0, 0, 0, 0, 0]  # 預設存貨
 order_list = [0, 0, 0, 0, 0]
-order_cost_list = [0]  # 畫圖
+order_cost_list = []  # 畫圖
 profit_list = []  # 畫圖
 accumulated_profit = 0  # 總分
 accumulated_profit_list = []  # 畫圖
@@ -1379,7 +1379,6 @@ class FirstdayStockPage(object):  # Day1 訂貨畫面 (教學訂購)
         for i in range(len(order_list)):
             stock_list[i] += int(order_list[i])
 
-        order_cost_list.append(total_cost)
         self.page.destroy()
         EverydayPage(root)
 
@@ -1416,8 +1415,8 @@ class EverydayStockPage(object):  # Day2~Day7 訂貨畫面 (玩家自行訂購)
         # 背景圖
         global bg_img
         img_name = "scenario_" + str(scenario) + "_day_" + str(counts + 1) + ".jpg"  # scenario_1_day_1
-        # image = ImageTk.Image.open(img_name)
-        image = ImageTk.Image.open('scenario_1_day_1.jpg')
+        image = ImageTk.Image.open(img_name)
+        # image = ImageTk.Image.open('scenario_1_day_1.jpg')
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
