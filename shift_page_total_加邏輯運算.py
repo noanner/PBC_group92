@@ -1485,7 +1485,7 @@ class FinalResultPage1(object):
         global day
         global accumulated_profit_list
         global profit_list
-        plt.figure(figsize = (4.5, 2.5), dpi = 150, linewidth = 2)
+        plt.figure(figsize = (4.7, 2.5), dpi = 150, linewidth = 2)
         plt.plot(day, order_cost_list, 's-', color = 'y', label = "Day Order Cost")
         plt.plot(day, accumulated_profit_list, 's-', color = 'r', label = "Accumulated Profit")
         plt.plot(day, profit_list, 's-', color = 'b', label = "Profit")
@@ -1499,7 +1499,7 @@ class FinalResultPage1(object):
         plt.savefig("temp.png")
 
         self.page.imageMain = ImageTk.PhotoImage(file = "temp.png")
-        self.page.csvMain.create_image(339, 170, image=self.page.imageMain, anchor=tk.CENTER)
+        self.page.csvMain.create_image(333, 170, image=self.page.imageMain, anchor=tk.CENTER)
         os.system("del temp.png")
 
     def gotoResult(self):
