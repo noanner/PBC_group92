@@ -84,7 +84,7 @@ order_cost_list = [0]  # 畫圖
 profit_list = []  # 畫圖
 accumulated_profit = 0  # 總分
 accumulated_profit_list = []  # 畫圖
-ranking_list = [[5684, "就愛吃漢堡"], [4783, "今晚吃漢堡"], [3366, "My Way"], [6428, "賽百味"], [1056, "我不會玩"]]
+stock_cost_list = []  # 畫圖
 
 # 小知識題庫1-------------------------------------------------------------------------
 ques_list1 = [[2,
@@ -102,7 +102,7 @@ ques_list1 = [[2,
               [2,
                "最大存貨量：所能存放的最大物品數量。小明開了一間漢堡店，漢堡店的食物儲藏室最多可以裝500個漢堡的材料，但是小明希望留一條走道方便拿東西，所以規定最多只能放450份漢堡食材。請問漢堡食材的最大庫存量為？",
                "450個", "500個"],
-              [2,
+              [3,
                "最小訂購量：每筆訂單的最低起訂量。小明開了一間漢堡店，每天開店時會準備5公斤的生菜，但賣生菜的老闆說每次只送5公斤連付油錢都不夠，要買8公斤以上才送貨。請問生菜的最小訂購量為？",
                "4公斤", "8公斤"]]
 ques_dict1 = dict()
@@ -211,7 +211,7 @@ class RankingPage1(object):  # 排行榜(前)
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f1 = tkFont.Font(size = 36, family = "華康娃娃體", weight="bold")
         f2 = tkFont.Font(size = 14, family = "華康娃娃體")
         f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
@@ -222,25 +222,19 @@ class RankingPage1(object):  # 排行榜(前)
         # 背景圖
         global bg_img
         global ranking_list
-        image = ImageTk.Image.open("背景設計.jpg")
+        image = ImageTk.Image.open("awardpage.png")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 內容
-        ranking_list.sort()
-        ranking_list.reverse()
-        self.page.lbl_topic = tk.Label(self.page, text = "排行榜", height = 2, width = 10, font = f1, bg = '#f9f7f1',
-                                       fg = '#666666')
-        for i in range(5):
-            self.page.rank = tk.Label(self.page, text = (
-                    "第" + str(i + 1) + "名： " + ranking_list[i][1] + "   " + str(ranking_list[i][0]) + "分"),
-                                      height = 2, width = 30, font = f3, bg = 'LightYellow')
-            self.page.rank.place(x = 300, y = 160 + i * 70)
+        self.page.lbl_topic = tk.Label(self.page, text = "成就榜", height = 2, width = 10, font = f1, bg = 'Black',
+                                       fg = 'White')
+
         self.page.btn_main = tk.Button(self.page, text = "回主畫面", command = self.gotoStartPage, height = 2, width = 9,
                                        font = f2, bg = '#FFCC22', fg = 'White')
 
-        self.page.lbl_topic.place(x = 300, y = 50)
+        self.page.lbl_topic.place(x = 152, y = 100)
         self.page.btn_main.place(x = 730, y = 490)
 
     def gotoStartPage(self):
@@ -827,70 +821,6 @@ class Calendar5(object):  # 行事曆(訂貨頁面)
         EverydayStockPage(root)
 
 
-'''
-know_content = "小知識1111111111111111111111111111111111111111111111111111111111111111111111111111"
-class Day4Page1(object):  # Day 4 小知識的日子
-    def __init__(self, master = None):
-        self.root = master  # 定義內部變數root
-        self.root.geometry('900x600+200+30')  # 設定視窗大小
-        self.username = StringVar()
-        self.password = StringVar()
-        self.createPage()
-
-    def createPage(self):
-        self.page = Frame(self.root)  # 建立Frame
-        self.page.pack()
-
-        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
-        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
-        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
-
-        # 底下的grid
-        self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
-        self.page.lbl_gridonly.grid(row = 3, column = 0, sticky = tk.S)
-
-        # 背景圖
-        global bg_img
-        image = ImageTk.Image.open("背景設計.jpg")
-        image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
-        bg_img = ImageTk.PhotoImage(image)
-        Label(self.page, image = bg_img).place(x = 0, y = 0)
-
-        # 元件內容
-        lbl_day = tk.Label(self.page,text = "Day4小知識問答", height = 2, width = 15, font = f1, bg = 'White', fg = '#666666')
-        lbl_know = tk.Label(self.page,text = know_content, font = f2, borderwidth = 2, relief = "ridge", wraplength = 300,
-                            justify = 'left', bg = 'LemonChiffon', fg = '#666666')
-        btn_optA = tk.Button(self.page,text = "選項A", command = self.gotoCorrect, width = 7, height = 2, font = f2, bg = '#FFCC22',
-                             fg = 'White')
-        btn_optB = tk.Button(self.page,text = "選項B", command = self.gotoWrong, width = 7, height = 2, font = f2, bg = '#FFCC22',
-                             fg = 'White')
-        btn_calendar = tk.Button(self.page,text = "行事曆", command = self.openCalendar, width = 7, height = 2, font = f2,
-                                 bg = '#666666', fg = 'White')
-
-        # 元件位置
-        lbl_day.place(x = 50, y = 40)
-        lbl_know.place(relx = 0.28, rely = 0.3, width = 400, height = 200)
-        btn_optA.place(relx = 0.3, rely = 0.75)
-        btn_optB.place(relx = 0.6, rely = 0.75)
-        btn_calendar.place(x = 720, y = 70)
-
-    def gotoCorrect(self):
-        global scenario
-        self.page.destroy()
-        CorrectPage(self.root)
-        showinfo(title='小提示', message=hint_dict.get(scenario)[1])
-
-    def gotoWrong(self):
-        self.page.destroy()
-        WrongPage(self.root)
-
-    def openCalendar(self):
-        showinfo(title = '行事曆', message = '此處放行事曆')
-'''
-
-hint = '為了獎勵你答對，\n告訴你一個小提示吧:\n !!!!!!!!!!!!!'
-
-
 class CorrectPage(object):  # Day 1 答對頁面
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
@@ -1236,6 +1166,7 @@ class EverydayResultPage(object):  # 每日結算畫面
                 material_fixed_cost += order_fixed_cost
         for i in range(len(stock_list)):
             stock_day_cost += (stock_list[i] - sold[i]) * stock_cost
+        stock_cost_list.append(stock_day_cost) 
         day_profit = total_revenue - material_total_cost - material_fixed_cost - stock_day_cost
         profit_list.append(day_profit)
         accumulated_profit += day_profit
@@ -1476,6 +1407,9 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
                 order = int(order)
                 if order < 0:
                     result = "failed"
+                elif order > 800:
+                    result = "over"
+                    break
             except ValueError:
                 result = "failed"
                 break
@@ -1491,51 +1425,10 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
             counts += 1
             self.page.destroy()
             EverydayPage(root)
+        elif result == "over":
+            showinfo(title = "前輩的提醒", message = "傻孩子，訂那麼多貨你會賠爆!")
         else:
             showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
-
-    '''
-    def orderFinishedgoto4(self):
-        global stock_list
-        global order_cost_list
-        global counts
-        global order_list
-        total_cost = 0
-        beefnum = self.page.txt_beef.get("1.0", END)
-        order_list[0] = beefnum
-        porknum = self.page.txt_pork.get("1.0", END)
-        order_list[1] = porknum
-        chickennum = self.page.txt_chick.get("1.0", END)
-        order_list[2] = chickennum
-        vegenum = self.page.txt_vege.get("1.0", END)
-        order_list[3] = vegenum
-        ketonum = self.page.txt_keto.get("1.0", END)
-        order_list[4] = ketonum
-
-        result = "success"
-        for order in order_list:
-            try:
-                order = int(order)
-                if order < 0:
-                    result = "failed"
-            except ValueError:
-                result = "failed"
-                break
-        if result == "success":
-            for i in range(len(order_list)):
-                if int(order_list[i]) > 0:
-                    total_cost += order_fixed_cost
-                    total_cost += int(order_list[i]) * material_price[i]
-                    stock_list[i] += int(order_list[i])
-                else:
-                    pass
-            order_cost_list.append(total_cost)
-            counts += 1
-            self.page.destroy()
-            Day4Page1(root)
-        else:
-            showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
-    '''
 
     def openCalendar(self):
         self.page.destroy()
@@ -1575,9 +1468,7 @@ class FinalResultPage1(object):
         self.page.btn_next = tk.Button(self.page, text = "經營成就", command = self.gotoResult, width = 10, height = 2,
                                        font = f2, bg = '#FFCC22', fg = 'White')
         # 折線圖
-        self.page.lbl_descripition = tk.Label(self.page, text = "來看看你本周的經營記錄吧!", height = 1, width = 30, font = f2,
-                                              bg = '#f9f7f1')
-        # self.page.btn_chart = tk.Canvas(self.page, height = 400, width = 500, bg = 'LightYellow')
+        self.page.lbl_descripition = tk.Label(self.page, text = "來看看你本周的經營記錄吧!", height = 1, width = 30, font = f2, bg = '#f9f7f1')
 
         # -------------------------------------------------------------------------------------------
         # 標題、敘述
@@ -1585,26 +1476,30 @@ class FinalResultPage1(object):
         self.page.btn_next.place(x = 720, y = 490)
         # 折線圖
         self.page.lbl_descripition.place(x = 430, y = 75)
-        # self.page.btn_chart.place(x = 200, y = 140)
 
         # 折線圖
-        self.page.csvMain = tk.Canvas(self.page, width=610, height=354, bg="LightYellow")
-        self.page.csvMain.place(x = 150, y = 110)
+        self.page.csvMain = tk.Canvas(self.page, width=636, height=354, bg="LightYellow")
+        self.page.csvMain.place(x = 146, y = 110)
 
         global order_cost_list
         global day
-        plt.figure(figsize = (4, 2.8), dpi = 150, linewidth = 2)
+        global accumulated_profit_list
+        global profit_list
+        plt.figure(figsize = (4.5, 2.5), dpi = 150, linewidth = 2)
         plt.plot(day, order_cost_list, 's-', color = 'y', label = "Day Order Cost")
+        plt.plot(day, accumulated_profit_list, 's-', color = 'r', label = "Accumulated Profit")
+        plt.plot(day, profit_list, 's-', color = 'b', label = "Profit")
+        plt.plot(day, stock_cost_list, 's-', color = 'g', label = "Stock Cost")
         plt.xticks(fontsize = 6)
         plt.yticks(fontsize = 6)
-        plt.xlabel("Day", fontsize = 10, labelpad = 10)
+        plt.xlabel("Day", fontsize = 10, labelpad = 6)
         plt.ylabel("$", fontsize = 10, labelpad = 10)
         plt.legend(loc = "best", fontsize = 6)
         #plt.show()
         plt.savefig("temp.png")
 
         self.page.imageMain = ImageTk.PhotoImage(file = "temp.png")
-        self.page.csvMain.create_image(310, 180, image=self.page.imageMain, anchor=tk.CENTER)
+        self.page.csvMain.create_image(339, 170, image=self.page.imageMain, anchor=tk.CENTER)
         os.system("del temp.png")
 
     def gotoResult(self):
