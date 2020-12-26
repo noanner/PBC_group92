@@ -4,6 +4,8 @@ import tkinter.font as tkFont
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import *
+import matplotlib.pyplot as plt
+import os
 
 from PIL import ImageTk
 
@@ -1046,7 +1048,7 @@ class EverydayPage(object):  # 每日漢堡製作畫面
 
         # 背景圖
         global bg_img
-        image = ImageTk.Image.open("背景設計.jpg")
+        image = ImageTk.Image.open("day_background.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
@@ -1054,28 +1056,30 @@ class EverydayPage(object):  # 每日漢堡製作畫面
         # 顯示Day 1
         self.page.lbl_topic = tk.Label(self.page, text = ("Day" + str(counts + 1)), height = 2, width = 7, font = f1,
                                        bg = '#f9f7f1', fg = '#666666')
-        self.page.lbl_topic.place(x = 50, y = 40)
+        self.page.lbl_topic.place(x = 380, y = 160)
 
         # 行事曆按鈕
         # Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
         # command = self.openCalendar).place(x = 720, y = 70)
 
-        # 做漢堡的圖片
+        """
+        做漢堡的圖片
         global cooking_img
         image = ImageTk.Image.open("S__85836045.png")
         # image = ImageTk.Image.open("C:\\Users\\formo\\Documents\\python files\\finalproject\\mytest\\S__85836045.png")
         image = image.resize((600, 300), ImageTk.Image.ANTIALIAS)
         cooking_img = ImageTk.PhotoImage(image)
         Label(self.page, image = cooking_img).place(x = 150, y = 160)
+        """
 
         # 顯示 餐廳開始營業囉，點選下一頁查看你今天的營業成果吧~
-        self.page.lbl_description = tk.Label(self.page, text = "餐廳開始營業囉，點選下一頁查看你今天的營業成果吧~", height = 2, width = 50,
-                                             bg = '#f9f7f1', fg = "#666666", font = f3)
-        self.page.lbl_description.place(x = 205, y = 70)
+        self.page.lbl_description = tk.Label(self.page, text = "餐廳開始營業囉，點選繼續遊戲查看你今天的營業成果吧~", height = 2, width = 50,
+                                             bg = '#f9f7f1', fg = "#666666", font = f2)
+        self.page.lbl_description.place(x = 205, y = 280)
 
         # 下一頁按鈕
         Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
-               command = self.gotoDayResult).place(x = 720, y = 490)
+               command = self.gotoDayResult).place(x = 400, y = 400)
 
     def gotoDayResult(self):
         self.page.destroy()
@@ -1564,7 +1568,7 @@ class FinalResultPage1(object):
         # 折線圖
         self.page.lbl_descripition = tk.Label(self.page, text = "來看看你本周的經營記錄吧!", height = 1, width = 30, font = f2,
                                               bg = '#f9f7f1')
-        self.page.btn_chart = tk.Canvas(self.page, height = 400, width = 500, bg = 'LightYellow')
+        # self.page.btn_chart = tk.Canvas(self.page, height = 400, width = 500, bg = 'LightYellow')
 
         # -------------------------------------------------------------------------------------------
         # 標題、敘述
@@ -1572,7 +1576,27 @@ class FinalResultPage1(object):
         self.page.btn_next.place(x = 720, y = 490)
         # 折線圖
         self.page.lbl_descripition.place(x = 430, y = 75)
-        self.page.btn_chart.place(x = 200, y = 140)
+        # self.page.btn_chart.place(x = 200, y = 140)
+
+        # 折線圖
+        self.page.csvMain = tk.Canvas(self.page, width=500, height=400, bg="LightYellow")
+        self.page.csvMain.place(x = 200, y = 140)
+
+        global order_cost_list
+        global day
+        plt.figure(figsize = (10, 5), dpi = 100, linewidth = 2)
+        plt.plot(day, order_cost_list, 's-', color = 'y', label = "Day Order Cost")
+        plt.xticks(fontsize = 12)
+        plt.yticks(fontsize = 12)
+        plt.xlabel("Day", fontsize = 20, labelpad = 10)
+        plt.ylabel("$", fontsize = 20, labelpad = 10)
+        plt.legend(loc = "best", fontsize = 10)
+        #plt.show()
+        plt.savefig("temp.png")
+
+        self.page.imageMain = ImageTk.PhotoImage(file = "temp.png")
+        self.page.csvMain.create_image(400, 300, image=self.page.imageMain, anchor=tk.CENTER)
+        os.system("del temp.png")
 
     def gotoResult(self):
         global ranking_list
