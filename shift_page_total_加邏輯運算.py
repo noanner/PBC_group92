@@ -1722,12 +1722,29 @@ class FinalResultPage2(object):
         # 要接最後的獲利，還有抓歷史還行榜，要排名次
         self.page.lbl_topic = tk.Label(self.page, text = "經營成就", height = 2, width = 10, font = f1, bg = '#f9f7f1',
                                        fg = '#666666')
-        self.page.lbl_descripition1 = tk.Label(self.page, text = ("獲利：" + str(accumulated_profit)), height = 1,
-                                               width = 15,
-                                               font = f2, anchor = 'w', bg = '#f9f7f1', fg = '#666666')
-        self.page.lbl_descripition2 = tk.Label(self.page, text = "名次：", height = 1, width = 15, font = f2, anchor = 'w',
+        self.page.lbl_descripition1 = tk.Label(self.page, text = ("總分：" + str(accumulated_profit)), height = 1,
+                                               width = 15, font = f2, anchor = 'w', bg = '#f9f7f1', fg = '#666666')
+        if accumulated_profit >= 5000:
+            achiev = "米其林三星"
+        elif accumulated_profit >= 4750:
+            achiev = "必比登百大美食"
+        elif accumulated_profit >= 4250:
+            achiev = "「我就讚」美食獎"
+        elif accumulated_profit >= 3500:
+            achiev = "街訪第一名"
+        elif accumulated_profit >= 2750:
+            achiev = "Google 評價 ★★★"
+        elif accumulated_profit >= 1500:
+            achiev = "Google 評價 ★★"
+        elif accumulated_profit >= 0:
+            achiev = "Google 評價 ★"
+        else:
+            achiev = "金「我就爛」獎"
+        self.page.lbl_descripition2 = tk.Label(self.page, text = "獲得成就：", height = 1, width = 15, font = f2, anchor = 'w',
                                                bg = '#f9f7f1', fg = '#666666')
-
+        self.page.lbl_descripition3 = tk.Label(self.page, text = achiev, height = 1, width = 15, font = f2, anchor = 'w',
+                                               bg = '#f9f7f1', fg = '#666666')
+        '''
         # 須依造分數給不一樣的敘述
         if accumulated_profit >= 3000:
             self.page.lbl_descripition3 = tk.Label(self.page, text = " 恭喜您的餐廳榮獲:  ", height = 2, width = 20, font = f2,
@@ -1768,6 +1785,7 @@ class FinalResultPage2(object):
             self.page.lbl_descripition3 = tk.Label(self.page, text = "加盟大老闆:「朽木不可雕也，你重練吧」", height = 2,
                                                    width = 35, font = f2, anchor = 'w', bg = 'LemonChiffon')
             self.page.lbl_descripition4 = tk.Label(self.page)
+        '''
         # 按鈕
         self.page.btn_tips = tk.Button(self.page, text = "高分秘訣", command = self.gotoHighscore, height = 2, width = 7,
                                        font = f2, bg = '#FFCC22', fg = 'White')
@@ -1779,8 +1797,7 @@ class FinalResultPage2(object):
         self.page.lbl_topic.place(x = 300, y = 50)
         self.page.lbl_descripition1.place(x = 330, y = 160)
         self.page.lbl_descripition2.place(x = 330, y = 220)
-        self.page.lbl_descripition3.place(x = 310, y = 280)
-        self.page.lbl_descripition4.place(x = 310, y = 320)
+        self.page.lbl_descripition3.place(x = 330, y = 280)
         self.page.btn_tips.place(x = 200, y = 420)
         self.page.btn_ranking.place(x = 400, y = 420)
         self.page.btn_main.place(x = 600, y = 420)
