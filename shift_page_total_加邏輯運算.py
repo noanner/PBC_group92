@@ -78,7 +78,7 @@ material_price = [10, 9, 9, 6, 16]  # 原料價格
 price_list = [20, 18, 18, 12, 32]
 order_fixed_cost = 50
 stock_cost = 2
-stock_list = [25, 25, 25, 25, 25]  # 預設存貨
+stock_list = [0, 0, 0, 0, 0]  # 預設存貨
 order_list = [0, 0, 0, 0, 0]
 order_cost_list = [0]  # 畫圖
 profit_list = []  # 畫圖
@@ -381,9 +381,17 @@ class RulePage(object):  # 營業說明
         tree_item.place(x = 480, y = 160, height = 300)
 
         # 開始遊戲
-        self.page.button = tk.Button(self.page, text = "開始遊戲", font = f2, command = self.gotoEveryday, height = 2,
-                                     width = 10, bg = '#FFCC22', fg = 'White')
+        if counts == 0:
+            self.page.button = tk.Button(self.page, text = "開始遊戲", font = f2, command = self.gotoDay1, height = 2,
+                                        width = 10, bg = '#FFCC22', fg = 'White')       
+        else:
+            self.page.button = tk.Button(self.page, text = "開始遊戲", font = f2, command = self.gotoEveryday, height = 2,
+                                        width = 10, bg = '#FFCC22', fg = 'White')
         self.page.button.place(x = 720, y = 490)
+
+    def gotoDay1(self):
+        self.page.destroy()
+        FirstdayStockPage(self.root)
 
     def gotoEveryday(self):
         self.page.destroy()
@@ -1348,40 +1356,8 @@ class FirstdayStockPage(object):  # Day1 訂貨畫面 (教學訂購)
                             # wraplength = 350, justify = 'left', fg = '#666666')
 
     def costCalculation(self):
-        global material_price
-        global order_fixed_cost
-        order_list = []
-        total_cost = 0
-        beefnum = self.page.txt_beef.get("1.0", END)
-        order_list.append(beefnum)
-        porknum = self.page.txt_pork.get("1.0", END)
-        order_list.append(porknum)
-        chickennum = self.page.txt_chick.get("1.0", END)
-        order_list.append(chickennum)
-        vegenum = self.page.txt_vege.get("1.0", END)
-        order_list.append(vegenum)
-        ketonum = self.page.txt_keto.get("1.0", END)
-        order_list.append(ketonum)
+        showinfo(title = "成本計算", message = ("總成本為$1500，但今天為首日訂貨，因此不會跟你收錢唷~!!"))
 
-        result = "success"
-        for order in order_list:
-            try:
-                order = int(order)
-                if order < 0:
-                    result = "failed"
-            except ValueError:
-                result = "failed"
-                break
-        if result == "success":
-            for i in range(len(order_list)):
-                if int(order_list[i]) > 0:
-                    total_cost += order_fixed_cost
-                    total_cost += int(order_list[i]) * material_price[i]
-                else:
-                    pass
-            showinfo(title = "成本計算", message = ("總成本為$" + str(total_cost)))
-        else:
-            showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
 
     def orderFinished(self):
         global stock_list
@@ -1389,40 +1365,19 @@ class FirstdayStockPage(object):  # Day1 訂貨畫面 (教學訂購)
         global counts
         global order_list
         total_cost = 0
-        beefnum = self.page.txt_beef.get("1.0", END)
-        order_list[0] = beefnum
-        porknum = self.page.txt_pork.get("1.0", END)
-        order_list[1] = porknum
-        chickennum = self.page.txt_chick.get("1.0", END)
-        order_list[2] = chickennum
-        vegenum = self.page.txt_vege.get("1.0", END)
-        order_list[3] = vegenum
-        ketonum = self.page.txt_keto.get("1.0", END)
-        order_list[4] = ketonum
+        beefnum = 25
+        porknum = 25
+        chickennum = 25
+        vegenum = 25
+        ketonum = 25
 
-        result = "success"
-        for order in order_list:
-            try:
-                order = int(order)
-                if order < 0:
-                    result = "failed"
-            except ValueError:
-                result = "failed"
-                break
-        if result == "success":
-            for i in range(len(order_list)):
-                if int(order_list[i]) > 0:
-                    total_cost += order_fixed_cost
-                    total_cost += int(order_list[i]) * material_price[i]
-                    stock_list[i] += int(order_list[i])
-                else:
-                    pass
-            order_cost_list.append(total_cost)
-            counts += 1
-            self.page.destroy()
-            EverydayPage(root)
-        else:
-            showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
+        for i in range(len(order_list)):
+            stock_list[i] += int(order_list[i])
+
+        order_cost_list.append(total_cost)
+        self.page.destroy()
+        EverydayPage(root)
+
 
 
 class EverydayStockPage(object):  # Day2~Day7 訂貨畫面 (玩家自行訂購)
@@ -1456,7 +1411,6 @@ class EverydayStockPage(object):  # Day2~Day7 訂貨畫面 (玩家自行訂購)
         # 背景圖
         global bg_img
         img_name = "scenario_" + str(scenario) + "_day_" + str(counts + 1) + ".jpg"  # scenario_1_day_1
-        print(img_name)
         # image = ImageTk.Image.open(img_name)
         image = ImageTk.Image.open('scenario_1_day_1.jpg')
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
