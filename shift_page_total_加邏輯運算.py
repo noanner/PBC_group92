@@ -84,6 +84,7 @@ order_cost_list = [0]  # 畫圖
 profit_list = []  # 畫圖
 accumulated_profit = 0  # 總分
 accumulated_profit_list = []  # 畫圖
+stock_cost_list = []  # 畫圖
 
 # 小知識題庫1-------------------------------------------------------------------------
 ques_list1 = [[2,
@@ -1165,6 +1166,7 @@ class EverydayResultPage(object):  # 每日結算畫面
                 material_fixed_cost += order_fixed_cost
         for i in range(len(stock_list)):
             stock_day_cost += (stock_list[i] - sold[i]) * stock_cost
+        stock_cost_list.append(stock_day_cost) 
         day_profit = total_revenue - material_total_cost - material_fixed_cost - stock_day_cost
         profit_list.append(day_profit)
         accumulated_profit += day_profit
@@ -1515,8 +1517,13 @@ class FinalResultPage1(object):
 
         global order_cost_list
         global day
+        global accumulated_profit_list
+        global profit_list
         plt.figure(figsize = (4.5, 2.5), dpi = 150, linewidth = 2)
         plt.plot(day, order_cost_list, 's-', color = 'y', label = "Day Order Cost")
+        plt.plot(day, accumulated_profit_list, 's-', color = 'r', label = "Accumulated Profit")
+        plt.plot(day, profit_list, 's-', color = 'b', label = "Profit")
+        plt.plot(day, stock_cost_list, 's-', color = 'g', label = "Stock Cost")
         plt.xticks(fontsize = 6)
         plt.yticks(fontsize = 6)
         plt.xlabel("Day", fontsize = 10, labelpad = 10)
