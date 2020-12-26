@@ -223,7 +223,7 @@ class RankingPage1(object):  # 排行榜(前)
         # 背景圖
         global bg_img
         global ranking_list
-        image = ImageTk.Image.open("awardpage.png")
+        image = ImageTk.Image.open("成就榜_bg.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
@@ -233,9 +233,9 @@ class RankingPage1(object):  # 排行榜(前)
                                        fg = 'White')
 
         self.page.btn_main = tk.Button(self.page, text = "回主畫面", command = self.gotoStartPage, height = 2, width = 9,
-                                       font = f2, bg = '#FFCC22', fg = 'White')
+                                       font = f2, bg = 'Black', fg = 'White')
 
-        self.page.lbl_topic.place(x = 152, y = 100)
+        self.page.lbl_topic.place(x = 75, y = 100)
         self.page.btn_main.place(x = 730, y = 490)
 
     def gotoStartPage(self):
@@ -1703,7 +1703,7 @@ class FinalResultPage2(object):
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體", weight = "bold")
         f2 = tkFont.Font(size = 14, family = "華康娃娃體")
         f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
@@ -1714,16 +1714,16 @@ class FinalResultPage2(object):
         # 背景圖
         global bg_img
         global user_name
-        image = ImageTk.Image.open("背景設計.jpg")
+        image = ImageTk.Image.open("成就榜_bg.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 要接最後的獲利，還有抓歷史還行榜，要排名次
-        self.page.lbl_topic = tk.Label(self.page, text = "經營成就", height = 2, width = 10, font = f1, bg = '#f9f7f1',
-                                       fg = '#666666')
+        self.page.lbl_topic = tk.Label(self.page, text = "經營成就", height = 2, width = 10, font = f1, bg = 'Black',
+                                       fg = 'White')
         self.page.lbl_descripition1 = tk.Label(self.page, text = ("總分：" + str(accumulated_profit)), height = 1,
-                                               width = 15, font = f2, anchor = 'w', bg = '#f9f7f1', fg = '#666666')
+                                               width = 15, font = f2, anchor = 'w', bg = 'Black', fg = 'White')
         if accumulated_profit >= 5000:
             achiev = "米其林三星"
         elif accumulated_profit >= 4750:
@@ -1741,9 +1741,9 @@ class FinalResultPage2(object):
         else:
             achiev = "金「我就爛」獎"
         self.page.lbl_descripition2 = tk.Label(self.page, text = "獲得成就：", height = 1, width = 15, font = f2, anchor = 'w',
-                                               bg = '#f9f7f1', fg = '#666666')
+                                               bg = 'Black', fg = 'White')
         self.page.lbl_descripition3 = tk.Label(self.page, text = achiev, height = 1, width = 15, font = f2, anchor = 'w',
-                                               bg = '#f9f7f1', fg = '#666666')
+                                               bg = 'Black', fg = 'White')
         '''
         # 須依造分數給不一樣的敘述
         if accumulated_profit >= 3000:
@@ -1788,33 +1788,33 @@ class FinalResultPage2(object):
         '''
         # 按鈕
         self.page.btn_tips = tk.Button(self.page, text = "高分秘訣", command = self.gotoHighscore, height = 2, width = 7,
-                                       font = f2, bg = '#FFCC22', fg = 'White')
-        self.page.btn_ranking = tk.Button(self.page, text = "排行榜", command = self.gotoRanking2, height = 2, width = 7,
-                                          font = f2, bg = '#FFCC22', fg = 'White')
+                                       font = f2, bg = 'Black', fg = 'White')
+        # self.page.btn_ranking = tk.Button(self.page, text = "排行榜", command = self.gotoRanking2, height = 2, width = 7,
+                                          # font = f2, bg = '#FFCC22', fg = 'White')
         self.page.btn_main = tk.Button(self.page, text = "再玩一次", command = self.againtoStart, height = 2, width = 7,
-                                       font = f2, bg = '#FFCC22', fg = 'White')
+                                       font = f2, bg = 'Black', fg = 'White')
 
-        self.page.lbl_topic.place(x = 300, y = 50)
-        self.page.lbl_descripition1.place(x = 330, y = 160)
-        self.page.lbl_descripition2.place(x = 330, y = 220)
-        self.page.lbl_descripition3.place(x = 330, y = 280)
-        self.page.btn_tips.place(x = 200, y = 420)
-        self.page.btn_ranking.place(x = 400, y = 420)
-        self.page.btn_main.place(x = 600, y = 420)
+        self.page.lbl_topic.place(x = 120, y = 30)
+        self.page.lbl_descripition1.place(x = 152, y = 120)
+        self.page.lbl_descripition2.place(x = 152, y = 160)
+        self.page.lbl_descripition3.place(x = 152, y = 200)
+        self.page.btn_tips.place(x = 800, y = 450)
+        # self.page.btn_ranking.place(x = 400, y = 420)
+        self.page.btn_main.place(x = 800, y = 500)
 
     def gotoHighscore(self):
         self.page.destroy()
         HighscorePage(self.root)
 
-    def gotoRanking2(self):
-        self.page.destroy()
-        RankingPage2(self.root)
+    # def gotoRanking2(self):
+        # self.page.destroy()
+        # RankingPage2(self.root)
 
     def againtoStart(self):
         self.page.destroy()
         StartPage(self.root)
 
-
+'''
 class RankingPage2(object):
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
@@ -1825,7 +1825,7 @@ class RankingPage2(object):
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體", weight = "bold")
         f2 = tkFont.Font(size = 14, family = "華康娃娃體")
         f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
@@ -1861,7 +1861,7 @@ class RankingPage2(object):
     def gotoResult2(self):
         self.page.destroy()
         FinalResultPage2(root)
-
+'''
 
 class HighscorePage(object):
     def __init__(self, master = None):
@@ -1873,7 +1873,7 @@ class HighscorePage(object):
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體",)
         f2 = tkFont.Font(size = 14, family = "華康娃娃體")
         f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
