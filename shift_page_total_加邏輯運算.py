@@ -1027,9 +1027,10 @@ class EverydayPage(object):  # 每日漢堡製作畫面
         """
 
         # 顯示 餐廳開始營業囉，點選下一頁查看你今天的營業成果吧~
-        self.page.lbl_description = tk.Label(self.page, text = "餐廳開始營業囉，點選繼續遊戲查看你今天的營業成果吧~", height = 2, width = 50,
-                                             bg = '#f9f7f1', fg = "#666666", font = f2)
-        self.page.lbl_description.place(x = 205, y = 280)
+        self.page.lbl_description1 = tk.Label(self.page, text = "餐廳開始營業囉，", height = 2, width = 20, bg = '#f9f7f1', fg = "#666666", font = f4)
+        self.page.lbl_description1.place(x = 300, y = 240)
+        self.page.lbl_description2 = tk.Label(self.page, text = "點選繼續遊戲查看你今天的營業成果吧~", height = 2, width = 50, bg = '#f9f7f1', fg = "#666666", font = f4)
+        self.page.lbl_description2.place(x = 60, y = 290)
 
         # 下一頁按鈕
         Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
