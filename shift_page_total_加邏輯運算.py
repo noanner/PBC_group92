@@ -820,70 +820,6 @@ class Calendar5(object):  # 行事曆(訂貨頁面)
         EverydayStockPage(root)
 
 
-'''
-know_content = "小知識1111111111111111111111111111111111111111111111111111111111111111111111111111"
-class Day4Page1(object):  # Day 4 小知識的日子
-    def __init__(self, master = None):
-        self.root = master  # 定義內部變數root
-        self.root.geometry('900x600+200+30')  # 設定視窗大小
-        self.username = StringVar()
-        self.password = StringVar()
-        self.createPage()
-
-    def createPage(self):
-        self.page = Frame(self.root)  # 建立Frame
-        self.page.pack()
-
-        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
-        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
-        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
-
-        # 底下的grid
-        self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
-        self.page.lbl_gridonly.grid(row = 3, column = 0, sticky = tk.S)
-
-        # 背景圖
-        global bg_img
-        image = ImageTk.Image.open("背景設計.jpg")
-        image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
-        bg_img = ImageTk.PhotoImage(image)
-        Label(self.page, image = bg_img).place(x = 0, y = 0)
-
-        # 元件內容
-        lbl_day = tk.Label(self.page,text = "Day4小知識問答", height = 2, width = 15, font = f1, bg = 'White', fg = '#666666')
-        lbl_know = tk.Label(self.page,text = know_content, font = f2, borderwidth = 2, relief = "ridge", wraplength = 300,
-                            justify = 'left', bg = 'LemonChiffon', fg = '#666666')
-        btn_optA = tk.Button(self.page,text = "選項A", command = self.gotoCorrect, width = 7, height = 2, font = f2, bg = '#FFCC22',
-                             fg = 'White')
-        btn_optB = tk.Button(self.page,text = "選項B", command = self.gotoWrong, width = 7, height = 2, font = f2, bg = '#FFCC22',
-                             fg = 'White')
-        btn_calendar = tk.Button(self.page,text = "行事曆", command = self.openCalendar, width = 7, height = 2, font = f2,
-                                 bg = '#666666', fg = 'White')
-
-        # 元件位置
-        lbl_day.place(x = 50, y = 40)
-        lbl_know.place(relx = 0.28, rely = 0.3, width = 400, height = 200)
-        btn_optA.place(relx = 0.3, rely = 0.75)
-        btn_optB.place(relx = 0.6, rely = 0.75)
-        btn_calendar.place(x = 720, y = 70)
-
-    def gotoCorrect(self):
-        global scenario
-        self.page.destroy()
-        CorrectPage(self.root)
-        showinfo(title='小提示', message=hint_dict.get(scenario)[1])
-
-    def gotoWrong(self):
-        self.page.destroy()
-        WrongPage(self.root)
-
-    def openCalendar(self):
-        showinfo(title = '行事曆', message = '此處放行事曆')
-'''
-
-hint = '為了獎勵你答對，\n告訴你一個小提示吧:\n !!!!!!!!!!!!!'
-
-
 class CorrectPage(object):  # Day 1 答對頁面
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
@@ -1460,6 +1396,9 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
                 order = int(order)
                 if order < 0:
                     result = "failed"
+                elif order > 800:
+                    result = "over"
+                    break
             except ValueError:
                 result = "failed"
                 break
@@ -1475,6 +1414,8 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
             counts += 1
             self.page.destroy()
             EverydayPage(root)
+        elif result == "over":
+            showinfo(title = "前輩的提醒", message = "傻孩子，訂那麼多貨你會賠爆!")
         else:
             showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
 
