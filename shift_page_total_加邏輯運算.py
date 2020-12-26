@@ -994,6 +994,7 @@ class EverydayPage(object):  # 每日漢堡製作畫面
         f1 = tkFont.Font(size = 30, family = "華康娃娃體")
         f2 = tkFont.Font(size = 14, family = "華康娃娃體")
         f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        f4 = tkFont.Font(size = 22, family = "華康娃娃體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
