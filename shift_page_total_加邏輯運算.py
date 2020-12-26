@@ -416,7 +416,7 @@ class KnowledgePage(object):  # Day 1 小知識的日子
 
         # 元件內容
         global know_num
-        know_num = random.randint(1, 7)
+        know_num = random.randint(1, 6)
         if counts == 0:
             know_content = (ques_dict1.get(know_num))[1]
         else:
