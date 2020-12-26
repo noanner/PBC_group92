@@ -167,32 +167,31 @@ class StartPage(object):  # 開始畫面
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
-        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
-        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        f1 = tkFont.Font(size = 30, family = "微軟正黑體")
+        f2 = tkFont.Font(size = 14, family = "微軟正黑體")
+        f3 = tkFont.Font(size = 12, family = "微軟正黑體")
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)  # 製造一個空的grid在底下
         self.page.lbl_gridonly.grid(row = 0, column = 0, columnspan = 10, sticky = tk.NW)
 
         # 背景圖
         global bg_img
-        image = ImageTk.Image.open("burgerbg.png")
+        image = ImageTk.Image.open("startpage_bg.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 內容
-        self.page.lbl_topic = tk.Label(self.page, text = "PBC讓你睡不堡  餐廳遊戲", height = 2, width = 23, font = f1,
-                                       bg = 'black',
-                                       fg = 'white')
+        # self.page.lbl_topic = tk.Label(self.page, text = "PBC讓你睡不堡  餐廳遊戲", height = 2, width = 23, font = f1,
+                                       # bg = 'black', fg = 'white')
         self.page.btn_enter = tk.Button(self.page, text = "進入遊戲", command = self.gotoIntro, height = 2, width = 10,
-                                        font = f2, bg = '#FFCC22', fg = 'black')
+                                        font = f3, bg = 'black', fg = 'white')
         self.page.btn_rank = tk.Button(self.page, text = "排行榜", command = self.gotoRanking1, height = 2, width = 10,
-                                       font = f2, bg = '#666666', fg = 'black')
+                                       font = f3, bg = 'black', fg = 'white')
 
-        self.page.lbl_topic.place(x = 150, y = 150)
-        self.page.btn_enter.place(x = 260, y = 350)
-        self.page.btn_rank.place(x = 495, y = 350)
+        # self.page.lbl_topic.place(x = 150, y = 150)
+        self.page.btn_enter.place(x = 170, y = 400)
+        self.page.btn_rank.place(x = 350, y = 400)
 
     def gotoIntro(self):
         self.page.destroy()
@@ -411,9 +410,9 @@ class KnowledgePage(object):  # Day 1 小知識的日子
         self.page = Frame(self.root)  # 建立Frame
         self.page.pack()
 
-        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
-        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
-        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        f1 = tkFont.Font(size = 30, family = "微軟正黑體")
+        f2 = tkFont.Font(size = 14, family = "微軟正黑體")
+        f3 = tkFont.Font(size = 12, family = "微軟正黑體")
 
         # 底下的grid
         self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
@@ -436,35 +435,34 @@ class KnowledgePage(object):  # Day 1 小知識的日子
             know_content = (ques_dict2.get(know_num))[1]
         lbl_day = tk.Label(self.page, text = ("Day" + str(counts + 2) + "需求提示"), height = 2, width = 15, font = f1,
                            bg = 'black', fg = 'white')
-        lbl_hint = tk.Label(self.page, text = ("這裡有一道小知識問答，答對了就能獲得明天的需求提示噢！"), height = 2, width = 15,
+        lbl_hint = tk.Label(self.page, text = ("這裡有一道小知識問答，\n答對了就能獲得明天的需求提示噢！"), height = 2, width = 15,
                             font = f2,
                             bg = 'black', fg = 'white')
-        lbl_know = tk.Label(self.page, text = know_content, font = f3, borderwidth = 2, relief = "ridge",
-                            wraplength = 350,
+        lbl_know = tk.Label(self.page, text = know_content, font = f3, wraplength = 350,
                             justify = 'left', bg = 'LemonChiffon', fg = '#666666')
         if counts == 0:
             btn_optA = tk.Button(self.page, text = (ques_dict1.get(know_num))[2], command = self.gotoVerify1, width = 7,
-                                 height = 2, font = f2, bg = '#FFCC22',
+                                 height = 2, font = f3, bg = '#FFCC22',
                                  fg = 'White')
             btn_optB = tk.Button(self.page, text = (ques_dict1.get(know_num))[3], command = self.gotoVerify2, width = 7,
-                                 height = 2, font = f2, bg = '#FFCC22',
+                                 height = 2, font = f3, bg = '#FFCC22',
                                  fg = 'White')
         else:
             btn_optA = tk.Button(self.page, text = (ques_dict2.get(know_num))[2], command = self.gotoVerify1, width = 7,
-                                 height = 2, font = f2, bg = '#FFCC22',
+                                 height = 2, font = f3, bg = '#FFCC22',
                                  fg = 'White')
             btn_optB = tk.Button(self.page, text = (ques_dict2.get(know_num))[3], command = self.gotoVerify2, width = 7,
-                                 height = 2, font = f2, bg = '#FFCC22',
+                                 height = 2, font = f3, bg = '#FFCC22',
                                  fg = 'White')
         # btn_calendar = tk.Button(self.page, text = "行事曆", command = self.openCalendar, width = 7, height = 2, font = f2,
         # bg = '#666666', fg = 'White')
 
         # 元件位置
         lbl_day.place(x = 50, y = 40)
-        lbl_hint.place(width = 400, height = 80, x = 100, y = 120)
-        lbl_know.place(relx = 0.28, rely = 0.3, width = 400, height = 200)
-        btn_optA.place(relx = 0.3, rely = 0.75)
-        btn_optB.place(relx = 0.6, rely = 0.75)
+        lbl_hint.place(width = 400, height = 80, x = 100, y = 140)
+        lbl_know.place(relx = 0.1, rely = 0.4, width = 400, height = 200)
+        btn_optA.place(relx = 0.15, rely = 0.8)
+        btn_optB.place(relx = 0.4, rely = 0.8)
         # btn_calendar.place(x = 720, y = 70)
 
     def gotoVerify1(self):
@@ -866,7 +864,7 @@ class CorrectPage(object):  # Day 1 答對頁面
         global bg_img
         global correct
         correct = 1
-        image = ImageTk.Image.open("背景設計.jpg")
+        image = ImageTk.Image.open("小知識_bg.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
