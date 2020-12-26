@@ -1579,23 +1579,23 @@ class FinalResultPage1(object):
         # self.page.btn_chart.place(x = 200, y = 140)
 
         # 折線圖
-        self.page.csvMain = tk.Canvas(self.page, width=500, height=400, bg="LightYellow")
-        self.page.csvMain.place(x = 200, y = 140)
+        self.page.csvMain = tk.Canvas(self.page, width=610, height=354, bg="LightYellow")
+        self.page.csvMain.place(x = 150, y = 110)
 
         global order_cost_list
         global day
-        plt.figure(figsize = (10, 5), dpi = 100, linewidth = 2)
+        plt.figure(figsize = (4, 2.8), dpi = 150, linewidth = 2)
         plt.plot(day, order_cost_list, 's-', color = 'y', label = "Day Order Cost")
-        plt.xticks(fontsize = 12)
-        plt.yticks(fontsize = 12)
-        plt.xlabel("Day", fontsize = 20, labelpad = 10)
-        plt.ylabel("$", fontsize = 20, labelpad = 10)
-        plt.legend(loc = "best", fontsize = 10)
+        plt.xticks(fontsize = 6)
+        plt.yticks(fontsize = 6)
+        plt.xlabel("Day", fontsize = 10, labelpad = 10)
+        plt.ylabel("$", fontsize = 10, labelpad = 10)
+        plt.legend(loc = "best", fontsize = 6)
         #plt.show()
         plt.savefig("temp.png")
 
         self.page.imageMain = ImageTk.PhotoImage(file = "temp.png")
-        self.page.csvMain.create_image(400, 300, image=self.page.imageMain, anchor=tk.CENTER)
+        self.page.csvMain.create_image(310, 180, image=self.page.imageMain, anchor=tk.CENTER)
         os.system("del temp.png")
 
     def gotoResult(self):
