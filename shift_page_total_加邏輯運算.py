@@ -153,7 +153,7 @@ class StartPage(object):  # 開始畫面
         global accumulated_profit_list
         scenario = random.randint(1, 4)
         counts = 0
-        stock_list = [25, 25, 25, 25, 25]  # 預設存貨
+        stock_list = [0, 0, 0, 0, 0]  # 預設存貨
         order_list = [0, 0, 0, 0, 0]
         order_cost_list = [0]  # 畫圖
         profit_list = []  # 畫圖
@@ -338,7 +338,7 @@ class RulePage(object):  # 營業說明
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
-        self.topic = tk.Label(self.page, text = ("Hello, " + user_name), font = f1, bg = '#f9f7f1',
+        self.topic = tk.Label(self.page, text = ("Hello, " + user_name + "的老闆"), font = f1, bg = '#f9f7f1',
                               fg = '#666666', height = 2, width = 30)
         self.topic.place(x = 50, y = 40)
 
@@ -1074,7 +1074,7 @@ class EverydayResultPage(object):  # 每日結算畫面
 
         global user_name
 
-        self.page.lbl_description = tk.Label(self.page, text = ("辛苦了~" + user_name + "   下面是你今天營業的成果~~"), height = 2,
+        self.page.lbl_description = tk.Label(self.page, text = ("辛苦了~" + user_name + "的老闆，下面是你今天營業的成果~~"), height = 2,
                                              width = 48, font = f3,
                                              bg = '#f9f7f1')
         self.page.lbl_description.place(x = 200, y = 70)
@@ -1131,17 +1131,10 @@ class EverydayResultPage(object):  # 每日結算畫面
             b = sold[i] * price_list[i]
             revenue.append(b)
             total_revenue += b
-        pct = []
-        for i in revenue:
-            if total_revenue != 0:
-                c = i / total_revenue * 100
-            else:
-                c = 0
-            pct.append("%.2f" % c + "%")
 
         pct = []
         for i in range(len(sold)):
-            if stock[i] <= demand[i]:
+            if stock[i] < demand[i]:
                 pct.append("缺貨")
             else:
                 pct.append(" ")
@@ -1371,11 +1364,7 @@ class FirstdayStockPage(object):  # Day1 訂貨畫面 (教學訂購)
         global counts
         global order_list
         total_cost = 0
-        beefnum = 25
-        porknum = 25
-        chickennum = 25
-        vegenum = 25
-        ketonum = 25
+        order_list = [25,25,25,25,25]
 
         for i in range(len(order_list)):
             stock_list[i] += int(order_list[i])
