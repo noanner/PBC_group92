@@ -1566,9 +1566,7 @@ class FinalResultPage1(object):
         self.page.btn_next = tk.Button(self.page, text = "經營成就", command = self.gotoResult, width = 10, height = 2,
                                        font = f2, bg = '#FFCC22', fg = 'White')
         # 折線圖
-        self.page.lbl_descripition = tk.Label(self.page, text = "來看看你本周的經營記錄吧!", height = 1, width = 30, font = f2,
-                                              bg = '#f9f7f1')
-        # self.page.btn_chart = tk.Canvas(self.page, height = 400, width = 500, bg = 'LightYellow')
+        self.page.lbl_descripition = tk.Label(self.page, text = "來看看你本周的經營記錄吧!", height = 1, width = 30, font = f2, bg = '#f9f7f1')
 
         # -------------------------------------------------------------------------------------------
         # 標題、敘述
@@ -1576,7 +1574,6 @@ class FinalResultPage1(object):
         self.page.btn_next.place(x = 720, y = 490)
         # 折線圖
         self.page.lbl_descripition.place(x = 430, y = 75)
-        # self.page.btn_chart.place(x = 200, y = 140)
 
         # 折線圖
         self.page.csvMain = tk.Canvas(self.page, width=610, height=354, bg="LightYellow")
@@ -1584,7 +1581,7 @@ class FinalResultPage1(object):
 
         global order_cost_list
         global day
-        plt.figure(figsize = (4, 2.8), dpi = 150, linewidth = 2)
+        plt.figure(figsize = (4, 2.6), dpi = 150, linewidth = 2)
         plt.plot(day, order_cost_list, 's-', color = 'y', label = "Day Order Cost")
         plt.xticks(fontsize = 6)
         plt.yticks(fontsize = 6)
