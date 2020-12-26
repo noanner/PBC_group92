@@ -228,19 +228,19 @@ class RankingPage1(object):  # 現在是成就榜(前)
         # 背景圖
         global bg_img
         global ranking_list
-        image = ImageTk.Image.open("成就榜_bg.jpg")
+        image = ImageTk.Image.open("成就榜_bg1.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 內容
-        self.page.lbl_topic = tk.Label(self.page, text = "成就榜", height = 2, width = 10, font = f1, bg = 'Black',
-                                       fg = 'White')
+        # self.page.lbl_topic = tk.Label(self.page, text = "成就榜", height = 2, width = 10, font = f1, bg = 'Black',
+                                       # fg = 'White')
 
         self.page.btn_main = tk.Button(self.page, text = "回主畫面", command = self.gotoStartPage, height = 2, width = 9,
                                        font = f2, bg = 'Black', fg = 'White')
 
-        self.page.lbl_topic.place(x = 75, y = 100)
+        # self.page.lbl_topic.place(x = 75, y = 100)
         self.page.btn_main.place(x = 730, y = 490)
 
     def gotoStartPage(self):
@@ -333,20 +333,20 @@ class RulePage(object):  # 營業說明
         # 左半邊 經營背景   
         self.page.intro_topic = tk.Label(self.page, text = "遊戲說明", height = 2, width = 8, font = f3, bg = '#f9f7f1',
                                          fg = '#666666')
-        self.page.intro_topic.place(x = 120, y = 150)
+        self.page.intro_topic.place(x = 120, y = 148)
         
         self.page.intro = tk.Label(self.page, text = "· 5種漢堡，每種平均賣20個\n· 根據每天情境有所增減"
                                                      "\n· 小知識問答答對有提示！\n· 記得看右邊行事曆！！",
                                    font = f4, borderwidth = 20, wraplength = 280, justify = 'left', bg = 'LemonChiffon',
                                    fg = '#666666')
-        self.page.intro.place(x = 120, y = 195)
+        self.page.intro.place(x = 120, y = 193)
 
         self.page.bg_topic = tk.Label(self.page, text = "經營背景", height = 2, width = 8, font = f3, bg = '#f9f7f1',
                                       fg = '#666666')
-        self.page.bg_topic.place(x = 120, y = 315)
+        self.page.bg_topic.place(x = 120, y = 325)
         self.page.lbl_bg = tk.Label(self.page, text = scen_dict[scenario], font = f4, borderwidth = 20,
                                     wraplength = 280, justify = 'left', bg = 'LemonChiffon', fg = '#666666')
-        self.page.lbl_bg.place(x = 120, y = 360)
+        self.page.lbl_bg.place(x = 120, y = 370)
 
         # 右半邊 行事曆表格
         tree_item = ttk.Treeview(self.page, selectmode = "extended", columns = ("天數", "活動"))  # 表格
@@ -523,7 +523,7 @@ class CorrectPage(object):  # Day 1 答對頁面
 
         # 下一頁按鈕
         Button(self.page, text = '繼續遊戲', width = 10, height = 2, font = f3, bg = 'black', fg = 'White',
-               command = self.gotoStockorder).place(x = 660, y = 440)
+               command = self.gotoStockorder).place(x = 660, y = 445)
 
     def gotoStockorder(self):
         self.page.destroy()
@@ -650,9 +650,9 @@ class EverydayResultPage(object):  # 每日結算畫面
         global user_name
 
         self.page.lbl_description = tk.Label(self.page, text = ("辛苦了~" + user_name + "的老闆，下面是你今天營業的成果~~"), height = 2,
-                                             width = 40, font = f2,
+                                             width = 50, font = f3,
                                              bg = '#f9f7f1')
-        self.page.lbl_description.place(x = 205, y = 70)
+        self.page.lbl_description.place(x = 214, y = 72)
 
         if counts == 0 or counts == 3:
             # 下一頁按鈕
@@ -772,7 +772,7 @@ class EverydayResultPage(object):  # 每日結算畫面
             accumulated_profit_str = accumulated_profit_str[0:12]
         self.page.lbl_topic = tk.Label(self.page, text = accumulated_profit_str, height = 2, width = 15, font = f3,
                                        fg = '#666666', bg = 'LemonChiffon')
-        self.page.lbl_topic.place(x = 480, y = 497)
+        self.page.lbl_topic.place(x = 490, y = 497)
 
     def gotoStockorder(self):
         self.page.destroy()
@@ -975,7 +975,7 @@ class EverydayStockPage(object):  # Day2~Day7 訂貨畫面 (玩家自行訂購)
         self.page.tree_item.column("訂購單價", width = 95, anchor = "center")
         self.page.tree_item.column("售價", width = 95, anchor = "center")
         self.page.tree_item.column("剩餘庫存", width = 95, anchor = "center")
-        self.page.tree_item.column("訂購數量", width = 110, anchor = "center")
+        self.page.tree_item.column("訂購數量", width = 112, anchor = "center")
 
         self.page.tree_item.heading("#0", text = "食材")
         self.page.tree_item.heading("訂購單價", text = "訂購單價")  # 顯示表頭
@@ -1007,11 +1007,11 @@ class EverydayStockPage(object):  # Day2~Day7 訂貨畫面 (玩家自行訂購)
         self.page.txt_keto = tk.Text(self.page, height = 2, width = 11, font = f4)
 
         # 輸入的表格 排版位置
-        self.page.txt_beef.place(x = 481, y = 175)
-        self.page.txt_pork.place(x = 481, y = 225)
-        self.page.txt_chick.place(x = 481, y = 275)
-        self.page.txt_vege.place(x = 481, y = 325)
-        self.page.txt_keto.place(x = 481, y = 375)
+        self.page.txt_beef.place(x = 480, y = 175)
+        self.page.txt_pork.place(x = 480, y = 225)
+        self.page.txt_chick.place(x = 480, y = 275)
+        self.page.txt_vege.place(x = 480, y = 325)
+        self.page.txt_keto.place(x = 480, y = 375)
 
     def costCalculation(self):
         global material_price
@@ -1114,7 +1114,7 @@ class FinalResultPage1(object):
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 26, family = "微軟正黑體")
+        f1 = tkFont.Font(size = 24, family = "微軟正黑體")
         f2 = tkFont.Font(size = 14, family = "微軟正黑體")
         f3 = tkFont.Font(size = 12, family = "微軟正黑體")
 
@@ -1130,7 +1130,7 @@ class FinalResultPage1(object):
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 標題、敘述
-        self.page.lbl_topic = tk.Label(self.page, text = "營業成果折線圖", height = 2, width = 15, font = f1, bg = '#f9f7f1',
+        self.page.lbl_topic = tk.Label(self.page, text = "營業成果折線圖", height = 1, width = 12, font = f1, bg = '#f9f7f1',
                                        fg = '#666666')
         self.page.btn_next = tk.Button(self.page, text = "經營成就", command = self.gotoResult, width = 10, height = 2,
                                        font = f3, bg = '#FFCC22', fg = 'White')
@@ -1140,10 +1140,10 @@ class FinalResultPage1(object):
 
         # -------------------------------------------------------------------------------------------
         # 標題、敘述
-        self.page.lbl_topic.place(x = 40, y = 30)
+        self.page.lbl_topic.place(x = 53, y = 45)
         self.page.btn_next.place(x = 720, y = 490)
         # 折線圖
-        self.page.lbl_descripition.place(x = 430, y = 70)
+        self.page.lbl_descripition.place(x = 380, y = 68)
 
         # 折線圖
         self.page.csvMain = tk.Canvas(self.page, width = 636, height = 354, bg = "LightYellow")
@@ -1291,24 +1291,24 @@ class HighscorePage(object):
         # 標題
         self.page.lbl_topic = tk.Label(self.page, text = "高分秘訣", height = 2, width = 10, font = f1, bg = '#f9f7f1',
                                        fg = '#666666')
-        self.page.lbl_topic.place(x = 300, y = 50)
+        self.page.lbl_topic.place(x = 300, y = 40)
 
         # P系統
         self.page.psystem = tk.Label(self.page,
                                      text = "P系統\n\n又稱「定期」存貨控制系統，以訂購周期和最高庫存量為控制基準，例：固定每兩天訂購生菜漢堡，訂到設定的最高庫存量40個，每次訂的數量因剩下的量而有不同。\n\n適合需求比較穩定、次要的原料",
-                                     height = 12, width = 30, font = f3, bg = 'LightYellow', wraplength = 280)
+                                     height = 12, width = 30, font = f3, bg = 'LightYellow', wraplength = 310)
 
         # Q系統
         self.page.qsystem = tk.Label(self.page,
                                      text = "Q系統\n\n又稱「定量」存貨控制系統，以再次訂購點和固定量為控制基準。\n例：只要至尊和牛堡低於15個，就馬上訂購固定的量20個，可能一天訂好幾次，但量都固定為20。\n\n適合需求比較不穩定、主要的原料",
-                                     height = 12, width = 30, font = f3, bg = 'OldLace', wraplength = 280)
+                                     height = 12, width = 30, font = f3, bg = 'OldLace', wraplength = 310)
 
         # 回經營成就頁面
         self.page.btn_main = tk.Button(self.page, text = "經營成就", command = self.gotoResult2, height = 2, width = 9,
                                        font = f3, bg = '#FFCC22', fg = 'White')
 
-        self.page.psystem.place(relx = 0.1, rely = 0.32)
-        self.page.qsystem.place(relx = 0.5, rely = 0.32)
+        self.page.psystem.place(relx = 0.08, rely = 0.25)
+        self.page.qsystem.place(relx = 0.52, rely = 0.25)
         self.page.btn_main.place(x = 720, y = 490)
 
     def gotoResult2(self):
@@ -1319,7 +1319,7 @@ class HighscorePage(object):
 
 ##### 最後跑程式的指令#####
 root = Tk()
-root.title('餐廳經營管理遊戲')
+root.title('PBC讓你睡不堡')
 StartPage(root)
 root.mainloop()
 print(user_name)
