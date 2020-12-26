@@ -1258,7 +1258,8 @@ class FirstdayStockPage(object):  # Day1 訂貨畫面 (教學訂購)
 
         # 背景圖
         global bg_img
-        image = ImageTk.Image.open("背景設計.jpg")
+        img_name = "scenario_" + str(scenario) + "_day_" + str(counts + 1) + ".jpg"  # scenario_1_day_1
+        image = ImageTk.Image.open(img_name)
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
@@ -1333,7 +1334,7 @@ class FirstdayStockPage(object):  # Day1 訂貨畫面 (教學訂購)
         style.configure("Treeview", rowheight = 50, font = ("華康娃娃體", 10))
         self.page.tree_item.place(x = 100, y = 150, height = 276)
         # -----------------------------------------------------------------------------------------------------------
-        
+        '''
         # 右半邊 行事曆表格
         tree_item1=ttk.Treeview(root, selectmode="extended", columns=("天數", "活動"))#表格
         tree_item1["columns"]=("活動")
@@ -1359,9 +1360,9 @@ class FirstdayStockPage(object):  # Day1 訂貨畫面 (教學訂購)
         # 紅框框
         # lbl_know = tk.Label(self.page, text = "", font = f3, borderwidth = 2, relief = "ridge",
                             # wraplength = 350, justify = 'left', fg = '#666666')
-
+        '''
     def costCalculation(self):
-        showinfo(title = "成本計算", message = ("總成本為$1500，但今天為首日訂貨，因此不會跟你收錢唷~!!"))
+        showinfo(title = "成本計算", message = ("總成本為 $1500"))
 
 
     def orderFinished(self):
@@ -1378,7 +1379,8 @@ class FirstdayStockPage(object):  # Day1 訂貨畫面 (教學訂購)
 
         for i in range(len(order_list)):
             stock_list[i] += int(order_list[i])
-
+            total_cost += order_fixed_cost
+            total_cost += int(order_list[i]) * material_price[i]     
         self.page.destroy()
         EverydayPage(root)
 
@@ -1414,7 +1416,7 @@ class EverydayStockPage(object):  # Day2~Day7 訂貨畫面 (玩家自行訂購)
 
         # 背景圖
         global bg_img
-        img_name = "scenario_" + str(scenario) + "_day_" + str(counts + 1) + ".jpg"  # scenario_1_day_1
+        img_name = "scenario_" + str(scenario) + "_day_" + str(counts + 2) + ".jpg"  # scenario_1_day_1
         image = ImageTk.Image.open(img_name)
         # image = ImageTk.Image.open('scenario_1_day_1.jpg')
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
@@ -1681,7 +1683,7 @@ class FinalResultPage1(object):
         plt.yticks(fontsize = 6)
         plt.xlabel("Day", fontsize = 10, labelpad = 6)
         plt.ylabel("$", fontsize = 10, labelpad = 10)
-        plt.legend(loc = "best", fontsize = 6)
+        plt.legend(loc = "upper right", fontsize = 6)
         # plt.show()
         plt.savefig("temp.png")
 
