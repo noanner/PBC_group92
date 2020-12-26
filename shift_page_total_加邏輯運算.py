@@ -1470,7 +1470,7 @@ class FinalResultPage1(object):
 
         # 折線圖
         self.page.csvMain = tk.Canvas(self.page, width=636, height=354, bg="LightYellow")
-        self.page.csvMain.place(x = 150, y = 110)
+        self.page.csvMain.place(x = 146, y = 110)
 
         global order_cost_list
         global day
