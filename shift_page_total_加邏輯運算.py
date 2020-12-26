@@ -1421,49 +1421,6 @@ class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算�
         else:
             showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
 
-    '''
-    def orderFinishedgoto4(self):
-        global stock_list
-        global order_cost_list
-        global counts
-        global order_list
-        total_cost = 0
-        beefnum = self.page.txt_beef.get("1.0", END)
-        order_list[0] = beefnum
-        porknum = self.page.txt_pork.get("1.0", END)
-        order_list[1] = porknum
-        chickennum = self.page.txt_chick.get("1.0", END)
-        order_list[2] = chickennum
-        vegenum = self.page.txt_vege.get("1.0", END)
-        order_list[3] = vegenum
-        ketonum = self.page.txt_keto.get("1.0", END)
-        order_list[4] = ketonum
-
-        result = "success"
-        for order in order_list:
-            try:
-                order = int(order)
-                if order < 0:
-                    result = "failed"
-            except ValueError:
-                result = "failed"
-                break
-        if result == "success":
-            for i in range(len(order_list)):
-                if int(order_list[i]) > 0:
-                    total_cost += order_fixed_cost
-                    total_cost += int(order_list[i]) * material_price[i]
-                    stock_list[i] += int(order_list[i])
-                else:
-                    pass
-            order_cost_list.append(total_cost)
-            counts += 1
-            self.page.destroy()
-            Day4Page1(root)
-        else:
-            showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
-    '''
-
     def openCalendar(self):
         self.page.destroy()
         Calendar5(root)
