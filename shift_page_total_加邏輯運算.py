@@ -43,7 +43,7 @@ hint_list = [["印度教徒不吃牛肉、豬肉，特愛雞肉，如果沒有�
              ["韓國人熱愛豬五花肉，甚至將3月3日正式訂為「五花肉日」", "全球素食日是一個完全不能吃肉的節日，連製作的食材都不會有任何的肉"],
              ["因為午後的豪大雨，導致顧客出門意願降低，只想待在家叫Foodpanda或Ubereats，全品項銷量約減少25%",
               "寒流來襲，大口大口咬下漢堡，身體有熱量去禦寒，大家喜歡到漢堡店坐在店裡享用，全品項銷售量約增加25%"],
-             ["今日為大樂透開獎，得主就住在餐廳樓上，平常他最愛吃的就是漢堡，今天他決定拿獎金買下60個牛肉漢堡請台北車站的流浪漢吃",
+             ["今日為大樂透開獎，得主就住在餐廳樓上，平常他最愛吃的就是漢堡，今天他決定拿獎金買下60個至尊和牛堡請台北車站的流浪漢吃",
               "新聞報導指控您的餐廳餐點不衛生，漢堡都是用組合肉，生菜也不新鮮，麵包更是都發霉了，讓業績只剩4成"]]
 hint_dict = dict()
 for i in range(4):
@@ -1101,22 +1101,22 @@ class EverydayResultPage(object):  # 每日結算畫面
         global stock_list
         global price_list
         # 品項表格
-        columns = ("牛肉漢堡", "豬肉堡堡", "雞肉漢堡", "生菜堡", "生酮堡堡")
+        columns = ("至尊和牛堡", "豬肉滿福堡", "嫩煎雞腿堡", "好多蔬食堡", "健康生酮堡")
         self.page.tree_item = ttk.Treeview(self.page, column = columns)  # 表格
 
         self.page.tree_item.column("#0", minwidth = 0, width = 110, anchor = "center")
-        self.page.tree_item.column("牛肉漢堡", width = 80, anchor = "center")  # 表示列,不顯示
-        self.page.tree_item.column("豬肉堡堡", width = 80, anchor = "center")
-        self.page.tree_item.column("雞肉漢堡", width = 80, anchor = "center")
-        self.page.tree_item.column("生菜堡", width = 80, anchor = "center")
-        self.page.tree_item.column("生酮堡堡", width = 80, anchor = "center")
+        self.page.tree_item.column("至尊和牛堡", width = 80, anchor = "center")  # 表示列,不顯示
+        self.page.tree_item.column("豬肉滿福堡", width = 80, anchor = "center")
+        self.page.tree_item.column("嫩煎雞腿堡", width = 80, anchor = "center")
+        self.page.tree_item.column("好多蔬食堡", width = 80, anchor = "center")
+        self.page.tree_item.column("健康生酮堡", width = 80, anchor = "center")
 
         self.page.tree_item.heading("#0", text = "品項")  # 顯示錶頭
-        self.page.tree_item.heading("牛肉漢堡", text = "牛肉漢堡")
-        self.page.tree_item.heading("豬肉堡堡", text = "豬肉堡堡")
-        self.page.tree_item.heading("雞肉漢堡", text = "雞肉漢堡")
-        self.page.tree_item.heading("生菜堡", text = "生菜堡")
-        self.page.tree_item.heading("生酮堡堡", text = "生酮堡堡")
+        self.page.tree_item.heading("至尊和牛堡", text = "至尊和牛堡")
+        self.page.tree_item.heading("豬肉滿福堡", text = "豬肉滿福堡")
+        self.page.tree_item.heading("嫩煎雞腿堡", text = "嫩煎雞腿堡")
+        self.page.tree_item.heading("好多蔬食堡", text = "好多蔬食堡")
+        self.page.tree_item.heading("健康生酮堡", text = "健康生酮堡")
 
         stock = stock_list
         demand = demand_dict.get(scenario)[counts]
@@ -1315,11 +1315,11 @@ class FirstdayStockPage(object):  # Day1 訂貨畫面 (教學訂購)
         global stock_list
         global price_list
         global material_price
-        self.page.tree_item.insert("", 0, text = "牛肉漢堡", values = (material_price[0], price_list[0], 0, 25))  # 插入資料
-        self.page.tree_item.insert("", 1, text = "豬肉漢堡", values = (material_price[1], price_list[1], 0, 25))
-        self.page.tree_item.insert("", 2, text = "雞肉漢堡", values = (material_price[2], price_list[2], 0, 25))
-        self.page.tree_item.insert("", 3, text = "生菜堡", values = (material_price[3], price_list[3], 0, 25))
-        self.page.tree_item.insert("", 4, text = "生酮堡", values = (material_price[4], price_list[4], 0, 25))
+        self.page.tree_item.insert("", 0, text = "至尊和牛堡", values = (material_price[0], price_list[0], 0, 25))  # 插入資料
+        self.page.tree_item.insert("", 1, text = "豬肉滿福堡", values = (material_price[1], price_list[1], 0, 25))
+        self.page.tree_item.insert("", 2, text = "嫩煎雞腿堡", values = (material_price[2], price_list[2], 0, 25))
+        self.page.tree_item.insert("", 3, text = "好多蔬食堡", values = (material_price[3], price_list[3], 0, 25))
+        self.page.tree_item.insert("", 4, text = "健康生酮堡", values = (material_price[4], price_list[4], 0, 25))
 
         style = ttk.Style()
         style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
@@ -1472,12 +1472,12 @@ class EverydayStockPage(object):  # Day2~Day7 訂貨畫面 (玩家自行訂購)
         global stock_list
         global price_list
         global material_price
-        self.page.tree_item.insert("", 0, text = "牛肉漢堡",
+        self.page.tree_item.insert("", 0, text = "至尊和牛堡",
                                    values = (material_price[0], price_list[0], stock_list[0]))  # 插入資料
-        self.page.tree_item.insert("", 1, text = "豬肉漢堡", values = (material_price[1], price_list[1], stock_list[1]))
-        self.page.tree_item.insert("", 2, text = "雞肉漢堡", values = (material_price[2], price_list[2], stock_list[2]))
-        self.page.tree_item.insert("", 3, text = "生菜堡", values = (material_price[3], price_list[3], stock_list[3]))
-        self.page.tree_item.insert("", 4, text = "生酮堡", values = (material_price[4], price_list[4], stock_list[4]))
+        self.page.tree_item.insert("", 1, text = "豬肉滿福堡", values = (material_price[1], price_list[1], stock_list[1]))
+        self.page.tree_item.insert("", 2, text = "嫩煎雞腿堡", values = (material_price[2], price_list[2], stock_list[2]))
+        self.page.tree_item.insert("", 3, text = "好多蔬食堡", values = (material_price[3], price_list[3], stock_list[3]))
+        self.page.tree_item.insert("", 4, text = "健康生酮堡", values = (material_price[4], price_list[4], stock_list[4]))
 
         style = ttk.Style()
         style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
@@ -1881,7 +1881,7 @@ class HighscorePage(object):
 
         # Q系統
         self.page.qsystem = tk.Label(self.page,
-                                     text = "Q系統\n\n又稱「定量」存貨控制系統，以再次訂購點和固定量為控制基準。\n例：只要牛肉漢堡低於15個，就馬上訂購固定的量20個，可能一天訂好幾次，但量都固定為20。\n\n適合需求比較不穩定、主要的原料",
+                                     text = "Q系統\n\n又稱「定量」存貨控制系統，以再次訂購點和固定量為控制基準。\n例：只要至尊和牛堡低於15個，就馬上訂購固定的量20個，可能一天訂好幾次，但量都固定為20。\n\n適合需求比較不穩定、主要的原料",
                                      height = 12, width = 30, font = f3, bg = 'OldLace', wraplength = 300)
 
         # 回經營成就頁面
