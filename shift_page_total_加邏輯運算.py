@@ -1215,7 +1215,217 @@ class EverydayResultPage(object):  # 每日結算畫面
         KnowledgePage(root)
 
 
-class EverydayStockPage(object):  # Day1~Day6 訂貨畫面 (是否加個計算功能?)
+class FirstdayStockPage(object):  # Day1 訂貨畫面 (教學訂購)
+
+    def __init__(self, master = None):
+        self.root = master  # 定義內部變數root
+        self.root.geometry('900x600+200+30')  # 設定視窗大小
+
+        self.beef = StringVar()
+        self.pork = StringVar()
+        self.chicken = StringVar()
+        self.vege = StringVar()
+        self.keto = StringVar()
+
+        self.createPage()
+
+    def createPage(self):
+        global counts
+        self.page = Frame(self.root)  # 建立Frame
+        self.page.pack()
+
+        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f2 = tkFont.Font(size = 14, family = "華康娃娃體")
+        f3 = tkFont.Font(size = 12, family = "華康娃娃體")
+        f4 = tkFont.Font(size = 10, family = "華康娃娃體")
+
+        # 底下的grid
+        self.page.lbl_gridonly = tk.Label(self.page, text = " ", height = 200, width = 300, font = f1)
+        self.page.lbl_gridonly.grid(row = 3, column = 0, sticky = tk.S)
+
+        # 背景圖
+        global bg_img
+        image = ImageTk.Image.open("背景設計.jpg")
+        image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
+        bg_img = ImageTk.PhotoImage(image)
+        Label(self.page, image = bg_img).place(x = 0, y = 0)
+
+        # 行事曆按鈕
+        # Button(self.page, text = '行事曆', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
+               # command = self.openCalendar).place(x = 720, y = 70)
+
+        # row0 標題、敘述、行事曆按鈕
+        self.page.lbl_topic = tk.Label(self.page, text = ("馬上就是Day1了!經驗老道的前輩建議你第一天各品項都訂25個，\n"
+                                        "之後可以根據\"行事曆\"訂貨，也可以按\"總價試算\"看看需要花多少錢唷!"), height = 2, width = 63, font = f2,
+                                       bg = '#f9f7f1', fg = '#666666')
+        # self.page.lbl_description = tk.Label(self.page, text = "以下是目前的剩餘庫存，請問今天要訂多少貨呢?", height = 2, width = 45,
+                                             # font = f3, bg = '#f9f7f1')
+
+        # row7 訂貨固定成本、目前訂購總價、訂購按鈕
+        self.page.lbl_fixcost = tk.Label(self.page, text = " 各品項固定成本:$50元 ", height = 1, width = 22, font = f3,
+                                         bg = 'LemonChiffon')
+        self.page.lbl_stockcost = tk.Label(self.page, text = " 每單位存貨成本:$2元 ", height = 1, width = 22, font = f3,
+                                         bg = 'LemonChiffon')
+        self.page.lbl_note = tk.Label(self.page, text = " 沒有要訂購也要輸入0唷! ", height = 1, width = 22, font = f3,
+                                      bg = 'LemonChiffon')
+        self.page.lbl_cost = tk.Button(self.page, text = "總價試算", command = self.costCalculation, height = 2, width = 10,
+                                       font = f2, bg = 'Lavender')
+        if counts != 2 and counts < 6:
+            # 訂購按鈕
+            Button(self.page, text = '訂購!', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
+                   command = self.orderFinished).place(x = 720, y = 490)
+        elif counts == 2:
+            # 訂購按鈕
+            Button(self.page, text = '訂購!', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
+                   command = self.orderFinished).place(x = 720, y = 490)
+
+        # row0 排版位置
+        self.page.lbl_topic.place(x = 50, y = 70)
+        # self.page.lbl_description.place(x = 200, y = 70)
+
+        # row7 排版位置
+        self.page.lbl_fixcost.place(x = 220, y = 480)
+        self.page.lbl_stockcost.place(x = 220, y = 500)
+        self.page.lbl_note.place(x = 220, y = 520)
+        self.page.lbl_cost.place(x = 511, y = 490)
+        # -----------------------------------------------------------------------------------------------------------
+
+        # 品項表格
+        columns = ("訂購單價", "售價", "剩餘庫存", "訂購數量")
+        self.page.tree_item = ttk.Treeview(self.page, column = columns)  # 表格
+
+        self.page.tree_item.column("#0", minwidth = 0, width = 95, anchor = "center")
+        self.page.tree_item.column("訂購單價", width = 95, anchor = "center")
+        self.page.tree_item.column("售價", width = 95, anchor = "center")
+        self.page.tree_item.column("剩餘庫存", width = 95, anchor = "center")
+        self.page.tree_item.column("訂購數量", width = 110, anchor = "center")
+
+        self.page.tree_item.heading("#0", text = "食材")
+        self.page.tree_item.heading("訂購單價", text = "訂購單價")  # 顯示表頭
+        self.page.tree_item.heading("售價", text = "售價")
+        self.page.tree_item.heading("剩餘庫存", text = "剩餘庫存")
+        self.page.tree_item.heading("訂購數量", text = "訂購數量")
+
+        global stock_list
+        global price_list
+        global material_price
+        self.page.tree_item.insert("", 0, text = "牛肉漢堡", values = (material_price[0], price_list[0], 0, 25))  # 插入資料
+        self.page.tree_item.insert("", 1, text = "豬肉漢堡", values = (material_price[1], price_list[1], 0, 25))
+        self.page.tree_item.insert("", 2, text = "雞肉漢堡", values = (material_price[2], price_list[2], 0, 25))
+        self.page.tree_item.insert("", 3, text = "生菜堡", values = (material_price[3], price_list[3], 0, 25))
+        self.page.tree_item.insert("", 4, text = "生酮堡", values = (material_price[4], price_list[4], 0, 25))
+
+        style = ttk.Style()
+        style.configure("Treeview.Heading", font = ("華康娃娃體", 10))
+        style.configure("Treeview", rowheight = 50, font = ("華康娃娃體", 10))
+        self.page.tree_item.place(x = 100, y = 150, height = 276)
+        # -----------------------------------------------------------------------------------------------------------
+        
+        # 右半邊 行事曆表格
+        tree_item1=ttk.Treeview(root, selectmode="extended", columns=("天數", "活動"))#表格
+        tree_item1["columns"]=("活動")
+        tree_item1.column("#0",minwidth=0,width=60, anchor='center')
+        tree_item1.column("活動",minwidth=0,width=130, anchor='center')   #表示列,不顯示
+
+        tree_item1.heading("#0",text="天數")
+        tree_item1.heading("活動",text="活動")  #顯示表頭
+
+        tree_item1.insert("",1,text="Day1", values=cal_dict[scenario][0])#插入資料
+        tree_item1.insert("",2,text="Day2", values=cal_dict[scenario][1])
+        tree_item1.insert("",3,text="Day3", values=cal_dict[scenario][2])
+        tree_item1.insert("",4,text="Day4", values=cal_dict[scenario][3])
+        tree_item1.insert("",5,text="Day5", values=cal_dict[scenario][4])
+        tree_item1.insert("",6,text="Day6", values=cal_dict[scenario][5])
+        tree_item1.insert("",7,text="Day7", values=cal_dict[scenario][6])
+        
+        # style1 = ttk.Style()
+        # style1.configure("Treeview.Heading", font=("華康娃娃體", 8))
+        # style1.configure("Treeview", rowheight=35, font=("華康娃娃體", 8))
+        tree_item1.place(x=630, y=150, height=276)
+        
+        # 紅框框
+        # lbl_know = tk.Label(self.page, text = "", font = f3, borderwidth = 2, relief = "ridge",
+                            # wraplength = 350, justify = 'left', fg = '#666666')
+
+    def costCalculation(self):
+        global material_price
+        global order_fixed_cost
+        order_list = []
+        total_cost = 0
+        beefnum = self.page.txt_beef.get("1.0", END)
+        order_list.append(beefnum)
+        porknum = self.page.txt_pork.get("1.0", END)
+        order_list.append(porknum)
+        chickennum = self.page.txt_chick.get("1.0", END)
+        order_list.append(chickennum)
+        vegenum = self.page.txt_vege.get("1.0", END)
+        order_list.append(vegenum)
+        ketonum = self.page.txt_keto.get("1.0", END)
+        order_list.append(ketonum)
+
+        result = "success"
+        for order in order_list:
+            try:
+                order = int(order)
+                if order < 0:
+                    result = "failed"
+            except ValueError:
+                result = "failed"
+                break
+        if result == "success":
+            for i in range(len(order_list)):
+                if int(order_list[i]) > 0:
+                    total_cost += order_fixed_cost
+                    total_cost += int(order_list[i]) * material_price[i]
+                else:
+                    pass
+            showinfo(title = "成本計算", message = ("總成本為$" + str(total_cost)))
+        else:
+            showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
+
+    def orderFinished(self):
+        global stock_list
+        global order_cost_list
+        global counts
+        global order_list
+        total_cost = 0
+        beefnum = self.page.txt_beef.get("1.0", END)
+        order_list[0] = beefnum
+        porknum = self.page.txt_pork.get("1.0", END)
+        order_list[1] = porknum
+        chickennum = self.page.txt_chick.get("1.0", END)
+        order_list[2] = chickennum
+        vegenum = self.page.txt_vege.get("1.0", END)
+        order_list[3] = vegenum
+        ketonum = self.page.txt_keto.get("1.0", END)
+        order_list[4] = ketonum
+
+        result = "success"
+        for order in order_list:
+            try:
+                order = int(order)
+                if order < 0:
+                    result = "failed"
+            except ValueError:
+                result = "failed"
+                break
+        if result == "success":
+            for i in range(len(order_list)):
+                if int(order_list[i]) > 0:
+                    total_cost += order_fixed_cost
+                    total_cost += int(order_list[i]) * material_price[i]
+                    stock_list[i] += int(order_list[i])
+                else:
+                    pass
+            order_cost_list.append(total_cost)
+            counts += 1
+            self.page.destroy()
+            EverydayPage(root)
+        else:
+            showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
+
+
+class EverydayStockPage(object):  # Day2~Day7 訂貨畫面 (玩家自行訂購)
 
     def __init__(self, master = None):
         self.root = master  # 定義內部變數root
