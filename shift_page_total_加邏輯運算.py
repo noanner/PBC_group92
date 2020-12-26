@@ -1177,6 +1177,15 @@ class EverydayResultPage(object):  # 每日結算畫面
         for i in range(len(stock_list)):
             stock_list[i] = stock_list[i] - sold[i]
 
+        # 顯示累積營業額
+        accumulated_profit_str = ("營業額：$" + str(accumulated_profit))
+        if len(accumulated_profit_str) > 15:
+            accumulated_profit_str = accumulated_profit_str[0:12]
+        self.page.lbl_topic = tk.Label(self.page, text = accumulated_profit_str, height = 2, width = 15, font = f2,
+                                       fg = '#666666', bg = 'LemonChiffon')
+        self.page.lbl_topic.place(x = 490, y = 497)
+
+
     def gotoStockorder(self):
         self.page.destroy()
         EverydayStockPage(root)
@@ -1473,7 +1482,7 @@ class FinalResultPage1(object):
         global day
         global accumulated_profit_list
         global profit_list
-        plt.figure(figsize = (4.5, 2.5), dpi = 150, linewidth = 2)
+        plt.figure(figsize = (4.7, 2.5), dpi = 150, linewidth = 2)
         plt.plot(day, order_cost_list, 's-', color = 'y', label = "Day Order Cost")
         plt.plot(day, accumulated_profit_list, 's-', color = 'r', label = "Accumulated Profit")
         plt.plot(day, profit_list, 's-', color = 'b', label = "Profit")
@@ -1487,7 +1496,7 @@ class FinalResultPage1(object):
         plt.savefig("temp.png")
 
         self.page.imageMain = ImageTk.PhotoImage(file = "temp.png")
-        self.page.csvMain.create_image(339, 170, image=self.page.imageMain, anchor=tk.CENTER)
+        self.page.csvMain.create_image(333, 170, image=self.page.imageMain, anchor=tk.CENTER)
         os.system("del temp.png")
 
     def gotoResult(self):
