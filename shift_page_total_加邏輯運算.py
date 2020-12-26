@@ -84,7 +84,6 @@ order_cost_list = [0]  # 畫圖
 profit_list = []  # 畫圖
 accumulated_profit = 0  # 總分
 accumulated_profit_list = []  # 畫圖
-ranking_list = [[5684, "就愛吃漢堡"], [4783, "今晚吃漢堡"], [3366, "My Way"], [6428, "賽百味"], [1056, "我不會玩"]]
 
 # 小知識題庫1-------------------------------------------------------------------------
 ques_list1 = [[2,
@@ -211,7 +210,7 @@ class RankingPage1(object):  # 排行榜(前)
         self.page = Frame(self.root)  # 建立Frame # 新增
         self.page.pack()  # 新增
 
-        f1 = tkFont.Font(size = 30, family = "華康娃娃體")
+        f1 = tkFont.Font(size = 36, family = "華康娃娃體", weight="bold")
         f2 = tkFont.Font(size = 14, family = "華康娃娃體")
         f3 = tkFont.Font(size = 12, family = "華康娃娃體")
 
@@ -222,25 +221,19 @@ class RankingPage1(object):  # 排行榜(前)
         # 背景圖
         global bg_img
         global ranking_list
-        image = ImageTk.Image.open("背景設計.jpg")
+        image = ImageTk.Image.open("awardpage.png")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
         Label(self.page, image = bg_img).place(x = 0, y = 0)
 
         # 內容
-        ranking_list.sort()
-        ranking_list.reverse()
-        self.page.lbl_topic = tk.Label(self.page, text = "排行榜", height = 2, width = 10, font = f1, bg = '#f9f7f1',
-                                       fg = '#666666')
-        for i in range(5):
-            self.page.rank = tk.Label(self.page, text = (
-                    "第" + str(i + 1) + "名： " + ranking_list[i][1] + "   " + str(ranking_list[i][0]) + "分"),
-                                      height = 2, width = 30, font = f3, bg = 'LightYellow')
-            self.page.rank.place(x = 300, y = 160 + i * 70)
+        self.page.lbl_topic = tk.Label(self.page, text = "成就榜", height = 2, width = 10, font = f1, bg = 'Black',
+                                       fg = 'White')
+
         self.page.btn_main = tk.Button(self.page, text = "回主畫面", command = self.gotoStartPage, height = 2, width = 9,
                                        font = f2, bg = '#FFCC22', fg = 'White')
 
-        self.page.lbl_topic.place(x = 300, y = 50)
+        self.page.lbl_topic.place(x = 152, y = 100)
         self.page.btn_main.place(x = 730, y = 490)
 
     def gotoStartPage(self):
