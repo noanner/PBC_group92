@@ -1678,7 +1678,7 @@ class FinalResultPage1(object):
         plt.savefig("temp.png")
 
         self.page.imageMain = ImageTk.PhotoImage(file = "temp.png")
-        self.page.csvMain.create_image(333, 170, image = self.page.imageMain, anchor = tk.CENTER)
+        self.page.csvMain.create_image(326, 170, image = self.page.imageMain, anchor = tk.CENTER)
         os.system("del temp.png")
 
     def gotoResult(self):
