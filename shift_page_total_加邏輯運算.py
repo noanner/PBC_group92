@@ -345,8 +345,8 @@ class RulePage(object):  # 營業說明
         self.page.intro_topic = tk.Label(self.page, text = "遊戲說明", height = 2, width = 8, font = f3, bg = '#f9f7f1',
                                          fg = '#666666')
         self.page.intro_topic.place(x = 120, y = 150)
-        self.page.intro = tk.Label(self.page, text = "5種漢堡中，各會賣出20個左右，但會根據每天的情境有所增減，所以記得看看右邊行事曆遇到什麼狀況~"
-                                                     "\n另外Day1和Day4會有小知識問答，答對會給你提示，祝你開店順利！!",
+        self.page.intro = tk.Label(self.page, text = "· 5種漢堡，每種平均賣20個\n· 根據每天情境有所增減"
+                                                     "\n· Day2 & Day5有小知識問答\n   答對給提示！\n· 記得看右邊行事曆！！",
                                    font = f4, borderwidth = 20, wraplength = 280, justify = 'left', bg = 'LemonChiffon',
                                    fg = '#666666')
         self.page.intro.place(x = 120, y = 190)
@@ -1678,7 +1678,7 @@ class FinalResultPage1(object):
         plt.savefig("temp.png")
 
         self.page.imageMain = ImageTk.PhotoImage(file = "temp.png")
-        self.page.csvMain.create_image(326, 170, image = self.page.imageMain, anchor = tk.CENTER)
+        self.page.csvMain.create_image(333, 170, image = self.page.imageMain, anchor = tk.CENTER)
         os.system("del temp.png")
 
     def gotoResult(self):
