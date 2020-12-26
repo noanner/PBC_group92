@@ -72,6 +72,7 @@ day = ["Day1", "Day2", "Day3", "Day4", "Day5", "Day6", "Day7"]
 
 # 預設資訊-------------------------------------------------------------------------
 counts = 0
+correct = 0
 count_list = []
 user_name = ""
 material_price = [10, 9, 9, 6, 16]  # 原料價格
@@ -863,6 +864,8 @@ class CorrectPage(object):  # Day 1 答對頁面
 
         # 背景圖
         global bg_img
+        global correct
+        correct = 1
         image = ImageTk.Image.open("背景設計.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
@@ -934,6 +937,8 @@ class WrongPage(object):  # Day 1 答錯頁面
 
         # 背景圖
         global bg_img
+        global correct
+        correct = 0
         image = ImageTk.Image.open("背景設計.jpg")
         image = image.resize((900, 600), ImageTk.Image.ANTIALIAS)
         bg_img = ImageTk.PhotoImage(image)
@@ -1434,6 +1439,12 @@ class EverydayStockPage(object):  # Day2~Day7 訂貨畫面 (玩家自行訂購)
                                       bg = 'LemonChiffon')
         self.page.lbl_cost = tk.Button(self.page, text = "總價試算", command = self.costCalculation, height = 2, width = 10,
                                        font = f2, bg = 'Lavender')
+        if correct == 1 and counts == 0:
+            self.page.lbl_hint = tk.Button(self.page, text = '小提示', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
+                                            command = self.openHint1).place(x = 720, y = 70)
+        elif correct == 1 and counts == 3:
+            self.page.lbl_hint = tk.Button(self.page, text = '小提示', width = 7, height = 2, font = f2, bg = '#666666', fg = 'White',
+                                            command = self.openHint4).place(x = 720, y = 70)            
         if counts != 2 and counts < 6:
             # 訂購按鈕
             Button(self.page, text = '訂購!', width = 10, height = 2, font = f2, bg = '#FFCC22', fg = 'White',
@@ -1604,9 +1615,11 @@ class EverydayStockPage(object):  # Day2~Day7 訂貨畫面 (玩家自行訂購)
         else:
             showinfo(title = "錯誤", message = "累了嗎?請輸入正確格式")
 
-    # def openCalendar(self):
-    # self.page.destroy()
-    # Calendar5(root)
+    def openHint1(self):
+        showinfo(title = "小提示", message = hint_dict[scenario][0])
+    
+    def openHint4(self):
+        showinfo(title = "小提示", message = hint_dict[scenario][1])
 
 
 class FinalResultPage1(object):
