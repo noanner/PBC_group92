@@ -295,11 +295,18 @@ class IntroPage(object):  # 說明、輸入姓名
         global user_name
         name = self.username.get()
         user_name = name
-        if name != '':
+        if 0 < len(name) <= 8:
             self.page.destroy()
             RulePage(self.root)
-        else:
+        if len(name) > 8:
+            showinfo(title = '錯誤', message = '餐廳名稱太長囉！')
+        if len(name) == 0:
             showinfo(title = '錯誤', message = '你的餐廳還沒命名喔！')
+        # if name != '':
+            # self.page.destroy()
+            # RulePage(self.root)
+        # else:
+            # showinfo(title = '錯誤', message = '你的餐廳還沒命名喔！')
 
 
 class RulePage(object):  # 營業說明
