@@ -1203,8 +1203,8 @@ class EverydayResultPage(object):  # 每日結算畫面
         for i in range(len(stock_list)):
             stock_list[i] = stock_list[i] - sold[i]
 
-        # 顯示累積營業額
-        accumulated_profit_str = ("營業額：$" + str(accumulated_profit))
+        # 顯示累積淨利
+        accumulated_profit_str = ("總淨利：$" + str(accumulated_profit))
         if len(accumulated_profit_str) > 15:
             accumulated_profit_str = accumulated_profit_str[0:12]
         self.page.lbl_topic = tk.Label(self.page, text = accumulated_profit_str, height = 2, width = 15, font = f2,
