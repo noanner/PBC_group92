@@ -1510,12 +1510,12 @@ class FinalResultPage1(object):
         self.page.lbl_descripition.place(x = 430, y = 75)
 
         # 折線圖
-        self.page.csvMain = tk.Canvas(self.page, width=610, height=354, bg="LightYellow")
+        self.page.csvMain = tk.Canvas(self.page, width=626, height=354, bg="LightYellow")
         self.page.csvMain.place(x = 150, y = 110)
 
         global order_cost_list
         global day
-        plt.figure(figsize = (4, 2.6), dpi = 150, linewidth = 2)
+        plt.figure(figsize = (4.5, 2.5), dpi = 150, linewidth = 2)
         plt.plot(day, order_cost_list, 's-', color = 'y', label = "Day Order Cost")
         plt.xticks(fontsize = 6)
         plt.yticks(fontsize = 6)
@@ -1526,7 +1526,7 @@ class FinalResultPage1(object):
         plt.savefig("temp.png")
 
         self.page.imageMain = ImageTk.PhotoImage(file = "temp.png")
-        self.page.csvMain.create_image(310, 180, image=self.page.imageMain, anchor=tk.CENTER)
+        self.page.csvMain.create_image(335, 170, image=self.page.imageMain, anchor=tk.CENTER)
         os.system("del temp.png")
 
     def gotoResult(self):
